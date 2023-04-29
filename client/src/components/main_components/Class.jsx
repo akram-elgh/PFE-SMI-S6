@@ -37,20 +37,24 @@ export default function Class() {
                 name="class_name"
                 placeholder="Taper ici"
                 value={class_name}
-                className="form-control"
+                className="form-control "
                 onChange={handleChange}
               ></input>
             </div>
-            <div className="mb-3">
-              <input
-                type="number"
-                name="duration"
-                placeholder="Taper ici"
-                value={duration}
-                className="form-control"
-                onChange={handleChange}
-              ></input>
-            </div>
+
+            <select
+              name="duration"
+              placeholder="Taper ici"
+              value={duration}
+              className="form-select mb-3"
+              onChange={handleChange}
+              aria-label="Default select example"
+            >
+              <option>----Duree----</option>
+              <option value="90">1h30</option>
+              <option value="120">2h</option>
+            </select>
+
             <div className="mb-3">
               <input
                 type="number"
@@ -74,12 +78,6 @@ export default function Class() {
           </form>
         </div>
       </div>
-      <form
-        onSubmit={(event) => {
-          // props.onSubmit({ login: login, password: password });
-          event.preventDefault();
-        }}
-      ></form>
     </div>
   );
 }
