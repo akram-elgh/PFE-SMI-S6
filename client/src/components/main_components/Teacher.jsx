@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Teacher() {
+  const url = "http://localhost:3001/class";
+  const [classes, setClasses] = useState([]);
   const [teacher, setTeacher] = useState({
     fname: "",
     lname: "",
@@ -19,17 +22,24 @@ export default function Teacher() {
       };
     });
   };
+
+  useEffect(() => {
+    axios.get(url).then((response) => setClasses(response.data));
+  }, [url]);
+
   return (
-    <div className="enrollment">
-      <div className="enrollment-form">
-        <div className="enrollment-labels">
+    <div className="space">
+      <div className="space-form">
+        <div className="space-labels">
           <ul>
-            <li className="enrollment-lable-li">Prenom:</li>
-            <li className="enrollment-lable-li">Nom:</li>
-            <li className="enrollment-lable-li">Numero du telephone:</li>
-            <li className="enrollment-lable-li">Type du payment:</li>
-            <li className="enrollment-lable-li">Classe:</li>
+            <li className="space-lable-li">Prenom:</li>
+            <li className="space-lable-li">Nom:</li>
+            <li className="space-lable-li">Numero du telephone:</li>
+            <li className="space-lable-li">Type du payment:</li>
+            <li className="space-lable-li">Classe:</li>
           </ul>
+        </div>
+        <div className="space-inputs">
           <form>
             <div className="mb-3">
               <input
@@ -78,7 +88,17 @@ export default function Teacher() {
               name="class_id"
               placeholder="Taper ici"
               value={classId}
-            ></select>
+              className="form-select"
+            >
+              <option key={0}>---Selectioner unse classe---</option>
+              {classes.map((classe) => {
+                return (
+                  <option key={classe.class_id} value={classe.class_id}>
+                    {classe.class_name}
+                  </option>
+                );
+              })}
+            </select>
           </form>
         </div>
       </div>

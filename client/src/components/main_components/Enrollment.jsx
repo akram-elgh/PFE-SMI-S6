@@ -16,10 +16,7 @@ export default function Enrollment() {
   const { fname, lname, bDate, level, phoneNum, parentNum, class_id } = student;
   const [classes, setClasses] = useState([{}]);
   useEffect(() => {
-    axios.get(url).then((result) => {
-      console.log(result.data);
-      setClasses(result.data);
-    });
+    axios.get(url).then((result) => setClasses(result.data));
   }, [url]);
   function handleChange(event) {
     const name = event.target.name;
@@ -32,22 +29,20 @@ export default function Enrollment() {
     });
   }
   return (
-    <div className="enrollment">
-      <div className="enrollment-form">
-        <div className="enrollment-labels">
+    <div className="space">
+      <div className="space-form">
+        <div className="space-labels">
           <ul>
-            <li className="enrollment-lable-li">Nom:</li>
-            <li className="enrollment-lable-li">Prenom:</li>
-            <li className="enrollment-lable-li">Date de naissance:</li>
-            <li className="enrollment-lable-li">Numero du telephone:</li>
-            <li className="enrollment-lable-li">
-              Numero du telephone du parent:
-            </li>
-            <li className="enrollment-lable-li">Niveau: </li>
-            <li className="enrollment-lable-li">Classe: </li>
+            <li className="space-lable-li">Nom:</li>
+            <li className="space-lable-li">Prenom:</li>
+            <li className="space-lable-li">Date de naissance:</li>
+            <li className="space-lable-li">Numero du telephone:</li>
+            <li className="space-lable-li">Numero du telephone du parent:</li>
+            <li className="space-lable-li">Niveau: </li>
+            <li className="space-lable-li">Classe: </li>
           </ul>
         </div>
-        <div className="enrollment-inputs">
+        <div className="space-inputs">
           <form>
             <div className="mb-3">
               <input
@@ -113,10 +108,10 @@ export default function Enrollment() {
               <select
                 name="class_id"
                 value={class_id}
-                className="form-control"
+                className="form-select"
                 onChange={handleChange}
               >
-                <option value="0" key="0">
+                <option value="0" key={0}>
                   ---Selectioner une classe---
                 </option>
                 {classes.map((classe) => {

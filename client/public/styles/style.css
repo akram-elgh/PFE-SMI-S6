@@ -139,15 +139,15 @@
 }
 
 /*****************************************************************/
-/***************************** Espace Inscription ********************/
+/***************************** Espace Inscription, Classe, Prof ********************/
 
-.enrollment {
+.space {
   text-align: center;
   width: 80%;
   padding: 20px;
 }
 
-.enrollment-form {
+.space-form {
   padding: 100px 80px;
   width: 80%;
   display: flex;
@@ -155,12 +155,12 @@
   text-align: left;
 }
 
-.enrollment-labels > ul {
+.space-labels > ul {
   list-style: none;
 }
 
-.enrollment-lable-li {
-  margin: 20px;
+.space-lable-li {
+  margin: 23px;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -169,10 +169,11 @@
   font-size: 3rem;
 }
 
-.enrollment-inputs {
+.space-inputs {
   width: 50%;
 }
 
-.enrollment-inputs .form-control {
+.space-inputs .form-control,
+.space-inputs .form-select {
   margin: 18px;
 }

@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Enrollment from "./Enrollment";
 import Class from "./Class";
 import Modal from "./Modal";
+import Teacher from "./Teacher";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -25,7 +26,7 @@ export default function Body(props) {
       {activeTab === "Espace Inscription" && <Enrollment></Enrollment>}
       {activeTab === "Espace Etudiant" && <div>student</div>}
       {activeTab === "Espace Classe" && <Class></Class>}
-      {activeTab === "Espace Prof" && <div>prof</div>}
+      {activeTab === "Espace Prof" && <Teacher></Teacher>}
       {activeTab === "Espace Emploi" && <div>schedule</div>}
       {activeTab === "Espace Finance" && <div>finance</div>}
     </main>

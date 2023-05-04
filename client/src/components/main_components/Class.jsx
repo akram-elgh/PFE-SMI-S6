@@ -19,17 +19,17 @@ export default function Class() {
     });
   };
   return (
-    <div className="enrollment">
-      <div className="enrollment-form">
-        <div className="enrollment-labels">
+    <div className="space">
+      <div className="space-form">
+        <div className="space-labels">
           <ul>
-            <li className="enrollment-lable-li">Nom du classe:</li>
-            <li className="enrollment-lable-li">Duree:</li>
-            <li className="enrollment-lable-li">Salle:</li>
-            <li className="enrollment-lable-li">Prix:</li>
+            <li className="space-lable-li">Nom du classe:</li>
+            <li className="space-lable-li">Duree:</li>
+            <li className="space-lable-li">Salle:</li>
+            <li className="space-lable-li">Prix:</li>
           </ul>
         </div>
-        <div className="enrollment-inputs">
+        <div className="space-inputs">
           <form>
             <div className="mb-3">
               <input
