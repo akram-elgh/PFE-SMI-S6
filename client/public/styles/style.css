@@ -173,7 +173,11 @@
   width: 50%;
 }
 
-.space-inputs .form-control,
-.space-inputs .form-select {
+.space-inputs > * {
   margin: 18px;
+}
+
+.space-inputs .btn {
+  margin-top: 50px;
+  width: 100%;
 }

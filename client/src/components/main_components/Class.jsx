@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Button from "../sub-components/Button";
 
-export default function Class() {
+export default function Class(props) {
   const [classe, setClass] = useState({
     class_name: "",
     duration: 0,
@@ -18,6 +19,11 @@ export default function Class() {
       };
     });
   };
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(classe);
+    if (duration === 0) props.showSuccessModal();
+  }
   return (
     <div className="space">
       <div className="space-form">
@@ -30,7 +36,7 @@ export default function Class() {
           </ul>
         </div>
         <div className="space-inputs">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input
                 type="text"
@@ -39,6 +45,7 @@ export default function Class() {
                 value={class_name}
                 className="form-control "
                 onChange={handleChange}
+                required
               ></input>
             </div>
 
@@ -50,7 +57,7 @@ export default function Class() {
               onChange={handleChange}
               aria-label="Default select example"
             >
-              <option>----Duree----</option>
+              <option value="0">----Duree----</option>
               <option value="90">1h30</option>
               <option value="120">2h</option>
             </select>
@@ -58,11 +65,12 @@ export default function Class() {
             <div className="mb-3">
               <input
                 type="number"
-                name="clasroom"
+                name="classroom"
                 placeholder="Taper ici"
                 value={classroom}
                 className="form-control"
                 onChange={handleChange}
+                required
               ></input>
             </div>
             <div className="mb-3">
@@ -73,8 +81,10 @@ export default function Class() {
                 value={price}
                 className="form-control"
                 onChange={handleChange}
+                required
               ></input>
             </div>
+            <Button></Button>
           </form>
         </div>
       </div>

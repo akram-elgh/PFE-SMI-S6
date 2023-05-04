@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../sub-components/Button";
 
 export default function Teacher() {
   const url = "http://localhost:3001/class";
@@ -99,6 +100,7 @@ export default function Teacher() {
                 );
               })}
             </select>
+            <Button></Button>
           </form>
         </div>
       </div>

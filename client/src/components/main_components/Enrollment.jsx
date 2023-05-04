@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "../sub-components/Button";
 // import Modal from "./Modal";
 
 export default function Enrollment() {
@@ -122,6 +123,7 @@ export default function Enrollment() {
                   );
                 })}
               </select>
+              <Button></Button>
             </div>
           </form>
         </div>
