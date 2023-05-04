@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Enrollment from "./Enrollment";
 import Class from "./Class";
-import Modal from "./Modal";
 import Teacher from "./Teacher";
+import Modal from "./Modal";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
+  const [modal, setShowModal] = useState({
+    showModal: false,
+    title: "Succes",
+    body: "",
+    color: "green",
+    classe: "success",
+  });
+
+  const { showModal, title, body, color, classe } = modal;
 
   const handleClick = (tabName) => {
     setActiveTab(tabName);
@@ -16,19 +25,62 @@ export default function Body(props) {
     props.onClick(activeTab);
   }, [activeTab, props]);
 
+  function handleShowSuccessModal(body) {
+    setShowModal((prevValues) => {
+      return {
+        ...prevValues,
+        showModal: true,
+        body: body,
+      };
+    });
+  }
+  function handleShowFailModal(body) {
+    setShowModal({
+      showModal: true,
+      title: "Erreur",
+      body: body,
+      color: "red",
+      classe: "danger",
+    });
+  }
+
+  function handleClose() {
+    setShowModal(false);
+  }
   return (
     <main className="main-container">
-      <Modal title="Succes" body="hello"></Modal>
-
       <Navbar onClick={handleClick}></Navbar>
       {activeTab === "Acceuil" && <div>home</div>}
       {activeTab === "Espace Payment" && <div>payment</div>}
-      {activeTab === "Espace Inscription" && <Enrollment></Enrollment>}
+      {activeTab === "Espace Inscription" && (
+        <Enrollment
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Enrollment>
+      )}
       {activeTab === "Espace Etudiant" && <div>student</div>}
-      {activeTab === "Espace Classe" && <Class></Class>}
-      {activeTab === "Espace Prof" && <Teacher></Teacher>}
+      {activeTab === "Espace Classe" && (
+        <Class
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Class>
+      )}
+      {activeTab === "Espace Prof" && (
+        <Teacher
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Teacher>
+      )}
       {activeTab === "Espace Emploi" && <div>schedule</div>}
       {activeTab === "Espace Finance" && <div>finance</div>}
+      <Modal
+        show={showModal}
+        title={title}
+        body={body}
+        color={color}
+        classe={classe}
+        onClose={handleClose}
+      ></Modal>
     </main>
   );
 }
