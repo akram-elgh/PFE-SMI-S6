@@ -28,7 +28,7 @@ export default function Login(props) {
             }}
           >
             <div className="mb-3">
-              <label for="exampleInputEmail1" className="form-label">
+              <label htmlFor="exampleInputEmail1" className="form-label">
                 Nom d'utilisateur
               </label>
               <input
@@ -43,7 +43,7 @@ export default function Login(props) {
               />
             </div>
             <div className="mb-3">
-              <label for="exampleInputPassword1" className="form-label">
+              <label htmlFor="exampleInputPassword1" className="form-label">
                 Mot de pass
               </label>
               <input
