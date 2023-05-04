@@ -18,15 +18,25 @@ app.get("/", (err, res) => {
   res.send("Hello, world!");
 });
 
-app.route("/class").get((req, res) => {
-  console.log(req.query.id);
-  const id = req.query.id;
-  const query = id ? "WHERE class_id = " + id : "";
-  connection.query("SELECT * FROM Class " + query, (err, result) => {
-    console.log(err, result);
-    res.send(err || result);
-    // res.sendStatus(err ? 404 : 200);
+app
+  .route("/class")
+  .get((req, res) => {
+    const id = req.query.id;
+    const query = "WHERE class_id = " + id ? id : "";
+    connection.query("SELECT * FROM Class " + query, (err, result) => {
+      res.send(err || result);
+    });
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    const { class_name, duration, classroom, price } = req.body;
+    connection.query(
+      `INSERT INTO Class (class_name, duration, classroom, price) VALUES (?, ?, ?, ?)`,
+      [class_name, duration, Number(classroom), price],
+      (err) => {
+        res.sendStatus(err ? err : 200);
+      }
+    );
   });
-});
 
 app.listen(3001, (err) => console.log(err || "Server Started"));

@@ -9,10 +9,10 @@ export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
   const [modal, setShowModal] = useState({
     showModal: false,
-    title: "Succes",
+    title: "",
     body: "",
-    color: "green",
-    classe: "success",
+    color: "",
+    classe: "",
   });
 
   const { showModal, title, body, color, classe } = modal;
@@ -28,9 +28,11 @@ export default function Body(props) {
   function handleShowSuccessModal(body) {
     setShowModal((prevValues) => {
       return {
-        ...prevValues,
         showModal: true,
+        title: "Succes",
         body: body,
+        color: "green",
+        classe: "success",
       };
     });
   }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Button from "../sub-components/Button";
+import axios from "axios";
 
 export default function Class(props) {
+  const url = "http://localhost:3001/class";
   const [classe, setClass] = useState({
     class_name: "",
     duration: 0,
@@ -21,8 +23,21 @@ export default function Class(props) {
   };
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(classe);
-    if (duration === 0) props.showSuccessModal();
+    if (Number(duration) === 0) {
+      props.showFailModal("Veuillez entrer la duree du cours");
+    } else {
+      axios.post(url, classe).then((response) => {
+        if (response.status === 200)
+          props.showSuccessModal("La classe a ete ajouter avec succes");
+        else props.showFailModal("Erreur Lors de l'ajout du classe");
+      });
+      setClass({
+        class_name: "",
+        duration: 0,
+        classroom: 0,
+        price: 0,
+      });
+    }
   }
   return (
     <div className="space">
