@@ -1,46 +1,46 @@
 import React from "react";
 
 export default function Modal(props) {
-  const script = " $(function () { $('#successModal').modal('show'); });";
   return (
     <div
-      class="modal fade"
-      id="successModal"
-      tabindex="-1"
+      className={`modal fade ${props.show ? "show" : ""}`}
+      tabIndex="-1"
       role="dialog"
-      aria-labelledby="successModalLabel"
+      aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true"
+      style={{ display: props.show ? "block" : "none" }}
     >
-      <div className="modal-dialog" role="document">
+      <div className={`modal-dialog modal-dialog-centered`} role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5
               className="modal-title"
-              id="successModalLabel"
-              style={props.style}
+              id="exampleModalLongTitle"
+              style={{ color: props.color }}
             >
               {props.title}
             </h5>
             <button
               type="button"
               className="btn-close"
-              data-bs-dismiss="modal"
+              data-dismiss="modal"
               aria-label="Close"
+              onClick={props.onClose}
             ></button>
           </div>
           <div className="modal-body">{props.body}</div>
           <div className="modal-footer">
             <button
               type="button"
-              className={"btn btn-" + props.class}
-              data-bs-dismiss="modal"
+              className={"btn btn-" + props.classe}
+              data-dismiss="modal"
+              onClick={props.onClose}
             >
-              Close
+              Fermer
             </button>
           </div>
         </div>
       </div>
-      <script>{script}</script>
     </div>
   );
 }
