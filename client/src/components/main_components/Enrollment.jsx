@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "../sub-components/Button";
-// import Modal from "./Modal";
+import { getLevel } from "../functions/functions";
 
-export default function Enrollment() {
+export default function Enrollment(props) {
+  const levels = getLevel();
   const url = "http://localhost:3001/class";
   const [student, setStudent] = useState({
     fname: "",
@@ -29,6 +30,18 @@ export default function Enrollment() {
       };
     });
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(student);
+    if (Number(class_id) === 0) {
+      props.showFailModal("Veuillez selectioner une classe.");
+    }
+    if (Number(level) === 0) {
+      props.showFailModal("Veuillez selectioner un niveau.");
+    }
+  }
+
   return (
     <div className="space">
       <div className="space-form">
@@ -44,8 +57,8 @@ export default function Enrollment() {
           </ul>
         </div>
         <div className="space-inputs">
-          <form>
-            <div className="mb-3">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
               <input
                 type="text"
                 name="fname"
@@ -53,9 +66,10 @@ export default function Enrollment() {
                 value={fname}
                 className="form-control"
                 onChange={handleChange}
+                required
               ></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="text"
                 name="lname"
@@ -63,9 +77,10 @@ export default function Enrollment() {
                 value={lname}
                 className="form-control"
                 onChange={handleChange}
+                required
               ></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="date"
                 name="bDate"
@@ -75,7 +90,7 @@ export default function Enrollment() {
                 onChange={handleChange}
               ></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="text"
                 name="phoneNum"
@@ -85,7 +100,7 @@ export default function Enrollment() {
                 onChange={handleChange}
               ></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="text"
                 name="parentNum"
@@ -93,19 +108,28 @@ export default function Enrollment() {
                 value={parentNum}
                 className="form-control"
                 onChange={handleChange}
+                required
               ></input>
             </div>
-            <div className="mb-3">
-              <input
+            <div className="mb-4">
+              <select
                 type="text"
                 name="level"
                 placeholder="Taper ici"
                 value={level}
-                className="form-control"
+                className="form-select"
                 onChange={handleChange}
-              ></input>
+              >
+                {levels.map((level, index) => {
+                  return (
+                    <option key={index} value={index}>
+                      {level}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <select
                 name="class_id"
                 value={class_id}

@@ -52,7 +52,7 @@ export default function Class(props) {
         </div>
         <div className="space-inputs">
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="text"
                 name="class_name"
@@ -68,7 +68,7 @@ export default function Class(props) {
               name="duration"
               placeholder="Taper ici"
               value={duration}
-              className="form-select mb-3"
+              className="form-select mb-4"
               onChange={handleChange}
               aria-label="Default select example"
             >
@@ -77,7 +77,7 @@ export default function Class(props) {
               <option value="120">2h</option>
             </select>
 
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="number"
                 name="classroom"
@@ -88,7 +88,7 @@ export default function Class(props) {
                 required
               ></input>
             </div>
-            <div className="mb-3">
+            <div className="mb-4">
               <input
                 type="number"
                 name="price"
