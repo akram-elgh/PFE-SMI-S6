@@ -5,7 +5,8 @@ import { getPaymentType } from "../functions/functions";
 
 export default function Teacher(props) {
   const types = getPaymentType();
-  const url = "http://localhost:3001/class";
+  const class_url = "http://localhost:3001/class";
+  const teacher_url = "http://localhost:3001/teacher";
   const [type, setType] = useState({
     isTypeSelected: false,
     typeTitle: "",
@@ -23,12 +24,15 @@ export default function Teacher(props) {
   const { fname, lname, phoneNum, typeOfPayment, salary, class_id } = teacher;
 
   useEffect(() => {
-    axios.get(url).then((response) => setClasses(response.data));
-  }, [url]);
+    axios.get(class_url).then((response) => setClasses(response.data));
+  }, [class_url]);
 
   function handleChange(event) {
     const name = event.target.name;
-    const value = event.target.value;
+    const value =
+      name === "salary" || name === "typeOfPayment" || name === "class_id"
+        ? Number(event.target.value)
+        : event.target.value;
     setTeacher((prevValues) => {
       return {
         ...prevValues,
@@ -52,7 +56,7 @@ export default function Teacher(props) {
     if (Number(class_id) === 0) {
       props.showFailModal("Veuillez choisir une classe.");
     } else {
-      axios.post(url, teacher).then((response) => {
+      axios.post(teacher_url, teacher).then((response) => {
         if (response.status === 200)
           props.showSuccessModal("Le prof a ete ajouter avec succes.");
         else props.showFailModal("Un erreur lors dde l'ajout du prof.");
@@ -86,9 +90,9 @@ export default function Teacher(props) {
             <div className="mb-4">
               <input
                 type="text"
-                name="fname"
+                name="lname"
                 placeholder="Taper ici"
-                value={fname}
+                value={lname}
                 className="form-control "
                 onChange={handleChange}
                 required
@@ -97,9 +101,9 @@ export default function Teacher(props) {
 
             <div className="mb-4">
               <input
-                name="lname"
+                name="fname"
                 placeholder="Taper ici"
-                value={lname}
+                value={fname}
                 className="form-control"
                 onChange={handleChange}
                 aria-label="Default select example"
@@ -131,7 +135,7 @@ export default function Teacher(props) {
             >
               {types.map((type, index) => {
                 return (
-                  <option key={index} value={index}>
+                  <option type="number" key={index} value={index}>
                     {type}
                   </option>
                 );
