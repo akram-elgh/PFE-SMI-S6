@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql2");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const date = require("./functions/function");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -59,6 +60,28 @@ app
       req.body;
     connection.query(
       `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary, class_id) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary}, ${class_id});`,
+      (err) => {
+        console.log(err);
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  });
+
+// ------------------------ Student routes --------------------------------
+
+app
+  .route("/student")
+  .get((req, res) => {
+    const id = req.query.id;
+    const query = "WHERE student_id = " + id ? id : ";";
+    connection.query(`SELECT * FROM Student ${query}`, (err, result) => {
+      res.send(err ? [] : result);
+    });
+  })
+  .post((req, res) => {
+    connection.query(
+      "INSERT INTO Student (fname, lname, bDate, level, phoneNum, parentNum, class_id, enrolment_date, last_payment_date) Values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [...Object.values(req.body), date.getDate(), date.getDate()],
       (err) => {
         console.log(err);
         res.sendStatus(err ? 201 : 200);
