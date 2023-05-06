@@ -47,16 +47,24 @@ export default function Teacher(props) {
     }
   }
 
-  // function handleTypeChange() {
-  //   console.log(typeOfPayment);
-
-  // }
-
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(teacher);
     if (Number(class_id) === 0) {
       props.showFailModal("Veuillez choisir une classe.");
+    } else {
+      axios.post(url, teacher).then((response) => {
+        if (response.status === 200)
+          props.showSuccessModal("Le prof a ete ajouter avec succes.");
+        else props.showFailModal("Un erreur lors dde l'ajout du prof.");
+      });
+      setTeacher({
+        fname: "",
+        lname: "",
+        phoneNum: "",
+        typeOfPayment: 0,
+        salary: 0,
+        class_id: 0,
+      });
     }
   }
 
