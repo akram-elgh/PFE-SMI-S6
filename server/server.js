@@ -18,23 +18,50 @@ app.get("/", (err, res) => {
   res.send("Hello, world!");
 });
 
+//------------------------ Class routes --------------------------------
+
 app
   .route("/class")
   .get((req, res) => {
     const id = req.query.id;
-    const query = "WHERE class_id = " + id ? id : "";
+    const query = "WHERE class_id = " + id ? id : ";";
     connection.query("SELECT * FROM Class " + query, (err, result) => {
-      res.send(err || result);
+      res.send(err ? [] : result);
     });
   })
   .post((req, res) => {
     console.log(req.body);
     const { class_name, duration, classroom, price } = req.body;
     connection.query(
-      `INSERT INTO Class (class_name, duration, classroom, price) VALUES (?, ?, ?, ?)`,
-      [class_name, duration, Number(classroom), price],
+      `INSERT INTO Class (class_name, duration, classroom, price) VALUES ("${class_name}", ${Number(
+        duration
+      )}, ${Number(classroom)}, ${price})`,
       (err) => {
-        res.sendStatus(err ? err : 200);
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  });
+
+//-------------------------- Teacher routes --------------------------------
+
+app
+  .route("/teacher")
+  .get((req, res) => {
+    const id = req.query.id;
+    const query = "WHERE prof_id = " + id ? id : ";";
+    connection.query(`SELECT * From Teacher ${query}`, (err, result) => {
+      res.send(err ? [] : result);
+    });
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    const { fname, lname, phoneNum, typeOfPayment, salary, class_id } =
+      req.body;
+    connection.query(
+      `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary, class_id) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary}, ${class_id});`,
+      (err) => {
+        console.log(err);
+        res.sendStatus(err ? 201 : 200);
       }
     );
   });
