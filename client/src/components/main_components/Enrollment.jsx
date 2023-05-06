@@ -5,7 +5,8 @@ import { getLevel } from "../functions/functions";
 
 export default function Enrollment(props) {
   const levels = getLevel();
-  const url = "http://localhost:3001/class";
+  const class_url = "http://localhost:3001/class";
+  const student_url = "http://localhost:3001/student";
   const [student, setStudent] = useState({
     fname: "",
     lname: "",
@@ -18,11 +19,14 @@ export default function Enrollment(props) {
   const { fname, lname, bDate, level, phoneNum, parentNum, class_id } = student;
   const [classes, setClasses] = useState([{}]);
   useEffect(() => {
-    axios.get(url).then((result) => setClasses(result.data));
-  }, [url]);
+    axios.get(class_url).then((result) => setClasses(result.data));
+  }, [class_url]);
   function handleChange(event) {
     const name = event.target.name;
-    const value = event.target.value;
+    const value =
+      name === "level" || name === "class_id"
+        ? Number(event.target.value)
+        : event.target.value;
     setStudent((prevValues) => {
       return {
         ...prevValues,
@@ -36,9 +40,14 @@ export default function Enrollment(props) {
     console.log(student);
     if (Number(class_id) === 0) {
       props.showFailModal("Veuillez selectioner une classe.");
-    }
-    if (Number(level) === 0) {
+    } else if (Number(level) === 0) {
       props.showFailModal("Veuillez selectioner un niveau.");
+    } else {
+      axios.post(student_url, student).then((response) => {
+        if (response.status === 200)
+          props.showSuccessModal("L'etudiant a ete bien ajouter.");
+        else props.showFailModal("Erreur lors de l'inscription de l'etudiant.");
+      });
     }
   }
 
@@ -61,9 +70,9 @@ export default function Enrollment(props) {
             <div className="mb-4">
               <input
                 type="text"
-                name="fname"
+                name="lname"
                 placeholder="Taper ici"
-                value={fname}
+                value={lname}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -72,9 +81,9 @@ export default function Enrollment(props) {
             <div className="mb-4">
               <input
                 type="text"
-                name="lname"
+                name="fname"
                 placeholder="Taper ici"
-                value={lname}
+                value={fname}
                 className="form-control"
                 onChange={handleChange}
                 required
@@ -136,7 +145,7 @@ export default function Enrollment(props) {
                 className="form-select"
                 onChange={handleChange}
               >
-                <option value="0" key={0}>
+                <option value="0" key="0">
                   ---Selectioner une classe---
                 </option>
                 {classes.map((classe) => {
