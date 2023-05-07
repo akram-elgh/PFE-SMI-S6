@@ -48,6 +48,15 @@ export default function Enrollment(props) {
           props.showSuccessModal("L'etudiant a ete bien ajouter.");
         else props.showFailModal("Erreur lors de l'inscription de l'etudiant.");
       });
+      setStudent({
+        fname: "",
+        lname: "",
+        bDate: "",
+        level: "",
+        phoneNum: "",
+        parentNum: "",
+        class_id: "",
+      });
     }
   }
 
