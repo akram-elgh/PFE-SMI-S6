@@ -25,7 +25,7 @@ app
   .route("/class")
   .get((req, res) => {
     const id = req.query.id;
-    const query = "WHERE class_id = " + id ? id : ";";
+    const query = id ? "WHERE class_id = " + id : ";";
     connection.query("SELECT * FROM Class " + query, (err, result) => {
       res.send(err ? [] : result);
     });
@@ -49,7 +49,7 @@ app
   .route("/teacher")
   .get((req, res) => {
     const id = req.query.id;
-    const query = "WHERE prof_id = " + id ? id : ";";
+    const query = id ? "WHERE prof_id = " + id : ";";
     connection.query(`SELECT * From Teacher ${query}`, (err, result) => {
       res.send(err ? [] : result);
     });
