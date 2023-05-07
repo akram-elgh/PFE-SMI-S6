@@ -98,4 +98,17 @@ app
     );
   });
 
+//-------------------- Payment routes ----------------------------
+
+app.route("/payment").get((req, res) => {
+  const name = req.query.name;
+  connection.query(
+    `SELECT S.student_id AS id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`,
+    (err, result) => {
+      console.log(err);
+      res.send(err ? [] : result);
+    }
+  );
+});
+
 app.listen(3001, (err) => console.log(err || "Server Started"));
