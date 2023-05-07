@@ -181,3 +181,36 @@
   margin-top: 50px;
   width: 100%;
 }
+
+/********************* Space Navbar******************************/
+
+.space-navbar {
+  display: flex;
+  margin: auto;
+  width: 60%;
+}
+
+.space-navbar-item {
+  background-color: aliceblue;
+  padding: 15px 70px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.space-navbar-item:hover,
+.space-navbar-item.active {
+  background-color: #cdccff;
+}
+
+/******************** Search student ******************************/
+
+.search-student {
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.search-student-input {
+  width: 30%;
+  font-weight: 900;
+  margin: auto;
+}

@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Enrollment from "./Enrollment";
 import Class from "./Class";
 import Teacher from "./Teacher";
+import Student from "./Student";
 import Modal from "./Modal";
 
 export default function Body(props) {
@@ -60,7 +61,7 @@ export default function Body(props) {
           showFailModal={handleShowFailModal}
         ></Enrollment>
       )}
-      {activeTab === "Espace Etudiant" && <div>student</div>}
+      {activeTab === "Espace Etudiant" && <Student></Student>}
       {activeTab === "Espace Classe" && (
         <Class
           showSuccessModal={handleShowSuccessModal}
