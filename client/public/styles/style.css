@@ -104,6 +104,7 @@
   padding: 70px 0 30px;
   border-top-right-radius: 200px;
   overflow: hidden;
+  width: 16%;
 }
 
 .navbar > ul {
@@ -143,13 +144,13 @@
 
 .space {
   text-align: center;
-  width: 80%;
+  width: 85%;
   padding: 20px;
 }
 
 .space-form {
   padding: 100px 80px;
-  width: 80%;
+  /* width: 80%; */
   display: flex;
   justify-content: space-evenly;
   text-align: left;
@@ -170,7 +171,8 @@
 }
 
 .space-inputs {
-  width: 50%;
+  width: 40%;
+  text-align: center;
 }
 
 .space-inputs > * {
@@ -178,8 +180,8 @@
 }
 
 .space-inputs .btn {
-  margin-top: 50px;
-  width: 100%;
+  width: 50%;
+  margin: 50px auto;
 }
 
 /********************* Space Navbar******************************/
@@ -187,7 +189,7 @@
 .space-navbar {
   display: flex;
   margin: auto;
-  width: 60%;
+  width: 50%;
 }
 
 .space-navbar-item {
@@ -213,4 +215,5 @@
   width: 30%;
   font-weight: 900;
   margin: auto;
+  margin-bottom: 30px;
 }
