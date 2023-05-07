@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
 export default function SpaceNavbar(props) {
-  const [activeTab, setActiveTab] = useState("search");
+  const number = Number(props.number);
+  const [activeTab, setActiveTab] = useState(number === 3 ? "search" : "add");
   const handleClick = (tabName) => setActiveTab(tabName);
   return (
-    <div className="space-navbar">
-      {Number(props.number) === 4 && (
+    <div
+      className="space-navbar"
+      style={{ width: number === 3 ? "50%" : "70%" }}
+    >
+      {number === 4 && (
         <div
           className={`space-navbar-item ${activeTab === "add" ? "active" : ""}`}
           onClick={() => {
