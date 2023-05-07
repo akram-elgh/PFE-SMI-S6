@@ -5,6 +5,7 @@ import Class from "./Class";
 import Teacher from "./Teacher";
 import Student from "./Student";
 import Modal from "./Modal";
+import Payment from "./Payment";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -54,14 +55,24 @@ export default function Body(props) {
     <main className="main-container">
       <Navbar onClick={handleClick}></Navbar>
       {activeTab === "Acceuil" && <div>home</div>}
-      {activeTab === "Espace Payment" && <div>payment</div>}
+      {activeTab === "Espace Payment" && (
+        <Payment
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Payment>
+      )}
       {activeTab === "Espace Inscription" && (
         <Enrollment
           showSuccessModal={handleShowSuccessModal}
           showFailModal={handleShowFailModal}
         ></Enrollment>
       )}
-      {activeTab === "Espace Etudiant" && <Student></Student>}
+      {activeTab === "Espace Etudiant" && (
+        <Student
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Student>
+      )}
       {activeTab === "Espace Classe" && (
         <Class
           showSuccessModal={handleShowSuccessModal}
