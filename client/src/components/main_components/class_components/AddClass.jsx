@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../../sub-components/Button";
 import axios from "axios";
 
-export default function Class(props) {
+export default function AddClass(props) {
   const url = "http://localhost:3001/class";
   const [classe, setClass] = useState({
     class_name: "",
