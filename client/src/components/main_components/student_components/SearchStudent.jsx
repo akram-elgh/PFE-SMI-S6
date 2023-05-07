@@ -13,8 +13,8 @@ export default function SearchStudent() {
     });
   };
   return (
-    <div className="search-student">
-      <div className="search-student-input">
+    <div className="search-space">
+      <div className="search-space-input">
         <input
           type="text"
           name="name"
@@ -24,7 +24,7 @@ export default function SearchStudent() {
           onChange={handleChange}
         />
       </div>
-      <div className="search-student-table">
+      <div className="search-space-table">
         <table className="table table-striped table-primary">
           <thead>
             <tr>
