@@ -19,7 +19,7 @@ app.get("/", (err, res) => {
   res.send("Hello, world!");
 });
 
-//------------------------ Class routes --------------------------------
+//------------------------ Class routes ------------------------------
 
 app
   .route("/class")
@@ -50,9 +50,13 @@ app
   .get((req, res) => {
     const id = req.query.id;
     const query = id ? "WHERE prof_id = " + id : ";";
-    connection.query(`SELECT * From Teacher ${query}`, (err, result) => {
-      res.send(err ? [] : result);
-    });
+    connection.query(
+      `SELECT * From Teacher AS T Join Class AS C ON T.class_id = C.class_id  ${query}`,
+      (err, result) => {
+        console.log(err);
+        res.send(err ? [] : result);
+      }
+    );
   })
   .post((req, res) => {
     console.log(req.body);
