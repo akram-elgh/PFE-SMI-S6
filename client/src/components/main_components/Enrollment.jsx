@@ -165,7 +165,7 @@ export default function Enrollment(props) {
                   );
                 })}
               </select>
-              <Button></Button>
+              <Button color="primary"></Button>
             </div>
           </form>
         </div>

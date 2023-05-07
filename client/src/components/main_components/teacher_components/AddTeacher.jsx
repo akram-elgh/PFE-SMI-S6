@@ -59,7 +59,7 @@ export default function AddTeacher(props) {
       axios.post(teacher_url, teacher).then((response) => {
         if (response.status === 200)
           props.showSuccessModal("Le prof a ete ajouter avec succes.");
-        else props.showFailModal("Un erreur lors dde l'ajout du prof.");
+        else props.showFailModal("Un erreur lors de l'ajout du prof.");
       });
       setTeacher({
         fname: "",
@@ -80,7 +80,7 @@ export default function AddTeacher(props) {
             <li className="space-lable-li">Prenom:</li>
             <li className="space-lable-li">Nom:</li>
             <li className="space-lable-li">Numero du telephone:</li>
-            <li className="space-lable-li">Type du payment:</li>
+            <li className="space-lable-li">Type du contrat:</li>
             {isTypeSelected && <li className="space-lable-li">{typeTitle}</li>}
             <li className="space-lable-li">Classe:</li>
           </ul>
@@ -173,7 +173,7 @@ export default function AddTeacher(props) {
                 );
               })}
             </select>
-            <Button></Button>
+            <Button color="primary"></Button>
           </form>
         </div>
       </div>

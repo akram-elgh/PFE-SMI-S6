@@ -99,7 +99,7 @@ export default function AddClass(props) {
                 required
               ></input>
             </div>
-            <Button></Button>
+            <Button color="primary"></Button>
           </form>
         </div>
       </div>
