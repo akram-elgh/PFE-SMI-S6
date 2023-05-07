@@ -204,14 +204,14 @@
   background-color: #cdccff;
 }
 
-/******************** Search student ******************************/
+/******************** Search space ******************************/
 
-.search-student {
+.search-space {
   padding: 10px;
   margin-top: 20px;
 }
 
-.search-student-input {
+.search-space-input {
   width: 30%;
   font-weight: 900;
   margin: auto;
