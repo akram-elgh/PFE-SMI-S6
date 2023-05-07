@@ -4,13 +4,14 @@ export default function Modal(props) {
   return (
     <div
       className={`modal fade ${props.show ? "show" : ""}`}
+      id="successModal"
       tabIndex="-1"
       role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true"
+      aria-labelledby="successModalLabel"
+      aria-modal="true"
       style={{ display: props.show ? "block" : "none" }}
     >
-      <div className={`modal-dialog modal-dialog-centered`} role="document">
+      <div className={`modal-dialog`} role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5
