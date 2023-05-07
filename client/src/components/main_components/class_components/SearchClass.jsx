@@ -32,7 +32,7 @@ export default function SearchClass() {
         </select>
       </div>
       <div className="search-space-table">
-        <table className="table table-striped table-primary">
+        <table className="table table-striped table-primary table-hover">
           <thead>
             <tr>
               <th>Nom</th>
