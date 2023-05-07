@@ -114,7 +114,7 @@
 .nav-item {
   list-style: none;
   color: white;
-  /* margin: 25px auto; */
+  width: 350px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 800;
   font-size: 1.5rem;
