@@ -38,3 +38,22 @@ export function getPaymentType(type) {
   ];
   return type ? types[type] : types;
 }
+
+export function getMonth(month) {
+  const months = [
+    "Pas encore",
+    "Janvier",
+    "Fevrier",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juilliet",
+    "Auot",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Decembre",
+  ];
+  return month ? months[month] : months;
+}
