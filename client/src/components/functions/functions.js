@@ -55,5 +55,5 @@ export function getMonth(month) {
     "Novembre",
     "Decembre",
   ];
-  return month ? months[month] : months;
+  return month || month === 0 ? months[month] : months;
 }
