@@ -154,7 +154,7 @@ export default function Enrollment(props) {
                 className="form-select"
                 onChange={handleChange}
               >
-                <option value="0" key="0">
+                <option value="0" key={0}>
                   ---Selectioner une classe---
                 </option>
                 {classes.map((classe) => {
