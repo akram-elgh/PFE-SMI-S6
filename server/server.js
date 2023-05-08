@@ -53,19 +53,16 @@ app
     connection.query(
       `SELECT * From Teacher AS T Join Class AS C ON T.class_id = C.class_id  ${query}`,
       (err, result) => {
-        console.log(err);
         res.send(err ? [] : result);
       }
     );
   })
   .post((req, res) => {
-    console.log(req.body);
     const { fname, lname, phoneNum, typeOfPayment, salary, class_id } =
       req.body;
     connection.query(
       `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary, class_id) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary}, ${class_id});`,
       (err) => {
-        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
@@ -79,11 +76,10 @@ app
     const id = req.query.id;
     const name = req.query.name;
     let query = "";
-    if (id) query = `SELECT * FROM Student WHERE id = ${id}`;
+    if (id) query = `SELECT * FROM Student WHERE student_id = ${id}`;
     if (name)
       query = `SELECT S.student_id AS id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
     connection.query(query, (err, result) => {
-      console.log(result);
       res.send(err ? [] : result);
     });
   })
@@ -92,10 +88,40 @@ app
       "INSERT INTO Student (fname, lname, bDate, level, phoneNum, parentNum, class_id, enrolment_date, last_payment_date) Values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [...Object.values(req.body), date.getDate(), date.getDate()],
       (err) => {
-        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
+  })
+  .put((req, res) => {
+    console.log(req.body);
+    let {
+      student_id,
+      fname,
+      lname,
+      bDate,
+      phoneNum,
+      parentNum,
+      level,
+      class_id,
+      new_class_id,
+    } = req.body;
+    new_class_id = new_class_id || class_id;
+    console.log(new_class_id);
+    let query = "";
+    if (class_id === new_class_id)
+      query = `UPDATE Student SET bDate = "${bDate.slice(
+        0,
+        10
+      )}", phoneNUm = ${phoneNum}, parentNUm = ${parentNum}, level = ${level} WHERE student_id = ${student_id} OR fname = "${fname}" AND lname = "${lname}" AND bdate = "${bDate.slice(
+        0,
+        10
+      )}"`;
+    else
+      query = `UPDATE Student SET class_id = ${new_class_id} WHERE student_id = ${student_id}`;
+    connection.query(query, (err) => {
+      console.log(err);
+      res.sendStatus(err ? 201 : 200);
+    });
   });
 
 //-------------------- Payment routes ----------------------------
@@ -108,7 +134,6 @@ app
       connection.query(
         `SELECT S.student_id AS id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`,
         (err, result) => {
-          console.log(err);
           res.send(err ? [] : result);
         }
       );
