@@ -100,15 +100,27 @@ app
 
 //-------------------- Payment routes ----------------------------
 
-app.route("/payment").get((req, res) => {
-  const name = req.query.name;
-  connection.query(
-    `SELECT S.student_id AS id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`,
-    (err, result) => {
-      console.log(err);
-      res.send(err ? [] : result);
-    }
-  );
-});
+app
+  .route("/payment")
+  .get((req, res) => {
+    const name = req.query.name;
+    if (name)
+      connection.query(
+        `SELECT S.student_id AS id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`,
+        (err, result) => {
+          console.log(err);
+          res.send(err ? [] : result);
+        }
+      );
+  })
+  .post((req, res) => {
+    const { id, month } = req.body;
+    connection.query(
+      `UPDATE Student SET last_payed_month = ${month}, last_payment_date = "${date.getDate()}" WHERE student_id = ${id}`,
+      (err) => {
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  });
 
 app.listen(3001, (err) => console.log(err || "Server Started"));
