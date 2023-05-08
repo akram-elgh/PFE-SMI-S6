@@ -105,6 +105,7 @@
   border-top-right-radius: 200px;
   overflow: hidden;
   width: 16%;
+  display: block;
 }
 
 .navbar > ul {
@@ -216,4 +217,20 @@
   font-weight: 900;
   margin: auto;
   margin-bottom: 30px;
+}
+
+/************************ Update Space *****************************/
+
+.update-space {
+  margin-top: 50px;
+}
+
+.update-space-search {
+  width: 60%;
+  margin: auto;
+}
+
+.update-space-search-input {
+  width: 50%;
+  margin: 10px auto;
 }
