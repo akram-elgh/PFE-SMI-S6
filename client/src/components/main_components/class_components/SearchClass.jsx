@@ -45,13 +45,11 @@ export default function SearchClass() {
           <tbody>
             {classesTable.map((classe) => {
               return (
-                <tr>
-                  <td key={classe.class_id}>{classe.class_name}</td>
-                  <td key={classe.class_id}>{classe.classroom}</td>
-                  <td key={classe.class_id}>
-                    {classe.duration === 90 ? "1h30" : "2h"}
-                  </td>
-                  <td key={classe.class_id}>{classe.price}DH</td>
+                <tr key={classe.class_id}>
+                  <td>{classe.class_name}</td>
+                  <td>{classe.classroom}</td>
+                  <td>{classe.duration === 90 ? "1h30" : "2h"}</td>
+                  <td>{classe.price}DH</td>
                 </tr>
               );
             })}
