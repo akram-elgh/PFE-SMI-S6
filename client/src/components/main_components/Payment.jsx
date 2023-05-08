@@ -23,10 +23,11 @@ export default function Payment(props) {
   function handleFormChange(event) {
     const name = event.target.name;
     const value = event.target.value;
+
     setPayingStudent((prevValues) => {
       return {
         ...prevValues,
-        [name]: Number(value),
+        [name]: event.target.checked ? Number(value) : 0,
       };
     });
   }
@@ -117,12 +118,14 @@ export default function Payment(props) {
                 </tr>
               );
             })}
-            <tr>
-              <td colSpan={7}></td>
-              <td>
-                <Button color="primary"></Button>
-              </td>
-            </tr>
+            {id !== 0 && (
+              <tr>
+                <td colSpan={7}></td>
+                <td>
+                  <Button color="info"></Button>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </form>
