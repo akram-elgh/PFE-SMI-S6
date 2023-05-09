@@ -90,9 +90,10 @@ app
     const id = req.query.id;
     const name = req.query.name;
     let query = "";
-    if (id) query = `SELECT * FROM Student WHERE student_id = ${id}`;
+    if (id)
+      query = `SELECT * FROM Student AS S JOIN Class AS C ON S.class_id = C.class_id  WHERE student_id = ${id}`;
     if (name)
-      query = `SELECT S.student_id AS id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
+      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
     connection.query(query, (err, result) => {
       res.send(err ? [] : result);
     });
