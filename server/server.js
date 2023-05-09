@@ -25,10 +25,14 @@ app
   .route("/class")
   .get((req, res) => {
     const id = req.query.id;
-    const query = id ? "WHERE class_id = " + id : ";";
-    connection.query("SELECT * FROM Class " + query, (err, result) => {
-      res.send(err ? [] : result);
-    });
+    const query = id ? "WHERE C.class_id = " + id : ";";
+    connection.query(
+      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, T.class_id AS tclass_id, T.fname FROM Class AS C LEFT JOIN Teacher AS T ON C.class_id = T.class_id " +
+        query,
+      (err, result) => {
+        res.send(err ? [] : result);
+      }
+    );
   })
   .post((req, res) => {
     console.log(req.body);
@@ -38,6 +42,16 @@ app
         duration
       )}, ${Number(classroom)}, ${price})`,
       (err) => {
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  })
+  .put((req, res) => {
+    const { class_id, class_name, duration, classroom, price } = req.body;
+    connection.query(
+      `UPDATE Class SET class_name = "${class_name}" , duration = ${duration}, classroom = ${classroom}, price = ${price} WHERE class_id = ${class_id}`,
+      (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
