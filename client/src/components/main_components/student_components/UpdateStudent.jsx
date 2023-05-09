@@ -21,7 +21,6 @@ export default function UpdateStudent(props) {
     new_class_id: 0,
   });
   const {
-    student_id,
     fname,
     lname,
     bDate,
@@ -61,14 +60,12 @@ export default function UpdateStudent(props) {
     if (event.target.checked) {
       const id = event.target.value;
       // const url = studentUrl + "?id=" + id;
-      axios
-        .get("http://localhost:3001/student?id=" + id)
-        .then((response) =>
-          setStudent({
-            ...response.data[0],
-            new_class_id: response.data[0].class_id,
-          })
-        );
+      axios.get("http://localhost:3001/student?id=" + id).then((response) =>
+        setStudent({
+          ...response.data[0],
+          new_class_id: response.data[0].class_id,
+        })
+      );
     }
   }
 
@@ -92,6 +89,8 @@ export default function UpdateStudent(props) {
         class_id: 0,
         new_class_id: 0,
       });
+      setName("");
+      setStudents([]);
     }
   }
 
