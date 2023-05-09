@@ -63,10 +63,11 @@ app
   .route("/teacher")
   .get((req, res) => {
     const id = req.query.id;
-    const query = id ? "WHERE prof_id = " + id : ";";
+    const query = id ? "WHERE teacher_id = " + id : ";";
     connection.query(
       `SELECT * From Teacher AS T Join Class AS C ON T.class_id = C.class_id  ${query}`,
       (err, result) => {
+        console.log(err);
         res.send(err ? [] : result);
       }
     );
@@ -77,6 +78,16 @@ app
     connection.query(
       `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary, class_id) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary}, ${class_id});`,
       (err) => {
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  })
+  .put((req, res) => {
+    const { teacher_id, phoneNum, class_id } = req.body;
+    connection.query(
+      `UPDATE Teacher SET phoneNum = "${phoneNum}", class_id = ${class_id} WHERE teacher_id = ${teacher_id}`,
+      (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
