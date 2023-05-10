@@ -30,16 +30,37 @@ export default function Modal(props) {
             ></button>
           </div>
           <div className="modal-body">{props.body}</div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className={"btn btn-" + props.classe}
-              data-dismiss="modal"
-              onClick={props.onClose}
-            >
-              Fermer
-            </button>
-          </div>
+          {!props.delete ? (
+            <div className="modal-footer">
+              <button
+                type="button"
+                className={"btn btn-" + props.classe}
+                data-dismiss="modal"
+                onClick={props.onClose}
+              >
+                Fermer
+              </button>
+            </div>
+          ) : (
+            <div className="modal-footer">
+              <button
+                type="button"
+                className={"btn btn-secondary"}
+                data-dismiss="modal"
+                onClick={() => props.onClose(false)}
+              >
+                Annuler
+              </button>
+              <button
+                type="button"
+                className={"btn btn-danger"}
+                data-dismiss="modal"
+                onClick={() => props.onClose(true)}
+              >
+                Supprimer
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
