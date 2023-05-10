@@ -59,7 +59,7 @@ export default function UpdateTeacher(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner une classe</h3>
+          <h3>Selectionner un prof</h3>
         </div>
         <div className="update-space-search-table">
           <table className="table table-striped table-primary table-hover">
