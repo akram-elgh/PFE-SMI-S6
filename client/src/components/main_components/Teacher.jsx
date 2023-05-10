@@ -3,6 +3,7 @@ import AddTeacher from "./teacher_components/AddTeacher";
 import SpaceNavbar from "../sub-components/SpaceNavbar";
 import SearchTeacher from "./teacher_components/SearchTeacher";
 import UpdateTeacher from "./teacher_components/UpdateTeacher";
+import DeleteTeacher from "./teacher_components/DeleteTeacher";
 
 export default function Teacher(props) {
   const [activeTab, setActiveTab] = useState("add");
@@ -23,7 +24,12 @@ export default function Teacher(props) {
           showFailModal={props.showFailModal}
         ></UpdateTeacher>
       )}
-      {activeTab === "delete" && <div>Delete</div>}
+      {activeTab === "delete" && (
+        <DeleteTeacher
+          showSuccessModal={props.showSuccessModal}
+          showFailModal={props.showFailModal}
+        ></DeleteTeacher>
+      )}
     </div>
   );
 }
