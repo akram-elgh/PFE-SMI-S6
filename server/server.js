@@ -55,6 +55,36 @@ app
         res.sendStatus(err ? 201 : 200);
       }
     );
+  })
+  .delete((req, res) => {
+    const class_id = req.query.id;
+    connection.query(
+      `DELETE FROM Teacher WHERE class_id = ${class_id}`,
+      (err) => {
+        console.log(err);
+        if (err) res.sendStatus(201);
+        else {
+          connection.query(
+            `DELETE FROM Student WHERE class_id = ${class_id}`,
+
+            (err) => {
+              console.log(err);
+              if (err) res.sendStatus(err);
+              else {
+                connection.query(
+                  `DELETE FROM Class WHERE class_id = ${class_id}`,
+                  (err) => {
+                    console.log(err);
+
+                    res.sendStatus(err ? 201 : 200);
+                  }
+                );
+              }
+            }
+          );
+        }
+      }
+    );
   });
 
 //-------------------------- Teacher routes --------------------------------
