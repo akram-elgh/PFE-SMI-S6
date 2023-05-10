@@ -3,6 +3,7 @@ import AddClass from "./class_components/AddClass";
 import SpaceNavbar from "../sub-components/SpaceNavbar";
 import SearchClass from "./class_components/SearchClass";
 import UpdateClass from "./class_components/UpdateClass";
+import DeleteClass from "./class_components/DeleteClass";
 
 export default function Class(props) {
   const [activeTab, setActiveTab] = useState("add");
@@ -28,7 +29,12 @@ export default function Class(props) {
           showFailModal={props.showFailModal}
         ></UpdateClass>
       )}
-      {activeTab === "delete" && <div>Delete</div>}
+      {activeTab === "delete" && (
+        <DeleteClass
+          showSuccessModal={props.showSuccessModal}
+          showFailModal={props.showFailModal}
+        ></DeleteClass>
+      )}
     </div>
   );
 }
