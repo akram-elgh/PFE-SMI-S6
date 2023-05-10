@@ -61,21 +61,17 @@ app
     connection.query(
       `DELETE FROM Teacher WHERE class_id = ${class_id}`,
       (err) => {
-        console.log(err);
         if (err) res.sendStatus(201);
         else {
           connection.query(
             `DELETE FROM Student WHERE class_id = ${class_id}`,
 
             (err) => {
-              console.log(err);
               if (err) res.sendStatus(err);
               else {
                 connection.query(
                   `DELETE FROM Class WHERE class_id = ${class_id}`,
                   (err) => {
-                    console.log(err);
-
                     res.sendStatus(err ? 201 : 200);
                   }
                 );
@@ -117,7 +113,15 @@ app
     connection.query(
       `UPDATE Teacher SET phoneNum = "${phoneNum}", class_id = ${class_id} WHERE teacher_id = ${teacher_id}`,
       (err) => {
-        console.log(err);
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  })
+  .delete((req, res) => {
+    const teacher_id = req.query.id;
+    connection.query(
+      `DELETE FROM Teacher WHERE teacher_id = ${teacher_id}`,
+      (err) => {
         res.sendStatus(err ? 201 : 200);
       }
     );
