@@ -5,7 +5,7 @@ export default function Button(props) {
     <input
       type="submit"
       className={`btn btn-lg btn-${props.color}`}
-      value="Valider"
+      value={props.text || "Valider"}
     ></input>
   );
 }
