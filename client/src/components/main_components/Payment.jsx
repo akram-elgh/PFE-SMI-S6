@@ -8,10 +8,10 @@ export default function Payment(props) {
   const [name, setName] = useState("");
   const [students, setStudents] = useState([]);
   const [payingStudent, setPayingStudent] = useState({
-    id: 0,
+    student_id: 0,
     month: 1,
   });
-  const { id, month } = payingStudent;
+  const { student_id, month } = payingStudent;
 
   function handleChange(event) {
     const value = event.target.value;
@@ -21,20 +21,39 @@ export default function Payment(props) {
   }
 
   function handleFormChange(event) {
-    const name = event.target.name;
     const value = event.target.value;
-
     setPayingStudent((prevValues) => {
       return {
         ...prevValues,
-        [name]: event.target.checked ? Number(value) : 0,
+        month: student_id ? Number(value) : 0,
       };
     });
   }
 
+  function handleCheckChange(event) {
+    const value = event.target.value;
+    if (event.target.checked) {
+      axios
+        .get("http://localhost:3001/payment?id=" + value)
+        .then((response) => setStudents(response.data));
+      setPayingStudent((prevValues) => {
+        return {
+          ...prevValues,
+          student_id: value,
+        };
+      });
+    } else {
+      axios.get(url + name).then((response) => setStudents(response.data));
+      setPayingStudent({
+        student_id: 0,
+        month: 1,
+      });
+    }
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    if (id === 0) {
+    if (student_id === 0) {
       props.showFailModal("Il fault selectioner un etudiant");
     } else {
       axios.post(url, payingStudent).then((response) => {
@@ -43,9 +62,11 @@ export default function Payment(props) {
         } else props.showFailModal("Erreur lors de l'effectue du paiement");
       });
       setPayingStudent({
-        id: 0,
-        month: 0,
+        student_id: 0,
+        month: 1,
       });
+      setName("");
+      setStudents([]);
     }
   }
   return (
@@ -77,16 +98,16 @@ export default function Payment(props) {
           <tbody>
             {students.map((student) => {
               return (
-                <tr key={student.id}>
+                <tr key={student.student_id}>
                   <td>
                     <div className="form-check form-switch">
                       <input
                         type="checkbox"
-                        name="id"
+                        name="student_id"
                         className="form-check-input"
                         role="switch"
-                        value={student.id}
-                        onChange={handleFormChange}
+                        value={student.student_id}
+                        onChange={handleCheckChange}
                       />
                     </div>
                   </td>
@@ -101,8 +122,8 @@ export default function Payment(props) {
                       name="month"
                       className="form-select disabled"
                       onChange={handleFormChange}
-                      value={student.id === id ? month : ""}
-                      disabled={student.id !== id}
+                      value={month}
+                      disabled={!student_id}
                     >
                       {getMonth()
                         .slice(1)
@@ -118,7 +139,7 @@ export default function Payment(props) {
                 </tr>
               );
             })}
-            {id !== 0 && (
+            {student_id !== 0 && (
               <tr>
                 <td colSpan={7}></td>
                 <td>

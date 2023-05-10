@@ -156,18 +156,20 @@ app
   .route("/payment")
   .get((req, res) => {
     const name = req.query.name;
+    const id = req.query.id;
+    let query = "";
     if (name)
-      connection.query(
-        `SELECT S.student_id AS id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`,
-        (err, result) => {
-          res.send(err ? [] : result);
-        }
-      );
+      query = `SELECT S.student_id AS student_id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
+    if (id)
+      query = `SELECT S.student_id AS student_id, S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name, C.price FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.student_id = ${id} ORDER BY S.lname`;
+    connection.query(query, (err, result) => {
+      res.send(err ? [] : result);
+    });
   })
   .post((req, res) => {
-    const { id, month } = req.body;
+    const { student_id, month } = req.body;
     connection.query(
-      `UPDATE Student SET last_payed_month = ${month}, last_payment_date = "${date.getDate()}" WHERE student_id = ${id}`,
+      `UPDATE Student SET last_payed_month = ${month}, last_payment_date = "${date.getDate()}" WHERE student_id = ${student_id}`,
       (err) => {
         res.sendStatus(err ? 201 : 200);
       }
