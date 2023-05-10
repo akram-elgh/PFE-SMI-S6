@@ -69,6 +69,10 @@ export default function AddTeacher(props) {
         salary: 0,
         class_id: 0,
       });
+      setType({
+        isTypeSelected: false,
+        typeTitle: "",
+      });
     }
   }
 
