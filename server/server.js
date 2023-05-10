@@ -102,7 +102,7 @@ app
     const name = req.query.name;
     let query = "";
     if (id)
-      query = `SELECT * FROM Student AS S JOIN Class AS C ON S.class_id = C.class_id  WHERE student_id = ${id}`;
+      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.student_id = ${id} ORDER BY S.lname`;
     if (name)
       query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
     connection.query(query, (err, result) => {
@@ -148,6 +148,16 @@ app
       console.log(err);
       res.sendStatus(err ? 201 : 200);
     });
+  })
+  .delete((req, res) => {
+    const student_id = req.query.id;
+    connection.query(
+      `DELETE FROM Student WHERE student_id = ${student_id}`,
+      (err) => {
+        console.log(err);
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
   });
 
 //-------------------- Payment routes ----------------------------
