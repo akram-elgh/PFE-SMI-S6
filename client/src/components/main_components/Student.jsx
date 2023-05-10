@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SpaceNavbar from "../sub-components/SpaceNavbar";
 import SearchStudent from "./student_components/SearchStudent";
 import UpdateStudent from "./student_components/UpdateStudent";
+import DeleteStudent from "./student_components/DeleteStudent";
 
 export default function Student(props) {
   const [activeTab, setActiveTab] = useState("search");
@@ -16,7 +17,12 @@ export default function Student(props) {
           showFailModal={props.showFailModal}
         ></UpdateStudent>
       )}
-      {activeTab === "delete" && <div>Delete</div>}
+      {activeTab === "delete" && (
+        <DeleteStudent
+          showSuccessModal={props.showSuccessModal}
+          showFailModal={props.showFailModal}
+        ></DeleteStudent>
+      )}
     </div>
   );
 }
