@@ -57,3 +57,28 @@ export function getMonth(month) {
   ];
   return month || month === 0 ? months[month] : months;
 }
+
+export function getHour(hour) {
+  const hours = [
+    "10:00h",
+    "10:30h",
+    "11:00h",
+    "11:30h",
+    "12:00h",
+    "12:30h",
+    "13:00h",
+    "13:30h",
+    "14:00h",
+    "14:30h",
+    "15:00h",
+    "15:30h",
+    "16:00h",
+    "16:30h",
+    "17:00h",
+    "17:30h",
+    "18:00h",
+    "18:30h",
+    "19:00h",
+  ];
+  return hour || hour === 0 ? hours[hour] : hours;
+}
