@@ -6,6 +6,7 @@ import Teacher from "./Teacher";
 import Student from "./Student";
 import Modal from "./Modal";
 import Payment from "./Payment";
+import Schedule from "./Schedule";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -85,7 +86,7 @@ export default function Body(props) {
           showFailModal={handleShowFailModal}
         ></Teacher>
       )}
-      {activeTab === "Espace Emploi" && <div>schedule</div>}
+      {activeTab === "Espace Emploi" && <Schedule></Schedule>}
       {activeTab === "Espace Finance" && <div>finance</div>}
       <Modal
         show={showModal}
