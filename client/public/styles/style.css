@@ -1,7 +1,8 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: arial;
+  /* font-family: arial; */
+  list-style: none;
 }
 
 /************* Login styles *********************/
@@ -233,4 +234,61 @@
 .update-space-search-input {
   width: 50%;
   margin: 10px auto;
+}
+
+/****************** Schedule space ***********************/
+
+/****************** Schedule table ***********************/
+
+td.schedule-header {
+  padding: 0.5rem;
+}
+
+.schedule-header.active {
+  background-color: #ff8730;
+}
+
+.schedule-header:hover {
+  background-color: #ffa96b;
+  cursor: pointer;
+}
+
+.schedule-td {
+  width: 200px;
+  text-align: left;
+}
+
+.schedule-td:hover {
+  background-color: #cdccff;
+  cursor: pointer;
+}
+
+.schedule-table > thead,
+.schedule-table > tbody > tr {
+  background-color: white;
+}
+
+.schedule-table > tbody > tr.odd {
+  background-color: #ffddc5;
+}
+.schedule-add-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  background-color: #ddeeff;
+  padding: 20px;
+}
+
+td.schedule-add-td {
+  border: 0;
+  width: 200px;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0;
+}
+
+.schedule-add-circle-btn {
+  cursor: pointer;
 }
