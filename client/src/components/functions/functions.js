@@ -60,6 +60,7 @@ export function getMonth(month) {
 
 export function getHour(hour) {
   const hours = [
+    "---Selectioner une heure----",
     "10:00h",
     "10:30h",
     "11:00h",
@@ -81,4 +82,17 @@ export function getHour(hour) {
     "19:00h",
   ];
   return hour || hour === 0 ? hours[hour] : hours;
+}
+
+export function getDay(day) {
+  const days = [
+    "---Selectioner un jour---",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+  ];
+  return day || day === 0 ? days[day] : days;
 }
