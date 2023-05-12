@@ -226,12 +226,32 @@ app.listen(3001, (err) => console.log(err || "Server Started"));
 
 // --------------------------- Schedule routes ------------------------
 
-app.route("/schedule").get((req, res) => {
-  const day = req.query.day;
-  connection.query(
-    `SELECT * FROM Schedule AS S JOIN Class AS C ON S.class_id = C.class_id WHERE S.day = ${day} ORDER BY C.classroom`,
-    (err, result) => {
-      res.send(err ? [] : result);
-    }
-  );
-});
+app
+  .route("/schedule")
+  .get((req, res) => {
+    const day = req.query.day;
+    connection.query(
+      `SELECT * FROM Schedule AS S JOIN Class AS C ON S.class_id = C.class_id WHERE S.day = ${day} ORDER BY C.classroom`,
+      (err, result) => {
+        res.send(err ? [] : result);
+      }
+    );
+  })
+  .post((req, res) => {
+    const { class_id, day, hour } = req.body;
+    connection.query(
+      `INSERT INTO Schedule (hour, day, class_id) Values (${hour}, ${day}, ${class_id})`,
+      (err) => {
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  })
+  .put((req, res) => {
+    const { hour, id } = req.body;
+    connection.query(
+      `UPDATE Schedule SET hour = ${hour} WHERE id = ${id}`,
+      (err) => {
+        res.sendStatus(err ? 201 : 200);
+      }
+    );
+  });
