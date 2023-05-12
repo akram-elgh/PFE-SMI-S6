@@ -223,3 +223,15 @@ app
   });
 
 app.listen(3001, (err) => console.log(err || "Server Started"));
+
+// --------------------------- Schedule routes ------------------------
+
+app.route("/schedule").get((req, res) => {
+  const day = req.query.day;
+  connection.query(
+    `SELECT * FROM Schedule AS S JOIN Class AS C ON S.class_id = C.class_id WHERE S.day = ${day} ORDER BY C.classroom`,
+    (err, result) => {
+      res.send(err ? [] : result);
+    }
+  );
+});
