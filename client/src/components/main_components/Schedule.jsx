@@ -4,24 +4,46 @@ import axios from "axios";
 import AddSchedule from "./schedule_components/AddSchedule";
 
 export default function Schedule(props) {
+  const url = "http://localhost:3001/schedule?day=";
   const days = getDay();
   const hours = getHour();
-  const url = "http://localhost:3001/schedule?day=";
-  const postUrl = "http://localhost:3001/schedule?id=";
-  const [chosenDay, setChosenDay] = useState(1);
   const [classes, setClasses] = useState([]);
+  const [chosenDay, setChosenDay] = useState(1);
   const [chosenClass, setChosenClass] = useState(0);
+  const [chosenHour, setChosenHour] = useState(0);
+  const [selectedRow, setSelectedRow] = useState(0);
 
   useEffect(() => {
     axios.get(url + chosenDay).then((response) => setClasses(response.data));
   }, [url, chosenDay]);
 
   function handleAddSubmit(id) {
-    axios.post(url + id).then((response) => {
-      if (response.status === 200) props.showSuccessModal("La classe ete ajouter dans l'emploi avec succes");
-      else props.showFailModal("Erreru lors du l'ajout du classe");
-    })
+    axios
+      .post(url, { class_id: id, hour: chosenHour, day: chosenDay })
+      .then((response) => {
+        if (response.status === 200) {
+          props.showSuccessModal(
+            "La classe ete ajouter dans l'emploi avec succes"
+          );
+          axios
+            .get(url + chosenDay)
+            .then((response) => setClasses(response.data));
+        } else props.showFailModal("Erreru lors du l'ajout du classe");
+      });
   }
+
+  function handleDragEnd(event) {
+    console.log(selectedRow, chosenClass);
+    axios.put(url, { hour: selectedRow, id: chosenClass }).then((response) => {
+      if (response.status === 200) {
+        // props.showSuccessModal("Class ete modifier avec succes");
+        axios
+          .get(url + chosenDay)
+          .then((response) => setClasses(response.data));
+      } else {
+        props.showErrorModal("Erreru lors du modifcation du classe");
+      }
+    });
   }
 
   return (
@@ -58,6 +80,7 @@ export default function Schedule(props) {
                     key={index + 1}
                     value={index + 1}
                     className={index % 2 === 0 ? "odd" : ""}
+                    onDragOver={() => setSelectedRow(index + 1)}
                   >
                     <td>{hour}</td>
                     {classes
@@ -65,10 +88,13 @@ export default function Schedule(props) {
                       .map((classe) => {
                         return (
                           <td
+                            draggable
                             key={classe.id}
-                            onClick={() => setChosenClass(classe.id)}
+                            onClick={() => setChosenClass(classe.class_id)}
                             className="schedule-td"
                             value={classe.day}
+                            onDrag={() => setChosenClass(classe.id)}
+                            onDragEnd={handleDragEnd}
                           >
                             <ul>
                               <li>Classe: {classe.class_name}</li>
@@ -83,7 +109,10 @@ export default function Schedule(props) {
                           </td>
                         );
                       })}
-                    <td className="schedule-add-td">
+                    <td
+                      className="schedule-add-td"
+                      onClick={() => setChosenHour(index + 1)}
+                    >
                       <AddSchedule onSubmit={handleAddSubmit}></AddSchedule>
                     </td>
                   </tr>
