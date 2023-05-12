@@ -86,7 +86,12 @@ export default function Body(props) {
           showFailModal={handleShowFailModal}
         ></Teacher>
       )}
-      {activeTab === "Espace Emploi" && <Schedule></Schedule>}
+      {activeTab === "Espace Emploi" && (
+        <Schedule
+          showSuccessModal={handleShowSuccessModal}
+          showFailModal={handleShowFailModal}
+        ></Schedule>
+      )}
       {activeTab === "Espace Finance" && <div>finance</div>}
       <Modal
         show={showModal}
