@@ -8,7 +8,7 @@ export default function Student(props) {
   const [activeTab, setActiveTab] = useState("search");
   const handleClick = (tabName) => setActiveTab(tabName);
   return (
-    <div className="space">
+    <>
       <SpaceNavbar onClick={handleClick} number="3"></SpaceNavbar>
       {activeTab === "search" && <SearchStudent></SearchStudent>}
       {activeTab === "modify" && (
@@ -23,6 +23,6 @@ export default function Student(props) {
           showFailModal={props.showFailModal}
         ></DeleteStudent>
       )}
-    </div>
+    </>
   );
 }

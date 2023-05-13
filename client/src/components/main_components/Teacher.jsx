@@ -9,7 +9,7 @@ export default function Teacher(props) {
   const [activeTab, setActiveTab] = useState("add");
   const handleClick = (tabName) => setActiveTab(tabName);
   return (
-    <div className="space">
+    <>
       <SpaceNavbar onClick={handleClick} number="4"></SpaceNavbar>
       {activeTab === "add" && (
         <AddTeacher
@@ -30,6 +30,6 @@ export default function Teacher(props) {
           showFailModal={props.showFailModal}
         ></DeleteTeacher>
       )}
-    </div>
+    </>
   );
 }

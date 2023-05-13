@@ -61,7 +61,7 @@ export default function Enrollment(props) {
   }
 
   return (
-    <div className="space">
+    <>
       <div className="space-form">
         <div className="space-labels">
           <ul>
@@ -170,6 +170,6 @@ export default function Enrollment(props) {
           </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }

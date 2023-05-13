@@ -70,7 +70,7 @@ export default function Payment(props) {
     }
   }
   return (
-    <div className="space">
+    <>
       <div className="search-space-input">
         <input
           type="text"
@@ -150,6 +150,6 @@ export default function Payment(props) {
           </tbody>
         </table>
       </form>
-    </div>
+    </>
   );
 }
