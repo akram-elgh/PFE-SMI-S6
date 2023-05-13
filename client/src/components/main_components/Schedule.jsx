@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getDay, getHour } from "../functions/functions";
 import axios from "axios";
 import AddSchedule from "./schedule_components/AddSchedule";
+import DeleteSchedule from "./schedule_components/DeleteSchedule";
 
 export default function Schedule(props) {
   const url = "http://localhost:3001/schedule?day=";
@@ -18,9 +19,11 @@ export default function Schedule(props) {
     isDragOver: false,
     dragOverClass: 0,
     isDragging: false,
+    isDragOverDelete: false,
   });
 
-  const { isDragOver, dragOverClass, isDragging } = isDragOverClass;
+  const { isDragOver, dragOverClass, isDragging, isDragOverDelete } =
+    isDragOverClass;
   const { chosenDay, chosenClass, chosenHour, chosenRow } = scheduleInfo;
 
   useEffect(() => {
@@ -44,17 +47,28 @@ export default function Schedule(props) {
 
   function handleDragEnd() {
     console.log(chosenRow, chosenClass);
+    if (isDragOverDelete) {
+      axios
+        .delete("http://localhost:3001/schedule?id=" + chosenClass)
+        .then((response) => {
+          if (response.status === 200)
+            axios
+              .get(url + chosenDay)
+              .then((response) => setClasses(response.data));
+          else props.showFailModal("Erreur lors du suppression du classe");
+        });
+    } else {
+      axios.put(url, { hour: chosenRow, id: chosenClass }).then((response) => {
+        if (response.status === 200) {
+          axios
+            .get(url + chosenDay)
+            .then((response) => setClasses(response.data));
+        } else {
+          props.showFailModal("Erreru lors du modifcation du classe");
+        }
+      });
+    }
     setIsDragOver({ isDragOver: false, dragOverClass: 0, isDragging: false });
-    axios.put(url, { hour: chosenRow, id: chosenClass }).then((response) => {
-      if (response.status === 200) {
-        // props.showSuccessModal("Class ete modifier avec succes");
-        axios
-          .get(url + chosenDay)
-          .then((response) => setClasses(response.data));
-      } else {
-        props.showErrorModal("Erreru lors du modifcation du classe");
-      }
-    });
   }
 
   return (
@@ -118,47 +132,105 @@ export default function Schedule(props) {
                             key={classe.id}
                             className="schedule-td"
                             value={classe.day}
-                            onDrag={() =>
+                            onDrag={() => {
                               setScheduleInfo((prevValues) => {
                                 return {
                                   ...prevValues,
                                   chosenClass: classe.id,
                                 };
-                              })
-                            }
+                              });
+                              setIsDragOver((prevValues) => {
+                                return {
+                                  ...prevValues,
+                                  isDragging: true,
+                                };
+                              });
+                            }}
                             onDragEnd={handleDragEnd}
                             onDragOver={() => {
                               setIsDragOver((prevValues) => {
-                                return { ...prevValues, dragOverClass: index2 };
+                                return {
+                                  ...prevValues,
+                                  dragOverClass: index2,
+                                  isDragOverDelete: false,
+                                };
                               });
                             }}
                             style={{
                               transform:
                                 isDragOver &&
                                 chosenRow === index + 1 &&
-                                dragOverClass <= index2
+                                dragOverClass <= index2 &&
+                                !isDragOverDelete
                                   ? "translateX(200px)"
                                   : "",
                             }}
                           >
                             <ul>
-                              <li>Classe: {classe.class_name}</li>
-                              <li>Salle: {classe.classroom}</li>
                               <li>
-                                Termine le:{" "}
-                                {getHour(
-                                  (classe.duration === 120 ? 4 : 3) + index + 1
-                                )}
+                                {(classes.filter(
+                                  (obj) => obj.hour === index + 1
+                                ).length < 9
+                                  ? "Classe: "
+                                  : "") + classe.class_name}
+                              </li>
+                              <li>
+                                {(classes.filter(
+                                  (obj) => obj.hour === index + 1
+                                ).length < 9
+                                  ? "Salle: "
+                                  : "") + classe.classroom}
+                              </li>
+                              <li>
+                                {(classes.filter(
+                                  (obj) => obj.hour === index + 1
+                                ).length < 9
+                                  ? "Termine le: "
+                                  : "") +
+                                  getHour(
+                                    (classe.duration === 120 ? 4 : 3) +
+                                      index +
+                                      1
+                                  )}
                               </li>
                             </ul>
                           </td>
                         );
                       })}
-                    {isDragging ? (
-                      <td className="schedule-delete-td"></td>
+                    {isDragging &&
+                    chosenRow === index + 1 &&
+                    classes.filter((obj) => obj.hour === index + 1).length ? (
+                      <td
+                        className="schedule-btn-td"
+                        style={{
+                          transform:
+                            isDragOver &&
+                            chosenRow === index + 1 &&
+                            (!isDragOverDelete ||
+                              classes.filter((obj) => obj.hour === index + 1)
+                                .length === 0)
+                              ? "translateX(200px)"
+                              : "",
+                        }}
+                        onDragOver={() => {
+                          setIsDragOver((prevValues) => {
+                            return {
+                              ...prevValues,
+                              isDragOverDelete: true,
+                              isDragOver: false,
+                            };
+                          });
+                        }}
+                      >
+                        <DeleteSchedule
+                          style={{
+                            backgroundColor: isDragOverDelete ? "#ffcfd3" : "",
+                          }}
+                        ></DeleteSchedule>
+                      </td>
                     ) : (
                       <td
-                        className="schedule-add-td"
+                        className="schedule-btn-td"
                         onClick={() =>
                           setScheduleInfo((prevValues) => {
                             return { ...prevValues, chosenHour: index + 1 };
@@ -170,6 +242,11 @@ export default function Schedule(props) {
                               ? "translateX(200px)"
                               : "",
                         }}
+                        onDragOver={() =>
+                          setIsDragOver((prevValues) => {
+                            return { ...prevValues, isDragOverDelete: false };
+                          })
+                        }
                       >
                         <AddSchedule
                           style={{
