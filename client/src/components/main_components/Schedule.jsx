@@ -8,10 +8,20 @@ export default function Schedule(props) {
   const days = getDay();
   const hours = getHour();
   const [classes, setClasses] = useState([]);
-  const [chosenDay, setChosenDay] = useState(1);
-  const [chosenClass, setChosenClass] = useState(0);
-  const [chosenHour, setChosenHour] = useState(0);
-  const [selectedRow, setSelectedRow] = useState(0);
+  const [scheduleInfo, setScheduleInfo] = useState({
+    chosenDay: 1,
+    chosenClass: 0,
+    chosenHour: 0,
+    chosenRow: 0,
+  });
+  const [isDragOverClass, setIsDragOver] = useState({
+    isDragOver: false,
+    dragOverClass: 0,
+    isDragging: false,
+  });
+
+  const { isDragOver, dragOverClass, isDragging } = isDragOverClass;
+  const { chosenDay, chosenClass, chosenHour, chosenRow } = scheduleInfo;
 
   useEffect(() => {
     axios.get(url + chosenDay).then((response) => setClasses(response.data));
@@ -32,9 +42,10 @@ export default function Schedule(props) {
       });
   }
 
-  function handleDragEnd(event) {
-    console.log(selectedRow, chosenClass);
-    axios.put(url, { hour: selectedRow, id: chosenClass }).then((response) => {
+  function handleDragEnd() {
+    console.log(chosenRow, chosenClass);
+    setIsDragOver({ isDragOver: false, dragOverClass: 0, isDragging: false });
+    axios.put(url, { hour: chosenRow, id: chosenClass }).then((response) => {
       if (response.status === 200) {
         // props.showSuccessModal("Class ete modifier avec succes");
         axios
@@ -47,7 +58,7 @@ export default function Schedule(props) {
   }
 
   return (
-    <div className="space">
+    <>
       <div className="shcedule search-space-table">
         <table className="table schedule-table">
           <thead>
@@ -56,7 +67,11 @@ export default function Schedule(props) {
               {days.slice(1).map((day, index) => {
                 return (
                   <td
-                    onClick={() => setChosenDay(index + 1)}
+                    onClick={() =>
+                      setScheduleInfo((prevValues) => {
+                        return { ...prevValues, chosenDay: index + 1 };
+                      })
+                    }
                     className={`schedule-header ${
                       chosenDay === index + 1 ? "active" : ""
                     }`}
@@ -71,7 +86,7 @@ export default function Schedule(props) {
           </thead>
           <tbody>
             <tr>
-              <td></td>
+              <td key={0}></td>
             </tr>
             {hours.slice(1).map((hour, index) => {
               return (
@@ -79,22 +94,52 @@ export default function Schedule(props) {
                   <tr
                     key={index + 1}
                     value={index + 1}
-                    className={index % 2 === 0 ? "odd" : ""}
-                    onDragOver={() => setSelectedRow(index + 1)}
+                    className={index % 2 !== 0 ? "odd" : ""}
+                    onDragOver={() => {
+                      setScheduleInfo((prevValues) => {
+                        return { ...prevValues, chosenRow: index + 1 };
+                      });
+                      setIsDragOver((prevValues) => {
+                        return { ...prevValues, isDragOver: true };
+                      });
+                    }}
+                    style={{
+                      backgroundColor:
+                        isDragOver && chosenRow === index + 1 ? "beige" : "",
+                    }}
                   >
                     <td>{hour}</td>
                     {classes
                       .filter((obj) => obj.hour === index + 1)
-                      .map((classe) => {
+                      .map((classe, index2) => {
                         return (
                           <td
                             draggable
                             key={classe.id}
-                            onClick={() => setChosenClass(classe.class_id)}
                             className="schedule-td"
                             value={classe.day}
-                            onDrag={() => setChosenClass(classe.id)}
+                            onDrag={() =>
+                              setScheduleInfo((prevValues) => {
+                                return {
+                                  ...prevValues,
+                                  chosenClass: classe.id,
+                                };
+                              })
+                            }
                             onDragEnd={handleDragEnd}
+                            onDragOver={() => {
+                              setIsDragOver((prevValues) => {
+                                return { ...prevValues, dragOverClass: index2 };
+                              });
+                            }}
+                            style={{
+                              transform:
+                                isDragOver &&
+                                chosenRow === index + 1 &&
+                                dragOverClass <= index2
+                                  ? "translateX(200px)"
+                                  : "",
+                            }}
                           >
                             <ul>
                               <li>Classe: {classe.class_name}</li>
@@ -109,12 +154,35 @@ export default function Schedule(props) {
                           </td>
                         );
                       })}
-                    <td
-                      className="schedule-add-td"
-                      onClick={() => setChosenHour(index + 1)}
-                    >
-                      <AddSchedule onSubmit={handleAddSubmit}></AddSchedule>
-                    </td>
+                    {isDragging ? (
+                      <td className="schedule-delete-td"></td>
+                    ) : (
+                      <td
+                        className="schedule-add-td"
+                        onClick={() =>
+                          setScheduleInfo((prevValues) => {
+                            return { ...prevValues, chosenHour: index + 1 };
+                          })
+                        }
+                        style={{
+                          transform:
+                            isDragOver && chosenRow === index + 1
+                              ? "translateX(200px)"
+                              : "",
+                        }}
+                      >
+                        <AddSchedule
+                          style={{
+                            height: classes.filter(
+                              (obj) => obj.hour === index + 1
+                            ).length
+                              ? "90px"
+                              : "",
+                          }}
+                          onSubmit={handleAddSubmit}
+                        ></AddSchedule>
+                      </td>
+                    )}
                   </tr>
                 </>
               );
@@ -122,6 +190,6 @@ export default function Schedule(props) {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 }

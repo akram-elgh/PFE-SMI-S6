@@ -14,7 +14,7 @@ export default function AddSchedule(props) {
   }, []);
 
   return (
-    <span className="schedule-add-btn">
+    <span style={props.style} className="schedule-add-btn">
       {isAddClicked ? (
         <form>
           <select
