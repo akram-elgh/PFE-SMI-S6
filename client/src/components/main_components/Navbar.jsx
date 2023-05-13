@@ -16,7 +16,12 @@ export default function Navbar(props) {
   };
 
   return (
-    <div className="navbar">
+    <div
+      className="navbar"
+      onMouseOver={props.onMouseOver}
+      onMouseLeave={props.onMouseLeave}
+      style={props.style}
+    >
       <ul>
         <li
           className={`nav-item ${activeTab === "home" ? "active" : ""}`}

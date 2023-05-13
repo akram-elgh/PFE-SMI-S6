@@ -17,6 +17,7 @@ export default function Body(props) {
     color: "",
     classe: "",
   });
+  const [mouseOver, setMouseOver] = useState(false);
 
   const { showModal, title, body, color, classe } = modal;
 
@@ -54,45 +55,52 @@ export default function Body(props) {
   }
   return (
     <main className="main-container">
-      <Navbar onClick={handleClick}></Navbar>
-      {activeTab === "Acceuil" && <div>home</div>}
-      {activeTab === "Espace Payment" && (
-        <Payment
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Payment>
-      )}
-      {activeTab === "Espace Inscription" && (
-        <Enrollment
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Enrollment>
-      )}
-      {activeTab === "Espace Etudiant" && (
-        <Student
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Student>
-      )}
-      {activeTab === "Espace Classe" && (
-        <Class
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Class>
-      )}
-      {activeTab === "Espace Prof" && (
-        <Teacher
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Teacher>
-      )}
-      {activeTab === "Espace Emploi" && (
-        <Schedule
-          showSuccessModal={handleShowSuccessModal}
-          showFailModal={handleShowFailModal}
-        ></Schedule>
-      )}
-      {activeTab === "Espace Finance" && <div>finance</div>}
+      <Navbar
+        onClick={handleClick}
+        onMouseOver={() => setMouseOver(true)}
+        onMouseLeave={() => setMouseOver(false)}
+        style={{ width: mouseOver ? "16%" : "" }}
+      ></Navbar>
+      <div className="space" style={{ width: mouseOver ? "85%" : "" }}>
+        {activeTab === "Acceuil" && <div>home</div>}
+        {activeTab === "Espace Payment" && (
+          <Payment
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Payment>
+        )}
+        {activeTab === "Espace Inscription" && (
+          <Enrollment
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Enrollment>
+        )}
+        {activeTab === "Espace Etudiant" && (
+          <Student
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Student>
+        )}
+        {activeTab === "Espace Classe" && (
+          <Class
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Class>
+        )}
+        {activeTab === "Espace Prof" && (
+          <Teacher
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Teacher>
+        )}
+        {activeTab === "Espace Emploi" && (
+          <Schedule
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Schedule>
+        )}
+        {activeTab === "Espace Finance" && <div>finance</div>}
+      </div>
       <Modal
         show={showModal}
         title={title}
