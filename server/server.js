@@ -254,4 +254,11 @@ app
         res.sendStatus(err ? 201 : 200);
       }
     );
+  })
+  .delete((req, res) => {
+    const id = req.query.id;
+    connection.query(`DELETE from Schedule WHERE id = ${id}`, (err) => {
+      console.log(err);
+      res.sendStatus(err ? 201 : 200);
+    });
   });
