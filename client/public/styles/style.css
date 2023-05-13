@@ -105,8 +105,9 @@
   padding: 70px 0 30px;
   border-top-right-radius: 200px;
   overflow: hidden;
-  width: 16%;
+  width: 3.5%;
   display: block;
+  transition: 500ms ease-in;
 }
 
 .navbar > ul {
@@ -122,6 +123,7 @@
   font-size: 1.5rem;
   padding: 25px 20px;
   cursor: pointer;
+  transition: 500ms ease-in;
 }
 
 .navbar ul .nav-item.active {
@@ -144,10 +146,19 @@
 /*****************************************************************/
 /***************************** Espace Inscription, Classe, Prof ********************/
 
+select {
+  transition: height 500ms ease-in;
+}
+
 .space {
   text-align: center;
-  width: 85%;
+  width: 100%;
   padding: 20px;
+  overflow: hidden;
+}
+
+.space > * {
+  animation: fade-in 1000ms ease-in;
 }
 
 .space-form {
@@ -199,6 +210,7 @@
   padding: 15px 70px;
   font-weight: 900;
   cursor: pointer;
+  transition: 500ms ease-in;
 }
 
 .space-navbar-item:hover,
@@ -240,6 +252,54 @@
 
 /****************** Schedule table ***********************/
 
+form {
+  animation: fade-in 500ms ease-in;
+}
+
+.table {
+  transition: width 500ms ease-in;
+  animation: fade-in 1000ms;
+}
+
+@keyframes fade-in-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+td {
+  transition: 500ms ease-in;
+  width: 150px;
+}
+
+tr {
+  transition: 500ms ease-in;
+  animation: fade-in-left 500ms;
+}
+
 td.schedule-header {
   padding: 0.5rem;
 }
@@ -256,6 +316,7 @@ td.schedule-header {
 .schedule-td {
   width: 200px;
   text-align: left;
+  transition: 500ms ease-in;
 }
 
 .schedule-td:hover {
@@ -275,7 +336,6 @@ td.schedule-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90px;
   background-color: #ddeeff;
   padding: 20px;
 }
@@ -285,7 +345,7 @@ td.schedule-add-td {
   width: 200px;
 }
 
-.table > :not(caption) > * > * {
+.schedule-table > :not(caption) > * > * {
   padding: 0;
 }
 
