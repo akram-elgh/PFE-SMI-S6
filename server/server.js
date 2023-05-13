@@ -25,7 +25,7 @@ app
   .route("/class")
   .get((req, res) => {
     const id = req.query.id;
-    const query = id ? "WHERE C.class_id = " + id : "";
+    const query = id ? " WHERE C.class_id = " + id : "";
     connection.query(
       "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.class_id = T.class_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
         query +
