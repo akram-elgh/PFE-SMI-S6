@@ -80,6 +80,9 @@ export function getHour(hour) {
     "18:00h",
     "18:30h",
     "19:00h",
+    "19:30h",
+    "20:00h",
+    "20:30h",
   ];
   return hour || hour === 0 ? hours[hour] : hours;
 }

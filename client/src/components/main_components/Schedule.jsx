@@ -102,7 +102,7 @@ export default function Schedule(props) {
             <tr>
               <td key={0}></td>
             </tr>
-            {hours.slice(1).map((hour, index) => {
+            {hours.slice(1, 20).map((hour, index) => {
               return (
                 <>
                   <tr
