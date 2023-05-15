@@ -7,6 +7,7 @@ import Student from "./Student";
 import Modal from "../sub-components/Modal";
 import Payment from "./Payment";
 import Schedule from "./Schedule";
+import Finance from "./finance_components/Finance";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -61,7 +62,10 @@ export default function Body(props) {
         onMouseLeave={() => setMouseOver(false)}
         style={{ width: mouseOver ? "16%" : "" }}
       ></Navbar>
-      <div className="space" style={{ width: mouseOver ? "85%" : "" }}>
+      <div
+        className={`space${activeTab === "Espace Finance" ? "-finance" : ""}`}
+        style={{ width: mouseOver ? "85%" : "" }}
+      >
         {activeTab === "Acceuil" && <div>home</div>}
         {activeTab === "Espace Payment" && (
           <Payment
@@ -99,7 +103,7 @@ export default function Body(props) {
             showFailModal={handleShowFailModal}
           ></Schedule>
         )}
-        {activeTab === "Espace Finance" && <div>finance</div>}
+        {activeTab === "Espace Finance" && <Finance></Finance>}
       </div>
       <Modal
         show={showModal}
