@@ -174,12 +174,13 @@ export default function UpdateStudent(props) {
                 </div>
                 <div className="mb-4">
                   <input
-                    type="date"
+                    type="text"
                     name="bDate"
                     placeholder="Taper ici"
                     value={bDate.slice(0, 10)}
                     className="form-control"
                     onChange={handleFormChange}
+                    disabled
                   ></input>
                 </div>
                 <div className="mb-4">
