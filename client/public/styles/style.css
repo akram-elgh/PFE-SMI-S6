@@ -107,7 +107,7 @@
   overflow: hidden;
   width: 3.5%;
   display: block;
-  transition: 500ms ease-in;
+  transition: width 500ms ease-in, background 100ms ease-in;
 }
 
 .navbar > ul {
@@ -150,17 +150,19 @@ select {
   transition: height 500ms ease-in;
 }
 
-.space {
+.space,
+.space-finance {
   text-align: center;
   width: 100%;
   padding: 20px;
   overflow: hidden;
+  min-height: 87.5vh;
   transition: 500ms ease-in;
 }
 
-.space > * {
-  animation: fade-in 1000ms ease-in;
-}
+/* .space > * {
+  animation: blur-in 1000ms ease-in;
+} */
 
 .space-form {
   padding: 100px 80px;
@@ -358,4 +360,45 @@ span.schedule-delete-btn {
   justify-content: center;
   padding: 30px;
   transition: 300ms ease-in;
+}
+
+/********************** Finance space ********************/
+
+/********************* Finance Login *********************/
+
+.finance-login-icon {
+  background-image: url("../images/password.png");
+  background-size: cover;
+  height: 500px;
+  width: 500px;
+  transition: 300ms ease-in;
+  animation: 500ms blur-in ease-in;
+}
+
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    scale: 0;
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    scale: 1;
+  }
+}
+
+.finance-login {
+  background-image: url("../images/wave.png");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 30px;
+  animation: 1s fade-in;
+}
+
+.space-finance {
+  padding: 0;
 }
