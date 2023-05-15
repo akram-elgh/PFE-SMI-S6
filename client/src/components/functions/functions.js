@@ -36,7 +36,7 @@ export function getPaymentType(type) {
     "Par heure",
     "Pourcentage",
   ];
-  return type ? types[type] : types;
+  return type || type === 0 ? types[type] : types;
 }
 
 export function getMonth(month) {
@@ -98,4 +98,27 @@ export function getDay(day) {
     "Samedi",
   ];
   return day || day === 0 ? days[day] : days;
+}
+
+export function calculateTeacherSalary({
+  price,
+  type_of_payment,
+  student_count,
+  duration,
+  salary,
+}) {
+  const hours = duration === 120 ? 4 : 3;
+
+  if (type_of_payment === 1) return student_count * salary;
+  else if (type_of_payment === 2) return hours * salary * 4;
+  else return price * (salary / 100);
+}
+
+export function calculateClassesRevenuePerMonth(classes) {
+  let revenue = 0;
+  classes.map((classe) => {
+    revenue +=
+      classe.student_count * classe.price - calculateTeacherSalary(classe);
+  });
+  return revenue;
 }
