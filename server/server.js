@@ -27,9 +27,9 @@ app
     const id = req.query.id;
     const query = id ? " WHERE C.class_id = " + id : "";
     connection.query(
-      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.class_id = T.class_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
+      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname, T.salary, T.type_of_payment , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.class_id = T.class_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
         query +
-        " GROUP BY C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname ",
+        " GROUP BY C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname, T.salary, T.type_of_payment ",
       (err, result) => {
         console.log(err);
         res.send(err ? [] : result);
