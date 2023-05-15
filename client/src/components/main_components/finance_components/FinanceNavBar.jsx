@@ -4,7 +4,7 @@ export default function FinanceNavBar(props) {
   const [activeTab, setActiveTab] = useState("info");
 
   return (
-    <div className="space-navbar">
+    <div className="space-navbar mb-5">
       <div
         className={`space-navbar-item ${activeTab === "info" ? "active" : ""}`}
         onClick={() => {
