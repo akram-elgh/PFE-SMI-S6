@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { getLevel } from "../../functions/functions";
 import Button from "../../sub-components/Button";
-import Modal from "../Modal";
+import Modal from "../../sub-components/Modal";
 
 export default function DeleteStudent(props) {
   const url = "http://localhost:3001/student?name=";

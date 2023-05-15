@@ -4,7 +4,7 @@ import Enrollment from "./Enrollment";
 import Class from "./Class";
 import Teacher from "./Teacher";
 import Student from "./Student";
-import Modal from "./Modal";
+import Modal from "../sub-components/Modal";
 import Payment from "./Payment";
 import Schedule from "./Schedule";
 

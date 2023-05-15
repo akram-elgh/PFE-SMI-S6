@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Button from "../../sub-components/Button";
 import axios from "axios";
-import Modal from "../Modal";
+import Modal from "../../sub-components/Modal";
 
 export default function DeleteClass(props) {
   const url = "http://localhost:3001/class?id=";
