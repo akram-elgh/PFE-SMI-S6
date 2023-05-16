@@ -38,16 +38,24 @@ export default function FinanceInfo(props) {
                 <td>{classe.price}DH</td>
                 <td>{classe.student_count}</td>
                 <td>{classe.student_count * classe.price}DH</td>
-                <td>{classe.fname}</td>
+                <td>{classe.fname || "_"}</td>
                 <td>
                   {classe.type_of_payment
                     ? getPaymentType(classe.type_of_payment)
                     : "_"}
                 </td>
                 <td>
-                  {classe.salary + (classe.type_of_payment === 3 ? "%" : "DH")}
+                  {(classe.salary &&
+                    ` ${
+                      classe.salary +
+                      (classe.type_of_payment === 3 ? "%" : "DH")
+                    }`) ||
+                    "_"}
                 </td>
-                <td>{calculateTeacherSalary(classe)}DH</td>
+                <td>
+                  {(classe.salary && `${calculateTeacherSalary(classe)}DH`) ||
+                    "_"}
+                </td>
                 <td>
                   {classe.student_count * classe.price -
                     calculateTeacherSalary(classe)}
