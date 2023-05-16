@@ -111,9 +111,10 @@ app
     );
   })
   .put((req, res) => {
-    const { teacher_id, phoneNum, class_id } = req.body;
+    const { teacher_id, phoneNum, type_of_payment, salary, class_id } =
+      req.body;
     connection.query(
-      `UPDATE Teacher SET phoneNum = "${phoneNum}", class_id = ${class_id} WHERE teacher_id = ${teacher_id}`,
+      `UPDATE Teacher SET phoneNum = "${phoneNum}",type_of_payment = ${type_of_payment}, salary = ${salary}, class_id = ${class_id} WHERE teacher_id = ${teacher_id}`,
       (err) => {
         res.sendStatus(err ? 201 : 200);
       }
