@@ -42,15 +42,16 @@ export default function UpdateTeacher(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (Number(class_id) === 0) {
-      props.showFailModal("Veuillez choisir une classe.");
+    if (Number(type_of_payment) === 0) {
+      props.showFailModal("Veuillez choisir un type du contrat.");
     } else {
       axios.put(url, teacherToModify).then((response) => {
         if (response.status === 200)
-          props.showSuccessModal("Le prof ete modifier avec succes");
-        else props.showFailModal("Erreur lors du modifcation du prof");
+          props.showSuccessModal("Le contrat ete modifier avec succes");
+        else props.showFailModal("Erreur lors du modifcation du contrat");
+        setTeacherToModify({});
+        axios.get(url).then((response) => setTeachers(response.data));
       });
-      setTeacherToModify({});
     }
   }
 
@@ -61,7 +62,7 @@ export default function UpdateTeacher(props) {
           <h3>Selectionner un prof</h3>
         </div>
         <div className="update-space-search-table">
-          <form>
+          <form onSubmit={handleSubmit}>
             <table className="table table-striped table-primary table-hover">
               <thead>
                 <tr>
@@ -100,14 +101,11 @@ export default function UpdateTeacher(props) {
                             name="type_of_payment"
                             value={type_of_payment}
                             className="form-select"
+                            onChange={handleChange}
                           >
                             {types.map((type, index) => {
                               return (
-                                <option
-                                  key={index}
-                                  value={index}
-                                  onChange={handleChange}
-                                >
+                                <option key={index} value={index}>
                                   {type}
                                 </option>
                               );
@@ -129,13 +127,23 @@ export default function UpdateTeacher(props) {
                             type="number"
                           />
                         ) : (
-                          teacher.salary
+                          `${teacher.salary}${
+                            teacher.type_of_payment === 3 ? "%" : "DH"
+                          }`
                         )}
                       </td>
                       <td>{teacher.class_name}</td>
                     </tr>
                   );
                 })}
+                {teacher_id && (
+                  <tr>
+                    <td colSpan={5}></td>
+                    <td>
+                      <Button color="primary"></Button>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </form>
