@@ -103,7 +103,12 @@ export default function Body(props) {
             showFailModal={handleShowFailModal}
           ></Schedule>
         )}
-        {activeTab === "Espace Finance" && <Finance></Finance>}
+        {activeTab === "Espace Finance" && (
+          <Finance
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Finance>
+        )}
       </div>
       <Modal
         show={showModal}

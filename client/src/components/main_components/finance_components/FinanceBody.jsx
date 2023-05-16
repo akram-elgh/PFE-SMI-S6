@@ -9,7 +9,12 @@ export default function FinanceBody(props) {
     <div className="finance-body">
       <FinanceNavBar onClick={(tab) => setActiveTab(tab)}></FinanceNavBar>
       {activeTab === "info" && <FinanceInfo></FinanceInfo>}
-      {activeTab === "modify" && <FinanceModify></FinanceModify>}
+      {activeTab === "modify" && (
+        <FinanceModify
+          showSuccessModal={props.showSuccessModal}
+          showFailModal={props.showFailModal}
+        ></FinanceModify>
+      )}
     </div>
   );
 }

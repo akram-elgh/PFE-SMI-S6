@@ -12,7 +12,12 @@ export default function Finance(props) {
           onSubmit={(password) => password === "admin" && setLogin(true)}
         ></FinanceLogin>
       )}
-      {isLoginTrue && <FinanceBody></FinanceBody>}
+      {isLoginTrue && (
+        <FinanceBody
+          showSuccessModal={props.showSuccessModal}
+          showFailModal={props.showFailModal}
+        ></FinanceBody>
+      )}
     </>
   );
 }
