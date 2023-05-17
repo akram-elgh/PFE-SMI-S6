@@ -5,14 +5,17 @@ import Modal from "../../sub-components/Modal";
 
 export default function DeleteTeacher(props) {
   const url = "http://localhost:3001/teacher?id=";
+  const classUrl = "http://localhost:3001/class";
   const [teachers, setTeachers] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [teacherToDelete, setTeacherToDelete] = useState({});
   const [showModal, setShowModal] = useState(false);
   const { teacher_id } = teacherToDelete;
 
   useEffect(() => {
     axios.get(url).then((response) => setTeachers(response.data));
-  }, [url]);
+    axios.get(classUrl).then((response) => setClasses(response.data));
+  }, [url, classUrl]);
 
   function handleCheckChange(event) {
     if (event.target.checked) {
@@ -66,11 +69,11 @@ export default function DeleteTeacher(props) {
                   <th></th>
                   <th>Nom</th>
                   <th>Prenom</th>
-                  <th>Class</th>
+                  <th>Classes</th>
                 </tr>
               </thead>
               <tbody>
-                {teachers.map((teacher) => {
+                {teachers.slice(teacher_id ? 0 : 1).map((teacher) => {
                   return (
                     <tr key={teacher.id}>
                       <td>
@@ -90,7 +93,15 @@ export default function DeleteTeacher(props) {
                       </td>
                       <td>{teacher.lname}</td>
                       <td>{teacher.fname}</td>
-                      <td>{teacher.class_name}</td>
+                      <td>
+                        {classes
+                          .filter(
+                            (obj) => obj.teacher_id === teacher.teacher_id
+                          )
+                          .map((classe) => {
+                            return `${classe.class_name || "_"} `;
+                          })}
+                      </td>
                     </tr>
                   );
                 })}

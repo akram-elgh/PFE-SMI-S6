@@ -50,8 +50,9 @@ export default function UpdateTeacher(props) {
         if (response.status === 200)
           props.showSuccessModal("Le prof ete modifier avec succes");
         else props.showFailModal("Erreur lors du modifcation du prof");
+        axios.get(url).then((response) => setTeachers(response.data));
+        setTeacherToModify({});
       });
-      setTeacherToModify({});
     }
   }
 
@@ -68,11 +69,11 @@ export default function UpdateTeacher(props) {
                 <th></th>
                 <th>Nom</th>
                 <th>Prenom</th>
-                <th>Class</th>
+                <th>Classes</th>
               </tr>
             </thead>
             <tbody>
-              {teachers.map((teacher) => {
+              {teachers.slice(teacher_id ? 0 : 1).map((teacher) => {
                 return (
                   <tr key={teacher.id}>
                     <td>
@@ -92,7 +93,13 @@ export default function UpdateTeacher(props) {
                     </td>
                     <td>{teacher.lname}</td>
                     <td>{teacher.fname}</td>
-                    <td>{teacher.class_name}</td>
+                    <td>
+                      {classes
+                        .filter((obj) => obj.teacher_id === teacher.teacher_id)
+                        .map((classe) => {
+                          return `${classe.class_name} `;
+                        })}
+                    </td>
                   </tr>
                 );
               })}
@@ -107,7 +114,6 @@ export default function UpdateTeacher(props) {
               <li className="space-lable-li">Prenom:</li>
               <li className="space-lable-li">Nom:</li>
               <li className="space-lable-li">Numero du telephone:</li>
-              <li className="space-lable-li">Classe:</li>
             </ul>
           </div>
           <div className="space-inputs">
@@ -147,25 +153,6 @@ export default function UpdateTeacher(props) {
                   required
                 ></input>
               </div>
-              <select
-                type="number"
-                name="class_id"
-                placeholder="Taper ici"
-                value={class_id}
-                className="form-select"
-                onChange={handleChange}
-              >
-                <option key={0} value="0">
-                  ---Selectioner unse classe---
-                </option>
-                {classes.map((classe) => {
-                  return (
-                    <option key={classe.class_id} value={classe.class_id}>
-                      {classe.class_name}
-                    </option>
-                  );
-                })}
-              </select>
               <Button color="primary"></Button>
             </form>
           </div>

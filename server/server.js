@@ -27,9 +27,9 @@ app
     const id = req.query.id;
     const query = id ? " WHERE C.class_id = " + id : "";
     connection.query(
-      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname, T.salary, T.type_of_payment , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.class_id = T.class_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
+      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, C.teacher_id, T.teacher_id, T.fname, T.salary, T.type_of_payment , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.teacher_id = T.teacher_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
         query +
-        " GROUP BY C.class_id, C.class_name, C.duration, C.classroom, C.price, T.fname, T.salary, T.type_of_payment ",
+        " GROUP BY C.class_id, C.class_name, C.duration, C.teacher_id, C.classroom, C.price,T.teacher_id, T.fname, T.salary, T.type_of_payment ",
       (err, result) => {
         console.log(err);
         res.send(err ? [] : result);
@@ -38,20 +38,22 @@ app
   })
   .post((req, res) => {
     console.log(req.body);
-    const { class_name, duration, classroom, price } = req.body;
+    const { class_name, duration, classroom, price, teacher_id } = req.body;
     connection.query(
-      `INSERT INTO Class (class_name, duration, classroom, price) VALUES ("${class_name}", ${Number(
+      `INSERT INTO Class (class_name, duration, classroom, price, teacher_id) VALUES ("${class_name}", ${Number(
         duration
-      )}, ${Number(classroom)}, ${price})`,
+      )}, ${Number(classroom)}, ${price}, ${teacher_id})`,
       (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
   })
   .put((req, res) => {
-    const { class_id, class_name, duration, classroom, price } = req.body;
+    const { class_id, class_name, duration, classroom, price, teacher_id } =
+      req.body;
     connection.query(
-      `UPDATE Class SET class_name = "${class_name}" , duration = ${duration}, classroom = ${classroom}, price = ${price} WHERE class_id = ${class_id}`,
+      `UPDATE Class SET class_name = "${class_name}" , duration = ${duration}, classroom = ${classroom}, price = ${price}, teacher_id = ${teacher_id} WHERE class_id = ${class_id}`,
       (err) => {
         console.log(err);
         res.sendStatus(err ? 201 : 200);
@@ -61,19 +63,19 @@ app
   .delete((req, res) => {
     const class_id = req.query.id;
     connection.query(
-      `DELETE FROM Teacher WHERE class_id = ${class_id}`,
+      `DELETE FROM Student WHERE class_id = ${class_id}`,
       (err) => {
-        if (err) res.sendStatus(201);
+        if (err) res.sendStatus(err);
         else {
           connection.query(
-            `DELETE FROM Student WHERE class_id = ${class_id}`,
-
+            `DELETE FROM Schedule WHERE class_id = ${class_id}`,
             (err) => {
               if (err) res.sendStatus(err);
               else {
                 connection.query(
                   `DELETE FROM Class WHERE class_id = ${class_id}`,
                   (err) => {
+                    console.log(err);
                     res.sendStatus(err ? 201 : 200);
                   }
                 );
@@ -92,20 +94,17 @@ app
   .get((req, res) => {
     const id = req.query.id;
     const query = id ? "WHERE teacher_id = " + id : ";";
-    connection.query(
-      `SELECT * From Teacher AS T Join Class AS C ON T.class_id = C.class_id  ${query}`,
-      (err, result) => {
-        console.log(err);
-        res.send(err ? [] : result);
-      }
-    );
+    connection.query(`SELECT * From Teacher ${query}`, (err, result) => {
+      console.log(err);
+      res.send(err ? [] : result);
+    });
   })
   .post((req, res) => {
-    const { fname, lname, phoneNum, typeOfPayment, salary, class_id } =
-      req.body;
+    const { fname, lname, phoneNum, typeOfPayment = 0, salary = 0 } = req.body;
     connection.query(
-      `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary, class_id) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary}, ${class_id});`,
+      `INSERT INTO Teacher (fname, lname, phoneNum, type_of_payment, salary) Values ("${fname}", "${lname}", ${phoneNum}, ${typeOfPayment}, ${salary});`,
       (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
@@ -139,7 +138,7 @@ app
     const name = req.query.name;
     let query = "";
     if (id)
-      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.student_id = ${id} ORDER BY S.lname`;
+      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name, C.class_id FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.student_id = ${id} ORDER BY S.lname`;
     if (name)
       query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
     connection.query(query, (err, result) => {
@@ -223,8 +222,6 @@ app
     );
   });
 
-app.listen(3001, (err) => console.log(err || "Server Started"));
-
 // --------------------------- Schedule routes ------------------------
 
 app
@@ -263,3 +260,5 @@ app
       res.sendStatus(err ? 201 : 200);
     });
   });
+
+app.listen(3001, (err) => console.log(err || "Server Started"));

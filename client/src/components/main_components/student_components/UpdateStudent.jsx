@@ -225,12 +225,12 @@ export default function UpdateStudent(props) {
                 <div className="mb-4">
                   <select
                     name="new_class_id"
-                    value={new_class_id}
+                    value={new_class_id || class_id}
                     className="form-select"
                     onChange={handleFormChange}
                   >
                     <option value="0" key={0}>
-                      ---Selectioner une classe---
+                      ---Selectioner un prof---
                     </option>
                     {classes.map((classe) => {
                       return (

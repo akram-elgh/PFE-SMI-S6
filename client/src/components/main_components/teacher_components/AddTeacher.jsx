@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Button from "../../sub-components/Button";
 import { getPaymentType } from "../../functions/functions";
 
 export default function AddTeacher(props) {
   const types = getPaymentType();
-  const class_url = "http://localhost:3001/class";
   const teacher_url = "http://localhost:3001/teacher";
   const [type, setType] = useState({
     isTypeSelected: false,
     typeTitle: "",
   });
-  const [classes, setClasses] = useState([]);
-  const [teacher, setTeacher] = useState({
-    fname: "",
-    lname: "",
-    phoneNum: "",
-    typeOfPayment: 0,
-    salary: 0,
-    class_id: 0,
-  });
+  const [teacher, setTeacher] = useState({});
   const { isTypeSelected, typeTitle } = type;
-  const { fname, lname, phoneNum, typeOfPayment, salary, class_id } = teacher;
-
-  useEffect(() => {
-    axios.get(class_url).then((response) => setClasses(response.data));
-  }, [class_url]);
+  const { fname, lname, phoneNum, typeOfPayment, salary } = teacher;
 
   function handleChange(event) {
     const name = event.target.name;
     const value =
-      name === "salary" || name === "typeOfPayment" || name === "class_id"
+      name === "salary" || name === "typeOfPayment"
         ? Number(event.target.value)
         : event.target.value;
     setTeacher((prevValues) => {
@@ -53,27 +40,22 @@ export default function AddTeacher(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (Number(class_id) === 0) {
-      props.showFailModal("Veuillez choisir une classe.");
-    } else {
-      axios.post(teacher_url, teacher).then((response) => {
-        if (response.status === 200)
-          props.showSuccessModal("Le prof a ete ajouter avec succes.");
-        else props.showFailModal("Un erreur lors de l'ajout du prof.");
-      });
-      setTeacher({
-        fname: "",
-        lname: "",
-        phoneNum: "",
-        typeOfPayment: 0,
-        salary: 0,
-        class_id: 0,
-      });
-      setType({
-        isTypeSelected: false,
-        typeTitle: "",
-      });
-    }
+    axios.post(teacher_url, teacher).then((response) => {
+      if (response.status === 200) {
+        props.showSuccessModal("Le prof a ete ajouter avec succes.");
+        setTeacher({
+          fname: "",
+          lname: "",
+          phoneNum: "",
+          typeOfPayment: 0,
+          salary: 0,
+        });
+        setType({
+          isTypeSelected: false,
+          typeTitle: "",
+        });
+      } else props.showFailModal("Un erreur lors de l'ajout du prof.");
+    });
   }
 
   return (
@@ -86,7 +68,6 @@ export default function AddTeacher(props) {
             <li className="space-lable-li">Numero du telephone:</li>
             <li className="space-lable-li">Type du contrat:</li>
             {isTypeSelected && <li className="space-lable-li">{typeTitle}</li>}
-            <li className="space-lable-li">Classe:</li>
           </ul>
         </div>
         <div className="space-inputs">
@@ -158,25 +139,6 @@ export default function AddTeacher(props) {
                 ></input>
               </div>
             )}
-            <select
-              type="number"
-              name="class_id"
-              placeholder="Taper ici"
-              value={class_id}
-              className="form-select"
-              onChange={handleChange}
-            >
-              <option key={0} value="0">
-                ---Selectioner unse classe---
-              </option>
-              {classes.map((classe) => {
-                return (
-                  <option key={classe.class_id} value={classe.class_id}>
-                    {classe.class_name}
-                  </option>
-                );
-              })}
-            </select>
             <Button color="primary"></Button>
           </form>
         </div>

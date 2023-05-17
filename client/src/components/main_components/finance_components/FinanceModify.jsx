@@ -6,13 +6,16 @@ import { getPaymentType } from "../../functions/functions";
 export default function UpdateTeacher(props) {
   const types = getPaymentType();
   const url = "http://localhost:3001/teacher?id=";
+  const classUrl = "http://localhost:3001/class";
+  const [classes, setClasses] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [teacherToModify, setTeacherToModify] = useState({});
   const { teacher_id, type_of_payment, salary } = teacherToModify;
 
   useEffect(() => {
     axios.get(url).then((response) => setTeachers(response.data));
-  }, [url]);
+    axios.get(classUrl).then((response) => setClasses(response.data));
+  }, [url, classUrl]);
 
   function handleCheckChange(event) {
     if (event.target.checked) {
@@ -71,7 +74,7 @@ export default function UpdateTeacher(props) {
                   <th>Prenom</th>
                   <th>Type du contrat</th>
                   <th>Salaire</th>
-                  <th>Class</th>
+                  <th>Classes</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,7 +135,15 @@ export default function UpdateTeacher(props) {
                           }`
                         )}
                       </td>
-                      <td>{teacher.class_name}</td>
+                      <td>
+                        {classes
+                          .filter(
+                            (obj) => obj.teacher_id === teacher.teacher_id
+                          )
+                          .map((classe) => {
+                            return `${classe.class_name} `;
+                          })}
+                      </td>
                     </tr>
                   );
                 })}

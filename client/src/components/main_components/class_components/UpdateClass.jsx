@@ -4,13 +4,17 @@ import axios from "axios";
 
 export default function UpdateClass(props) {
   const url = "http://localhost:3001/class?id=";
+  const teacherUrl = "http://localhost:3001/teacher";
+  const [teachers, setTeachers] = useState([]);
   const [classes, setClasses] = useState([]);
   const [classeToModify, setClasseToModify] = useState({});
-  const { class_id, class_name, duration, classroom, price } = classeToModify;
+  const { class_id, class_name, duration, classroom, price, teacher_id } =
+    classeToModify;
 
   useEffect(() => {
     axios.get(url).then((response) => setClasses(response.data));
-  }, [url]);
+    axios.get(teacherUrl).then((response) => setTeachers(response.data));
+  }, [url, teacherUrl]);
 
   function handleCheckChange(event) {
     if (event.target.checked) {
@@ -47,9 +51,9 @@ export default function UpdateClass(props) {
         if (response.status === 200)
           props.showSuccessModal("La classe a ete modifier avec succes");
         else props.showFailModal("Erreur Lors du modification du classe");
+        setClasseToModify({});
+        axios.get(url).then((response) => setClasses(response.data));
       });
-      setClasseToModify({});
-      // setClasses([]);
     }
   }
 
@@ -105,6 +109,7 @@ export default function UpdateClass(props) {
                 <li className="space-lable-li">Duree:</li>
                 <li className="space-lable-li">Salle:</li>
                 <li className="space-lable-li">Prix:</li>
+                <li className="space-lable-li">Prof:</li>
               </ul>
             </div>
             <div className="space-inputs">
@@ -155,6 +160,30 @@ export default function UpdateClass(props) {
                     onChange={handleChange}
                     required
                   ></input>
+                </div>
+                <div className="mb-4">
+                  <select
+                    type="text"
+                    name="teacher_id"
+                    placeholder="Taper ici"
+                    value={teacher_id}
+                    className="form-select"
+                    onChange={handleChange}
+                  >
+                    <option key={0} value="0">
+                      ---Selectioner unse classe---
+                    </option>
+                    {teachers.map((teacher) => {
+                      return (
+                        <option
+                          key={teacher.teacher_id}
+                          value={teacher.teacher_id}
+                        >
+                          {teacher.fname}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
                 <Button color="primary"></Button>
               </form>

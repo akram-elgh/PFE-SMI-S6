@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../sub-components/Button";
 import axios from "axios";
 
 export default function AddClass(props) {
   const url = "http://localhost:3001/class";
+  const teacherUrl = "http://localhost:3001/teacher";
+  const [teachers, setTeachers] = useState([]);
   const [classe, setClass] = useState({
     class_name: "",
     duration: 0,
     classroom: 0,
     price: 0,
+    teacher_id: 0,
   });
-  const { class_name, duration, classroom, price } = classe;
+
+  useEffect(() => {
+    axios.get(teacherUrl).then((response) => setTeachers(response.data));
+  }, [teacherUrl]);
+
+  const { class_name, duration, classroom, price, teacher_id } = classe;
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -25,17 +33,20 @@ export default function AddClass(props) {
     event.preventDefault();
     if (Number(duration) === 0) {
       props.showFailModal("Veuillez entrer la duree du cours");
-    } else {
+    } else if (Number(teacher_id) === 0)
+      props.showFailModal("Veuillez choisir un prof");
+    else {
       axios.post(url, classe).then((response) => {
-        if (response.status === 200)
+        if (response.status === 200) {
           props.showSuccessModal("La classe a ete ajouter avec succes");
-        else props.showFailModal("Erreur Lors de l'ajout du classe");
-      });
-      setClass({
-        class_name: "",
-        duration: 0,
-        classroom: 0,
-        price: 0,
+          setClass({
+            class_name: "",
+            duration: 0,
+            classroom: 0,
+            price: 0,
+            teacher_id: 0,
+          });
+        } else props.showFailModal("Erreur Lors de l'ajout du classe");
       });
     }
   }
@@ -48,6 +59,7 @@ export default function AddClass(props) {
             <li className="space-lable-li">Duree:</li>
             <li className="space-lable-li">Salle:</li>
             <li className="space-lable-li">Prix:</li>
+            <li className="space-lable-li">Prof:</li>
           </ul>
         </div>
         <div className="space-inputs">
@@ -98,6 +110,27 @@ export default function AddClass(props) {
                 onChange={handleChange}
                 required
               ></input>
+            </div>
+            <div className="mb-4">
+              <select
+                type="text"
+                name="teacher_id"
+                placeholder="Taper ici"
+                value={teacher_id}
+                className="form-select"
+                onChange={handleChange}
+              >
+                <option key={0} value="0">
+                  ---Selectioner un prof---
+                </option>
+                {teachers.map((teacher) => {
+                  return (
+                    <option key={teacher.teacher_id} value={teacher.teacher_id}>
+                      {teacher.fname + " " + teacher.lname}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <Button color="primary"></Button>
           </form>
