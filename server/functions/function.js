@@ -6,3 +6,12 @@ exports.getDate = () => {
 
   return `${year}-${month}-${day}`;
 };
+
+exports.transfromDate = (dateString) => {
+  const parts = dateString.split("/");
+  const day = parts[0].padStart(2, "0");
+  const month = parts[1].padStart(2, "0");
+  const year = parts[2];
+
+  return `${year}-${month}-${day}`;
+};

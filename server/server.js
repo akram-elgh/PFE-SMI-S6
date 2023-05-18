@@ -27,9 +27,9 @@ app
     const id = req.query.id;
     const query = id ? " WHERE C.class_id = " + id : "";
     connection.query(
-      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, C.teacher_id, T.teacher_id, T.fname, T.salary, T.type_of_payment , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.teacher_id = T.teacher_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
+      "SELECT C.class_id, C.class_name, C.duration, C.classroom, C.price, C.teacher_id, T.teacher_id, T.lname, T.fname, T.salary, T.type_of_payment , COUNT(S.student_id) AS student_count FROM Class AS C LEFT JOIN Teacher AS T ON C.teacher_id = T.teacher_id LEFT JOIN Student AS S ON C.class_id = S.class_id" +
         query +
-        " GROUP BY C.class_id, C.class_name, C.duration, C.teacher_id, C.classroom, C.price,T.teacher_id, T.fname, T.salary, T.type_of_payment ",
+        " GROUP BY C.class_id, C.class_name, C.duration, C.teacher_id, C.classroom, C.price,T.teacher_id, T.lname, T.fname, T.salary, T.type_of_payment ",
       (err, result) => {
         console.log(err);
         res.send(err ? [] : result);
@@ -110,11 +110,11 @@ app
     );
   })
   .put((req, res) => {
-    const { teacher_id, phoneNum, type_of_payment, salary, class_id } =
-      req.body;
+    const { teacher_id, phoneNum, type_of_payment, salary } = req.body;
     connection.query(
-      `UPDATE Teacher SET phoneNum = "${phoneNum}",type_of_payment = ${type_of_payment}, salary = ${salary}, class_id = ${class_id} WHERE teacher_id = ${teacher_id}`,
+      `UPDATE Teacher SET phoneNum = "${phoneNum}",type_of_payment = ${type_of_payment}, salary = ${salary} WHERE teacher_id = ${teacher_id}`,
       (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
@@ -162,7 +162,7 @@ app
       lname,
       bDate,
       phoneNum,
-      parentNum,
+      parentNum = "",
       level,
       class_id,
       new_class_id,
@@ -171,12 +171,10 @@ app
     console.log(new_class_id);
     let query = "";
     if (class_id === new_class_id)
-      query = `UPDATE Student SET bDate = "${bDate.slice(
-        0,
-        10
-      )}", phoneNUm = ${phoneNum}, parentNUm = ${parentNum}, level = ${level} WHERE student_id = ${student_id} OR fname = "${fname}" AND lname = "${lname}" AND bdate = "${bDate.slice(
-        0,
-        10
+      query = `UPDATE Student SET bDate = "${date.transfromDate(
+        bDate.slice(0, 10)
+      )}", phoneNUm = ${phoneNum}, parentNUm = "${parentNum}", level = ${level} WHERE student_id = ${student_id} OR fname = "${fname}" AND lname = "${lname}" AND bdate = "${date.transfromDate(
+        bDate.slice(0, 10)
       )}"`;
     else
       query = `UPDATE Student SET class_id = ${new_class_id} WHERE student_id = ${student_id}`;

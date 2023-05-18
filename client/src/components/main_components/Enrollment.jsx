@@ -126,7 +126,6 @@ export default function Enrollment(props) {
                 value={parentNum}
                 className="form-control"
                 onChange={handleChange}
-                required
               ></input>
             </div>
             <div className="mb-4">

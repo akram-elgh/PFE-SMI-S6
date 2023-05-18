@@ -111,7 +111,7 @@ export function calculateTeacherSalary({
 
   if (type_of_payment === 1) return student_count * salary;
   else if (type_of_payment === 2) return hours * salary * 4;
-  else return price * (salary / 100);
+  else return price * student_count * (salary / 100);
 }
 
 export function calculateClassesRevenuePerMonth(classes) {

@@ -19,7 +19,7 @@ export default function SearchClass() {
               <th>Duree</th>
               <th>Prix</th>
               <th>Prof</th>
-              <th>Nombre d'etudiant'</th>
+              <th>Nombre d'etudiants</th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +30,7 @@ export default function SearchClass() {
                   <td>{classe.classroom}</td>
                   <td>{classe.duration === 90 ? "1h30" : "2h"}</td>
                   <td>{classe.price}DH</td>
-                  <td>{classe.fname}</td>
+                  <td>{classe.lname + " " + classe.fname || "_"}</td>
                   <td>{classe.student_count}</td>
                 </tr>
               );

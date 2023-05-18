@@ -78,7 +78,7 @@ export default function UpdateTeacher(props) {
                 </tr>
               </thead>
               <tbody>
-                {teachers.map((teacher) => {
+                {teachers.slice(teacher_id ? 0 : 1).map((teacher) => {
                   return (
                     <tr key={teacher.id}>
                       <td>

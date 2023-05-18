@@ -179,7 +179,7 @@ export default function UpdateClass(props) {
                           key={teacher.teacher_id}
                           value={teacher.teacher_id}
                         >
-                          {teacher.fname}
+                          {teacher.lname + " " + teacher.fname}
                         </option>
                       );
                     })}

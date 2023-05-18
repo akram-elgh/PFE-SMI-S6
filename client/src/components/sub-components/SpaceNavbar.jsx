@@ -7,7 +7,7 @@ export default function SpaceNavbar(props) {
   return (
     <div
       className="space-navbar"
-      style={{ width: number === 3 ? "50%" : "70%" }}
+      style={{ width: number === 3 ? "44.5%" : "56.5%" }}
     >
       {number === 4 && (
         <div

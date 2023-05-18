@@ -201,7 +201,6 @@ export default function UpdateStudent(props) {
                     value={parentNum}
                     className="form-control"
                     onChange={handleFormChange}
-                    required
                   ></input>
                 </div>
                 <div className="mb-4">
