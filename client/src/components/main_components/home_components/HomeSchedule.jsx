@@ -16,7 +16,7 @@ export default function HomeSchedule() {
   return (
     <>
       <div className="home-space-schedule-table">
-        <table className="table table-light table-striped">
+        <table className="table table-primary table-striped">
           <thead>
             <tr>
               <td key={0}></td>

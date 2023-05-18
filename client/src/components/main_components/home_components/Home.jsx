@@ -1,5 +1,6 @@
 import React from "react";
 import HomeSchedule from "./HomeSchedule.jsx";
+import HomeBlackList from "./HomeBlackList.jsx";
 
 export default function Home() {
   return (
@@ -14,7 +15,13 @@ export default function Home() {
         <div className="home-space-requests">Requests</div>
       </div>
       <div className="home-space-right">
-        <div className="home-space-blacklist">Blacklist</div>
+        <div className="home-space-blacklist">
+          <div className="mb-4">
+            <h1>Blacklist</h1>
+            <p>La liste des etudiants qui n'ont pas encore paye ce mois</p>
+          </div>
+          <HomeBlackList></HomeBlackList>
+        </div>
       </div>
     </div>
   );

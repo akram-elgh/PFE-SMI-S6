@@ -5,12 +5,25 @@
   list-style: none;
 }
 
+/************** Styling the scrollbar of the whole page ************/
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #ddeeff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff8730;
+  border-radius: 50px;
+  padding: 1px;
+}
+
 /************* Login styles *********************/
 
 .login {
   display: flex;
   flex-direction: row;
-  /* position: absolute; */
+  height: 100vh;
 }
 
 .logo {
@@ -156,7 +169,7 @@ select {
   width: 100%;
   padding: 20px;
   overflow: hidden;
-  min-height: 87.5vh;
+  min-height: 87.4vh;
   transition: 500ms ease-in;
 }
 
@@ -165,8 +178,7 @@ select {
 } */
 
 .space-form {
-  padding: 100px 80px;
-  /* width: 80%; */
+  padding: 90px 80px;
   display: flex;
   justify-content: space-evenly;
   text-align: left;
@@ -414,27 +426,41 @@ span.schedule-delete-btn {
 }
 
 .home-space-left {
-  width: 60%;
+  width: 50%;
   padding: 30px;
+}
+
+.home-space-right {
+  width: 50%;
+  padding: 10px;
 }
 
 /******************* Home space schdule ************/
 
 .home-space-schedule-table {
-  height: 400px;
+  height: 300px;
   overflow: hidden;
   overflow-y: scroll;
-  background-color: rgb(219, 219, 219);
+  background-color: #ffffff59;
   border-radius: 10px;
 }
 
-.home-space-schedule-table::-webkit-scrollbar {
+.home-space-schedule-table::-webkit-scrollbar,
+.home-space-blacklist-table::-webkit-scrollbar {
   width: 5px;
-  height: 5px;
-  background-color: #cdccff;
-  margin: 2px 0;
+  background-color: #ddeeff;
 }
 
-.home-space-schedule-table::-webkit-scrollbar-thumb {
-  background-color: #ffff;
+.home-space-schedule-table::-webkit-scrollbar-thumb,
+.home-space-blacklist-table::-webkit-scrollbar-thumb {
+  background-color: #ff8730;
+}
+
+/****************** Home blacklist ******************/
+
+.home-space-blacklist-table {
+  max-height: 600px;
+  overflow-y: scroll;
+  border-radius: 10px;
+  background-color: var(--bs-dark);
 }
