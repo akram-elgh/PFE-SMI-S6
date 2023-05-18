@@ -8,6 +8,7 @@ import Modal from "../sub-components/Modal";
 import Payment from "./Payment";
 import Schedule from "./Schedule";
 import Finance from "./finance_components/Finance";
+import Home from "./home_components/Home";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -66,7 +67,7 @@ export default function Body(props) {
         className={`space${activeTab === "Espace Finance" ? "-finance" : ""}`}
         style={{ width: mouseOver ? "85%" : "" }}
       >
-        {activeTab === "Acceuil" && <div>home</div>}
+        {activeTab === "Acceuil" && <Home></Home>}
         {activeTab === "Espace Payment" && (
           <Payment
             showSuccessModal={handleShowSuccessModal}
