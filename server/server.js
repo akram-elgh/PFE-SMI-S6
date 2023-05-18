@@ -137,13 +137,17 @@ app
     const id = req.query.id;
     const name = req.query.name;
     let query = "";
-    if (id)
-      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name, C.class_id FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.student_id = ${id} ORDER BY S.lname`;
+    if (id) query = `WHERE S.student_id = ${id} ORDER BY S.lname`;
     if (name)
-      query = `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
-    connection.query(query, (err, result) => {
-      res.send(err ? [] : result);
-    });
+      query = `WHERE S.fname LIKE "${name}%" OR S.lname LIKE "${name}%" ORDER BY S.lname`;
+
+    connection.query(
+      `SELECT S.student_id, S.fname, S.lname, S.level, DATE_FORMAT(S.bDate, "%d/%m/%Y") AS bDate, S.phoneNum, S.parentNum, DATE_FORMAT(S.enrolment_date, "%d/%m/%Y") AS dateOfEnrollment , C.class_name, C.class_id FROM Student S JOIN Class C ON S.class_id = C.class_id ${query}`,
+      (err, result) => {
+        console.log(err);
+        res.send(err ? [] : result);
+      }
+    );
   })
   .post((req, res) => {
     connection.query(
@@ -258,5 +262,16 @@ app
       res.sendStatus(err ? 201 : 200);
     });
   });
+
+//-------------------------- Blacklist Route --------------------------------
+
+app.get("/blacklist", (req, res) => {
+  connection.query(
+    `SELECT S.student_id , S.fname, S.lname, DATE_FORMAT(S.last_payment_date, "%d/%m/%Y") AS date, S.last_payed_month AS month , C.class_name FROM Student S JOIN Class C ON S.class_id = C.class_id ORDER BY S.lname`,
+    (err, result) => {
+      res.send(err ? [] : result);
+    }
+  );
+});
 
 app.listen(3001, (err) => console.log(err || "Server Started"));
