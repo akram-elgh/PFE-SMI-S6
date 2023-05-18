@@ -171,7 +171,7 @@ export default function UpdateClass(props) {
                     onChange={handleChange}
                   >
                     <option key={0} value="0">
-                      ---Selectioner unse classe---
+                      ---Selectioner un prof---
                     </option>
                     {teachers.map((teacher) => {
                       return (
