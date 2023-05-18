@@ -406,3 +406,35 @@ span.schedule-delete-btn {
 .finance-body {
   padding: 20px;
 }
+
+/******************** Home space *********************/
+
+.home-space {
+  display: flex;
+}
+
+.home-space-left {
+  width: 60%;
+  padding: 30px;
+}
+
+/******************* Home space schdule ************/
+
+.home-space-schedule-table {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: rgb(219, 219, 219);
+  border-radius: 10px;
+}
+
+.home-space-schedule-table::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #cdccff;
+  margin: 2px 0;
+}
+
+.home-space-schedule-table::-webkit-scrollbar-thumb {
+  background-color: #ffff;
+}
