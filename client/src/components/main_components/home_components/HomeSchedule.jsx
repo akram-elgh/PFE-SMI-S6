@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getDay, getHour } from "../../functions/functions";
+import { getDay, getHour, getMonth } from "../../functions/functions";
 
 export default function HomeSchedule() {
   const days = getDay();
   const hours = getHour();
+  const date = new Date().getDate();
+  const month = new Date().getMonth();
+  const year = new Date().getFullYear();
   const url = "http://localhost:3001/schedule?day=";
   const [chosenDay] = useState(new Date().getDay());
   const [classes, setClasses] = useState([]);
@@ -23,7 +26,7 @@ export default function HomeSchedule() {
               {days.slice(chosenDay, chosenDay + 1).map((day, index) => {
                 return (
                   <td
-                    colSpan={10}
+                    colSpan={12}
                     onClick={() =>
                       setScheduleInfo((prevValues) => {
                         return { ...prevValues, chosenDay: index + 1 };
@@ -32,7 +35,7 @@ export default function HomeSchedule() {
                     style={{ padding: "0.5rem" }}
                     key={index + 1}
                   >
-                    {day}
+                    {`${day} ${date} ${getMonth(month + 1)} ${year}`}
                   </td>
                 );
               })}

@@ -426,41 +426,59 @@ span.schedule-delete-btn {
 }
 
 .home-space-left {
-  width: 50%;
+  width: 60%;
   padding: 30px;
 }
 
 .home-space-right {
-  width: 50%;
+  width: 40%;
   padding: 10px;
 }
 
 /******************* Home space schdule ************/
 
 .home-space-schedule-table {
-  height: 300px;
-  overflow: hidden;
-  overflow-y: scroll;
+  height: 250px;
+  overflow: scroll;
   background-color: #ffffff59;
   border-radius: 10px;
 }
 
 .home-space-schedule-table::-webkit-scrollbar,
-.home-space-blacklist-table::-webkit-scrollbar {
+.home-space-blacklist-table::-webkit-scrollbar,
+.home-space-request-table::-webkit-scrollbar {
   width: 5px;
   background-color: #ddeeff;
 }
 
 .home-space-schedule-table::-webkit-scrollbar-thumb,
-.home-space-blacklist-table::-webkit-scrollbar-thumb {
+.home-space-blacklist-table::-webkit-scrollbar-thumb,
+.home-space-request-table::-webkit-scrollbar-thumb {
   background-color: #ff8730;
 }
 
 /****************** Home blacklist ******************/
 
+.home-space-blacklist {
+  text-align: left;
+}
+
 .home-space-blacklist-table {
-  max-height: 600px;
+  max-height: 650px;
   overflow-y: scroll;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: var(--bs-dark);
+}
+
+/*************** Home requests **********************/
+
+.home-space-requests {
+  text-align: left;
+  margin-top: 30px;
+}
+
+.home-space-request-table {
+  max-height: 250px;
+  overflow-y: scroll;
+  border-radius: 15px;
 }
