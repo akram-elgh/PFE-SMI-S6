@@ -274,4 +274,16 @@ app.get("/blacklist", (req, res) => {
   );
 });
 
+//------------------------ Request Route --------------------------------
+
+app.route("/request").get((req, res) => {
+  connection.query(
+    `SELECT R.request_id, R.fname, R.lname,R.level, R.phoneNumber AS phoneNum, DATE_FORMAT(R.request_date, "%d/%m/%Y") AS date, C.class_name FROM Request AS R JOIN Class AS C ON R.class_id = C.class_id ORDER BY R.request_date DESC`,
+    (err, result) => {
+      console.log(err);
+      res.send(err ? [] : result);
+    }
+  );
+});
+
 app.listen(3001, (err) => console.log(err || "Server Started"));
