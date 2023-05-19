@@ -7,6 +7,7 @@ import SensorDoorIcon from "@mui/icons-material/SensorDoor";
 import ManIcon from "@mui/icons-material/Man";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PaidIcon from "@mui/icons-material/Paid";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 export default function Navbar(props) {
   const [activeTab, setActiveTab] = useState("home");
@@ -31,6 +32,15 @@ export default function Navbar(props) {
           }}
         >
           <HomeIcon fontSize="large" color="grey" /> Acceuil
+        </li>
+        <li
+          className={`nav-item ${activeTab === "notification" ? "active" : ""}`}
+          onClick={() => {
+            props.onClick("Notifications des demandes en lignes");
+            handleTabClick("notification");
+          }}
+        >
+          <NotificationsIcon fontSize="large" color="grey" /> Notifications
         </li>
         <li
           className={`nav-item ${activeTab === "payment" ? "active" : ""}`}

@@ -150,10 +150,12 @@ app
     );
   })
   .post((req, res) => {
+    const { fname, lname, bDate, level, phoneNum, parentNum, class_id } =
+      req.body;
     connection.query(
-      "INSERT INTO Student (fname, lname, bDate, level, phoneNum, parentNum, class_id, enrolment_date, last_payment_date) Values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [...Object.values(req.body), date.getDate(), date.getDate()],
+      `INSERT INTO Student (fname, lname, bDate, level, phoneNum, parentNum, class_id, enrolment_date, last_payment_date) Values("${fname}", "${lname}", "${bDate}", ${level}, "${phoneNum}", "${parentNum}", ${class_id}, "${date.getDate()}", "${date.getDate()}")`,
       (err) => {
+        console.log(err);
         res.sendStatus(err ? 201 : 200);
       }
     );
@@ -276,14 +278,29 @@ app.get("/blacklist", (req, res) => {
 
 //------------------------ Request Route --------------------------------
 
-app.route("/request").get((req, res) => {
-  connection.query(
-    `SELECT R.request_id, R.fname, R.lname,R.level, R.phoneNumber AS phoneNum, DATE_FORMAT(R.request_date, "%d/%m/%Y") AS date, C.class_name FROM Request AS R JOIN Class AS C ON R.class_id = C.class_id ORDER BY R.request_date DESC`,
-    (err, result) => {
+app
+  .route("/request")
+  .get((req, res) => {
+    const name = req.query.name || "";
+    const id = req.query.id;
+    let query = "";
+    if (name)
+      query = `WHERE R.fname LIKE "${name}%" OR R.lname LIKE "${name}%"`;
+    if (id) query = `WHERE R.request_id = ${id}`;
+    connection.query(
+      `SELECT R.request_id, R.fname, R.lname,R.level, R.phoneNum, R.parentNum,R.class_id, DATE_FORMAT(R.request_date, "%d/%m/%Y") AS date, C.class_name FROM Request AS R JOIN Class AS C ON R.class_id = C.class_id ${query} ORDER BY R.request_date DESC`,
+      (err, result) => {
+        console.log(err);
+        res.send(err ? [] : result);
+      }
+    );
+  })
+  .delete((req, res) => {
+    const id = req.query.id;
+    connection.query(`DELETE FROM Request WHERE request_id = ${id}`, (err) => {
       console.log(err);
-      res.send(err ? [] : result);
-    }
-  );
-});
+      res.send(err ? 201 : 200);
+    });
+  });
 
 app.listen(3001, (err) => console.log(err || "Server Started"));

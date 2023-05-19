@@ -9,6 +9,7 @@ import Payment from "./Payment";
 import Schedule from "./Schedule";
 import Finance from "./finance_components/Finance";
 import Home from "./home_components/Home";
+import Requests from "./request_components/Requests.jsx";
 
 export default function Body(props) {
   const [activeTab, setActiveTab] = useState("Acceuil");
@@ -68,6 +69,12 @@ export default function Body(props) {
         style={{ width: mouseOver ? "85%" : "" }}
       >
         {activeTab === "Acceuil" && <Home></Home>}
+        {activeTab === "Notifications des demandes en lignes" && (
+          <Requests
+            showSuccessModal={handleShowSuccessModal}
+            showFailModal={handleShowFailModal}
+          ></Requests>
+        )}
         {activeTab === "Espace Payment" && (
           <Payment
             showSuccessModal={handleShowSuccessModal}

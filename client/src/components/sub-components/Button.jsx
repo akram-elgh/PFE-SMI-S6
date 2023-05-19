@@ -6,6 +6,8 @@ export default function Button(props) {
       type="submit"
       className={`btn btn-${props.size || "lg"} btn-${props.color}`}
       value={props.text || "Valider"}
+      onClick={props.onClick}
+      style={props.style}
     ></input>
   );
 }
