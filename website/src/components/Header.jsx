@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  // const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,22 +23,26 @@ export default function Header() {
     elements.forEach((e) => {
       e.classList.toggle("dark");
     });
+    setDarkMode(!darkMode);
   }
   return (
-    <header className={`header ${isScrolled ? "scrolled" : ""}`}>
+    <header
+      className={`header ${darkMode ? "dark" : ""} ${
+        isScrolled ? "scrolled" : ""
+      }`}
+    >
       <div className="logo">
-        <img
-          src="/images/logo.png"
-          alt="logo"
-          width="140px"
-          height="140px"
-        ></img>
+        <a href="#landing-page">
+          <img
+            src="/images/logo.png"
+            alt="logo"
+            width="140px"
+            height="140px"
+          ></img>
+        </a>
       </div>
       <div className="nav-links">
         <ul className="nav-links-ul">
-          <li className="nav-links-li" onClick={handleClick}>
-            Dark
-          </li>
           <li className="nav-links-li btn-enroll">
             <a href="">S&apos;inscrire</a>
           </li>
@@ -51,6 +57,13 @@ export default function Header() {
           </li>
           <li className="nav-links-li">
             <a href="#contatc">Contactez nous</a>
+          </li>
+          <li className="mode-switcher light" onClick={handleClick}>
+            {!darkMode ? (
+              <DarkModeIcon fontSize="medium"></DarkModeIcon>
+            ) : (
+              <LightModeIcon fontSize="medium"></LightModeIcon>
+            )}
           </li>
         </ul>
       </div>

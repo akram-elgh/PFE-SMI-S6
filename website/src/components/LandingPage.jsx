@@ -3,9 +3,9 @@ export default function LandingPage() {
     <div className="landing-page row" id="landing-page">
       <div className="landing-page-description col-4">
         <div>
-          <h1 className="title">Soyer le meilleur !</h1>
+          <h1 className="title light">Soyer le meilleur !</h1>
         </div>
-        <div className="landing-page-parag">
+        <div className="landing-page-parag light">
           <p>
             Développez vos potentiels linguistiques et académiques grâce à notre
             large choix de cours offerts par
@@ -13,7 +13,7 @@ export default function LandingPage() {
           </p>
         </div>
         <div className="enroll-now">
-          <div className="landing-page-parag">
+          <div className="landing-page-parag light">
             <p>Decouvrez nos offres des cours et inscrivez vous maintenant !</p>
           </div>
           <div className="landing-page-buttons">

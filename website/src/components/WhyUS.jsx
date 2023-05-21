@@ -6,7 +6,7 @@ export default function WhyUS() {
           <h1 className="row-title">Pourquoi Markaz Nour Al Ilem</h1>
         </div>
         <div className="section-parag">
-          <p className="row-parag">
+          <p className="row-parag light">
             Chez Markaz Nour Al Ilem, nous avons les meilleurs enseignants de
             Tetouan. Leur expertise dans toutes les matières est bien connue, ce
             qui en fait le choix idéal pour votre apprentissage. Faites

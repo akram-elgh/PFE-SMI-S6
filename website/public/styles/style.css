@@ -55,10 +55,6 @@ body.dark {
   justify-content: space-between;
 }
 
-.landing-page {
-  background-image: url("../images/Landing-page2.png");
-}
-
 /* Header Style */
 
 .header {
@@ -73,6 +69,10 @@ body.dark {
 
 .header.scrolled {
   background-color: #ffffffe1;
+}
+
+.header.scrolled.dark {
+  background-color: #666666e1;
 }
 
 .logo {
@@ -103,7 +103,24 @@ body.dark {
   font-size: 1rem;
 }
 
+.mode-switcher {
+  padding: 5px;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.mode-switcher.dark {
+  background-color: black;
+  color: white;
+}
+
 /* landing page style */
+
+.landing-page {
+  background-image: url("../images/Landing-page2.png");
+}
 
 .landing-page-description {
   display: flex;
@@ -120,9 +137,17 @@ body.dark {
   color: var(--dark-blue);
 }
 
+.title.dark {
+  color: var(--light-blue);
+}
+
 .landing-page-parag {
   font-size: 1.3rem;
   color: var(--grey);
+}
+
+.landing-page-parag.dark {
+  color: white;
 }
 
 span.parag-title {
@@ -187,6 +212,10 @@ h1.row-title {
 .row-parag {
   font-size: 1.5rem;
   text-align: justify;
+}
+
+.row-parag.dark {
+  color: white;
 }
 
 /* why-us */

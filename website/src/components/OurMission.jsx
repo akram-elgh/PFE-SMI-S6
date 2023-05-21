@@ -14,7 +14,7 @@ export default function OurMission() {
           <h1 className="row-title">Notre Mission</h1>
         </div>
         <div className="section-parag">
-          <p className="row-parag">
+          <p className="row-parag light">
             Notre mission depuis 16 ans est de fournir un enseignement de
             qualité et un soutien académique exceptionnel. Chez Markaz Nour Al
             Ilem, nous sommes dédiés à aider nos étudiants à développer leurs
