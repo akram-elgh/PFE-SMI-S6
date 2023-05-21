@@ -1,7 +1,15 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 export default function OurMission() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <div className="our-mission row" id="our-mission">
-      <div className="our-mission-img col-6">
+      <div className="our-mission-img col-6" data-aos="fade-right">
         <img
           src="/images/Teaching.svg"
           alt="teacher image"
@@ -9,7 +17,7 @@ export default function OurMission() {
           width="80%"
         />
       </div>
-      <div className="section-description col-6">
+      <div className="section-description col-6" data-aos="fade-left">
         <div className="our-mission-title ">
           <h1 className="row-title">Notre Mission</h1>
         </div>

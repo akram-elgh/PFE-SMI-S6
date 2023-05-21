@@ -33,12 +33,7 @@ export default function Header() {
     >
       <div className="logo">
         <a href="#landing-page">
-          <img
-            src="/images/logo.png"
-            alt="logo"
-            width="140px"
-            height="140px"
-          ></img>
+          <img src="/images/logo.png" alt="logo" width="30%" height="30%"></img>
         </a>
       </div>
       <div className="nav-links">

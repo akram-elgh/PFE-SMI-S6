@@ -1,7 +1,15 @@
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 export default function WhyUS() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
   return (
     <div className="why-us row" id="why-us">
-      <div className="col-6 section-description">
+      <div className="col-6 section-description" data-aos="fade-right">
         <div>
           <h1 className="row-title">Pourquoi Markaz Nour Al Ilem</h1>
         </div>
@@ -15,7 +23,7 @@ export default function WhyUS() {
           </p>
         </div>
       </div>
-      <div className="col-6 why-us-img">
+      <div className="col-6 why-us-img" data-aos="fade-left">
         <img
           src="/images/Classroom.svg"
           alt="classroom"
