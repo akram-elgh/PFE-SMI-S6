@@ -129,7 +129,7 @@ body.dark {
 /* landing page style */
 
 .landing-page {
-  background-image: url("../images/Landing-page2.png");
+  background-image: url("../images/landing-page.svg");
 }
 
 .landing-page-description {
@@ -197,31 +197,21 @@ span.parag-title {
   justify-content: flex-start;
 }
 
-.section-description {
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 50%;
-  padding: 0 0 0 3%;
-  align-items: flex-start;
-}
-
 h1.row-title {
   color: var(--main-orange);
   font-size: 3.5rem;
   font-weight: 700;
+  text-align: left;
 }
 
 .section-parag {
   margin-top: 20%;
-  width: 80%;
-  text-align: left;
 }
 
 .row-parag {
   font-size: 1.5rem;
   text-align: justify;
+  width: 90%;
 }
 
 .row-parag.dark {
@@ -238,7 +228,7 @@ h1.row-title {
 /* our courses style */
 
 .our-courses {
-  background-image: url("../images/our-courses.png");
+  background-image: url("../images/our-courses.svg");
   text-align: center;
   padding: 3% 0;
 }
@@ -354,4 +344,37 @@ svg #math.dark > * {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
+}
+
+/* our courses description */
+
+.our-courses-description-1 {
+  background-image: url("../images/our-courses2.svg");
+}
+
+.our-courses-description-title {
+  text-align: center;
+  color: var(--main-orange);
+}
+
+.our-courses-description-title > h2 {
+  font-weight: 700;
+}
+
+.our-courses-description-image {
+  text-align: center;
+}
+
+.row-parag-title {
+  font-weight: 700;
+  color: var(--dark-blue);
+  margin-bottom: 5%;
+}
+
+.row-parag-title.dark {
+  color: var(--light-blue);
+}
+
+.our-courses-description-2 {
+  background-image: url("../images/our-courses3.svg");
 }

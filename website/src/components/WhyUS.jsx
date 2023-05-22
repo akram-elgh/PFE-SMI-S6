@@ -15,11 +15,12 @@ export default function WhyUS() {
         </div>
         <div className="section-parag">
           <p className="row-parag light">
-            Chez Markaz Nour Al Ilem, nous avons les meilleurs enseignants de
-            Tetouan. Leur expertise dans toutes les matières est bien connue, ce
-            qui en fait le choix idéal pour votre apprentissage. Faites
-            confiance à nos enseignants expérimentés pour une expérience
-            d&apos;apprentissage exceptionnelle.
+            Chez <span className="parag-title"> Markaz Nour Al Ilem </span> ,
+            nous avons les meilleurs enseignants de Tetouan. Leur expertise dans
+            toutes les matières est bien connue, ce qui en fait le choix idéal
+            pour votre apprentissage. Faites confiance à nos enseignants
+            expérimentés pour une expérience d&apos;apprentissage
+            exceptionnelle.
           </p>
         </div>
       </div>

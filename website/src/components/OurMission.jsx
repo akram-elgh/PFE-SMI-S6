@@ -24,12 +24,13 @@ export default function OurMission() {
         <div className="section-parag">
           <p className="row-parag light">
             Notre mission depuis 16 ans est de fournir un enseignement de
-            qualité et un soutien académique exceptionnel. Chez Markaz Nour Al
-            Ilem, nous sommes dédiés à aider nos étudiants à développer leurs
-            compétences linguistiques et académiques. Avec notre équipe
-            expérimentée et notre engagement envers l&apos;excellence, nous
-            guidons nos étudiants vers la réussite et les préparons pour un
-            avenir prometteur.
+            qualité et un soutien académique exceptionnel. Chez{" "}
+            <span className="parag-title"> Markaz Nour Al Ilem </span> , nous
+            sommes dédiés à aider nos étudiants à développer leurs compétences
+            linguistiques et académiques. Avec notre équipe expérimentée et
+            notre engagement envers l&apos;excellence, nous guidons nos
+            étudiants vers la réussite et les préparons pour un avenir
+            prometteur.
           </p>
         </div>
       </div>
