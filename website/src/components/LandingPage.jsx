@@ -1,27 +1,26 @@
-export default function LandingPage() {
+/* eslint-disable react/prop-types */
+export default function LandingPage(props) {
+  const { landing_title, landing_parag1, landing_parag2, our_courses, enroll } =
+    props.lang;
   return (
     <div className="landing-page row" id="landing-page">
       <div className="landing-page-description col-4">
         <div>
-          <h1 className="title light">Soyer le meilleur !</h1>
+          <h1 className="title light left">{landing_title}</h1>
         </div>
-        <div className="landing-page-parag light">
-          <p>
-            Développez vos potentiels linguistiques et académiques grâce à notre
-            large choix de cours offerts par
-            <span className="parag-title"> Markaz Nour Al Ilem</span>
-          </p>
+        <div className="landing-page-parag light left">
+          <p dangerouslySetInnerHTML={{ __html: landing_parag1 }}></p>
         </div>
         <div className="enroll-now">
-          <div className="landing-page-parag light">
-            <p>Decouvrez nos offres des cours et inscrivez vous maintenant !</p>
+          <div className="landing-page-parag light left">
+            <p>{landing_parag2}</p>
           </div>
-          <div className="landing-page-buttons">
+          <div className="landing-page-buttons left">
             <button className="btn btn-lg btn-courses">
-              <a href="#our-courses">Nos Cours</a>
+              <a href="#our-courses">{our_courses}</a>
             </button>
             <button className="btn btn-lg btn-enroll">
-              <a href="#enroll">S&apos;inscrire</a>
+              <a href="#enroll">{enroll}</a>
             </button>
           </div>
         </div>

@@ -1,7 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-export default function OurCoursesCards() {
+export default function OurCoursesCards(props) {
+  const {
+    our_courses,
+    our_courses_title1,
+    our_courses_title2,
+    our_courses_title3,
+  } = props.lang;
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -9,7 +17,7 @@ export default function OurCoursesCards() {
   return (
     <div className="our-courses row light" id="our-courses">
       <div className="col-12 our-courser-title">
-        <h1 className="row-title text-center">Nos Cours</h1>
+        <h1 className="row-title text-center">{our_courses}</h1>
       </div>
       <div className="row our-courses-cards">
         <div className="col-lg-3 our-courses-card light" data-aos="fade-right">
@@ -35,7 +43,7 @@ export default function OurCoursesCards() {
               </g>
             </g>
           </svg>
-          <h1>Prix Raisonable</h1>
+          <h1>{our_courses_title1}</h1>
         </div>
         <div className="col-lg-3 our-courses-card light" data-aos="fade-right">
           <svg
@@ -70,7 +78,7 @@ export default function OurCoursesCards() {
             </g>
           </svg>
 
-          <h1>Qualité garantie</h1>
+          <h1>{our_courses_title2}</h1>
         </div>
         <div className="col-lg-3 our-courses-card light" data-aos="fade-right">
           <svg
@@ -274,7 +282,7 @@ export default function OurCoursesCards() {
             </defs>
           </svg>
 
-          <h1>Variété de cours</h1>
+          <h1>{our_courses_title3}</h1>
         </div>
       </div>
     </div>

@@ -1,10 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
-export default function Header() {
+export default function Header(props) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [arLang, setarLang] = useState(false);
+  const { home, enroll, our_courses, our_mission, contact_us, lang } =
+    props.lang;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +29,16 @@ export default function Header() {
     });
     setDarkMode(!darkMode);
   }
+
+  function handleLangClick() {
+    props.onClick(!arLang);
+    setarLang(!arLang);
+    const elements = document.querySelectorAll(".left");
+    elements.forEach((e) => {
+      e.classList.toggle("right");
+    });
+  }
+
   return (
     <header
       className={`header ${darkMode ? "dark" : ""} ${
@@ -39,19 +53,22 @@ export default function Header() {
       <div className="nav-links">
         <ul className="nav-links-ul">
           <li className="nav-links-li btn-enroll">
-            <a href="">S&apos;inscrire</a>
+            <a href="">{enroll}</a>
           </li>
           <li className="nav-links-li">
-            <a href="#landing-page">Acceuil</a>
+            <a href="#landing-page">{home}</a>
           </li>
           <li className="nav-links-li">
-            <a href="#our-mission">Notre mission</a>
+            <a href="#our-mission">{our_mission}</a>
           </li>
           <li className="nav-links-li">
-            <a href="#our-courses">Nos cours</a>
+            <a href="#our-courses">{our_courses}</a>
           </li>
           <li className="nav-links-li">
-            <a href="#contatc">Contactez nous</a>
+            <a href="#contatc">{contact_us}</a>
+          </li>
+          <li onClick={handleLangClick} className="language-switcher">
+            {lang}
           </li>
           <li className="mode-switcher light" onClick={handleClick}>
             {!darkMode ? (

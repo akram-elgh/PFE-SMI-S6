@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-export default function OurMission() {
+export default function OurMission(props) {
+  const { our_mission, our_mission_parag } = props.lang;
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -19,19 +22,13 @@ export default function OurMission() {
       </div>
       <div className="section-description col-6" data-aos="fade-left">
         <div className="our-mission-title ">
-          <h1 className="row-title">Notre Mission</h1>
+          <h1 className="row-title left">{our_mission}</h1>
         </div>
         <div className="section-parag">
-          <p className="row-parag light">
-            Notre mission depuis 16 ans est de fournir un enseignement de
-            qualité et un soutien académique exceptionnel. Chez{" "}
-            <span className="parag-title"> Markaz Nour Al Ilem </span> , nous
-            sommes dédiés à aider nos étudiants à développer leurs compétences
-            linguistiques et académiques. Avec notre équipe expérimentée et
-            notre engagement envers l&apos;excellence, nous guidons nos
-            étudiants vers la réussite et les préparons pour un avenir
-            prometteur.
-          </p>
+          <p
+            className="row-parag light left"
+            dangerouslySetInnerHTML={{ __html: our_mission_parag }}
+          ></p>
         </div>
       </div>
     </div>

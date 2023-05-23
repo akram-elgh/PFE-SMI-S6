@@ -1,8 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-export default function Languages() {
+export default function AcademicSupport(props) {
+  const { academic_parag_title, academic_parag } = props.lang;
+
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -25,18 +28,11 @@ export default function Languages() {
           className="our-courses-description-paragraph col-6"
           data-aos="fade-left"
         >
-          <h3 className="row-parag-title light">Soutien scolaire</h3>
-          <p className="row-parag light">
-            Profitez d&apos;un soutien scolaire complet et d&apos;une
-            préparation aux examens nationaux et régionaux dans toutes les
-            matières, pour tous les niveaux et filières. Chez{" "}
-            <span className="parag-title"> Markaz Nour Al Ilem </span>, nous
-            sommes là pour vous accompagner vers la réussite académique. Nos
-            enseignants expérimentés et dévoués vous fourniront l&apos;aide
-            nécessaire pour exceller dans chaque discipline. Faites-nous
-            confiance pour atteindre vos objectifs scolaires avec succès et
-            devenir le meilleur !
-          </p>
+          <h3 className="row-parag-title light left">{academic_parag_title}</h3>
+          <p
+            className="row-parag light left"
+            dangerouslySetInnerHTML={{ __html: academic_parag }}
+          ></p>
         </div>
       </div>
     </div>
