@@ -42,6 +42,7 @@ body.dark {
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #ddeeff;
+  z-index: 1000;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -428,5 +429,48 @@ ul.row-parag.right {
 }
 
 .enroll-btn-section {
+  width: 90%;
+}
+
+/* enroll modal style */
+
+.enroll-modal {
+  background-image: url("../images/modal.svg");
+  background-color: var(--light-bg-color);
+}
+
+.enroll-modal.dark {
+  background-color: var(--dark-bg-color);
+}
+
+.modal-dialog {
+  background-color: transparent;
+}
+
+.modal {
+  margin: 0;
+  padding: 0;
+  --bs-modal-bg: transparent;
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-title {
+  font-weight: 700;
+  color: var(--dark-blue);
+}
+
+.modal-title.dark {
+  color: #bbdeff;
+}
+
+.modal-description-row {
+  display: flex;
+  align-items: center;
+}
+
+.modal-form {
   width: 90%;
 }

@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import EnrollModal from "./EnrollModal";
 
 export default function Enroll(props) {
+  const [showModal, setShowModal] = useState(false);
   const {
     enrollment,
     enroll_title1,
@@ -67,7 +69,12 @@ export default function Enroll(props) {
             data-aos="fade-right"
             style={{ "--number": 4 }}
           >
-            <button className="btn btn-enroll">{enroll_btn}</button>
+            <button
+              onClick={() => setShowModal(true)}
+              className="btn btn-enroll"
+            >
+              {enroll_btn}
+            </button>
           </div>
         </div>
         <div className="row-description-image col-6" data-aos="fade-left">
@@ -79,6 +86,11 @@ export default function Enroll(props) {
           />
         </div>
       </div>
+      <EnrollModal
+        lang={props.lang}
+        onClick={() => setShowModal(false)}
+        show={showModal}
+      ></EnrollModal>
     </div>
   );
 }

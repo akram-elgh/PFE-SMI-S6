@@ -41,7 +41,7 @@ export default function Header(props) {
 
   return (
     <header
-      className={`header ${darkMode ? "dark" : ""} ${
+      className={`header navbar ${darkMode ? "dark" : ""} ${
         isScrolled ? "scrolled" : ""
       }`}
     >
@@ -53,7 +53,7 @@ export default function Header(props) {
       <div className="nav-links">
         <ul className="nav-links-ul">
           <li className="nav-links-li btn-enroll">
-            <a href="">{enroll}</a>
+            <a href="#enroll">{enroll}</a>
           </li>
           <li className="nav-links-li">
             <a href="#landing-page">{home}</a>
