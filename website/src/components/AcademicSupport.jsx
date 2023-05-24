@@ -24,10 +24,7 @@ export default function AcademicSupport(props) {
             width="60%"
           />
         </div>
-        <div
-          className="our-courses-description-paragraph col-6"
-          data-aos="fade-left"
-        >
+        <div className="row-description-paragraph col-6" data-aos="fade-left">
           <h3 className="row-parag-title light left">{academic_parag_title}</h3>
           <p
             className="row-parag light left"

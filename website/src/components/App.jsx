@@ -3,6 +3,7 @@ import OurMission from "./OurMission.jsx";
 import WhyUS from "./WhyUS.jsx";
 import Header from "./Header.jsx";
 import OurCourses from "./OurCourses.jsx";
+import Enroll from "./Enroll.jsx";
 import { useState } from "react";
 import ar from "./languages/ar.json";
 import fr from "./languages/fr.json";
@@ -17,6 +18,7 @@ export default function App() {
       <OurMission lang={lang}></OurMission>
       <WhyUS lang={lang}></WhyUS>
       <OurCourses lang={lang}></OurCourses>
+      <Enroll lang={lang}></Enroll>
     </div>
   );
 }

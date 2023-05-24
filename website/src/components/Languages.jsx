@@ -34,10 +34,7 @@ export default function Languages(props) {
             dangerouslySetInnerHTML={{ __html: languages_parag }}
           ></p>
         </div>
-        <div
-          className="our-courses-description-image col-6"
-          data-aos="fade-left"
-        >
+        <div className="row-description-image col-6" data-aos="fade-left">
           <img
             src="/images/english.svg"
             alt="english course"

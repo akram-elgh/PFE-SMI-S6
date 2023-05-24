@@ -196,6 +196,8 @@ span.parag-title {
 
 .btn.btn-enroll {
   background-color: var(--main-orange);
+  color: white;
+  font-weight: 700;
 }
 
 .btn.btn-courses {
@@ -377,7 +379,7 @@ svg #math.dark > * {
   font-weight: 700;
 }
 
-.our-courses-description-image {
+.row-description-image {
   text-align: center;
 }
 
@@ -397,4 +399,34 @@ svg #math.dark > * {
 
 .our-courses-description-2 {
   background-image: url("../images/our-courses3.svg");
+}
+
+/* Enroll section styles */
+
+.enroll {
+  background-image: url("../images/enroll.svg");
+}
+
+.enroll-parag-section {
+  margin-bottom: 5%;
+}
+
+.row-parag-title.enroll {
+  margin-bottom: 2%;
+}
+
+.row-parag-title.online {
+  color: var(--main-orange);
+}
+
+.enroll-parag-section {
+  transition-delay: calc(var(--number) * 100ms);
+}
+
+ul.row-parag.right {
+  padding-right: 2rem;
+}
+
+.enroll-btn-section {
+  width: 90%;
 }
