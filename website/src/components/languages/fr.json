@@ -33,9 +33,9 @@
   "modal_li1": "Nom",
   "modal_li2": "Prénom",
   "modal_li3": "Date de naissance",
-  "modal_li4": "Niveau scolaire",
-  "modal_li5": "Numéro de téléphone",
-  "modal_li6": "Numéro de téléphone du parent",
+  "modal_li4": "Numéro de téléphone",
+  "modal_li5": "Numéro de téléphone du parent",
+  "modal_li6": "Niveau scolaire",
   "modal_li7": "Je souhaite m'inscrire au cours de :",
   "modal_li8": "--- Selectioner un cour ---",
   "courses": [

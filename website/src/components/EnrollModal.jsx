@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import axios from "axios";
 
 export default function EnrollModal(props) {
   const isDarkMode = !!document.querySelector(".dark");
@@ -32,6 +33,15 @@ export default function EnrollModal(props) {
       };
     });
   }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    axios.post("http://localhost:3001/request", student).then((response) => {
+      console.log(response.status);
+    });
+    // setStudent({});
+  }
+
   return (
     <div
       className={`modal enroll-modal light ${isDarkMode ? "dark" : ""} ${
@@ -54,7 +64,7 @@ export default function EnrollModal(props) {
           <div className="modal-body">
             <div className="modal-description-row">
               <div className="col-6">
-                <form className="modal-form">
+                <form className="modal-form" onSubmit={handleSubmit}>
                   <div className="form-floating mb-3">
                     <input
                       type="text"
@@ -97,7 +107,7 @@ export default function EnrollModal(props) {
                       className="form-control light left modal-input"
                       id="floatingInput"
                       placeholder="Date de naissance"
-                      name="bdate"
+                      name="bDate"
                       value={bDate}
                       onChange={handleChange}
                       required
@@ -110,23 +120,16 @@ export default function EnrollModal(props) {
                     </label>
                   </div>
                   <div className="form-floating mb-3">
-                    <select
+                    <input
                       type="text"
-                      className="form-select light left modal-input"
+                      className="form-control light left modal-input"
                       id="floatingInput"
-                      placeholder="text"
+                      placeholder="Password"
                       name="phoneNum"
                       value={phoneNum}
                       onChange={handleChange}
-                    >
-                      {levels.map((level, index) => {
-                        return (
-                          <option key={index} value={index}>
-                            {level}
-                          </option>
-                        );
-                      })}
-                    </select>
+                      required
+                    />
                     <label
                       htmlFor="floatingInput"
                       className="modal-label light left modal-input"
@@ -152,16 +155,23 @@ export default function EnrollModal(props) {
                     </label>
                   </div>
                   <div className="form-floating mb-3">
-                    <input
+                    <select
                       type="text"
-                      className="form-control light left modal-input"
+                      className="form-select light left modal-input"
                       id="floatingInput"
-                      placeholder="Password"
+                      placeholder="text"
                       name="level"
                       value={level}
                       onChange={handleChange}
-                      required
-                    />
+                    >
+                      {levels.map((level, index) => {
+                        return (
+                          <option key={index} value={index}>
+                            {level}
+                          </option>
+                        );
+                      })}
+                    </select>
                     <label
                       htmlFor="floatingInput"
                       className="modal-label light left modal-input"
@@ -175,6 +185,7 @@ export default function EnrollModal(props) {
                       id="floatingInput"
                       name="class_name"
                       value={class_name}
+                      onChange={handleChange}
                       required
                     >
                       <option value={0}>{modal_li8}</option>
