@@ -45,5 +45,23 @@
     "Arabe",
     "Mathématiques",
     "Physique"
-  ]
+  ],
+  "levels": [
+    "---Sélectionner un niveau---",
+    "Préscolaire",
+    "Première année primaire",
+    "Deuxième année primaire",
+    "Troisième année primaire",
+    "Quatrième année primaire",
+    "Cinquième année primaire",
+    "Sixième année primaire",
+    "Première année collège",
+    "Deuxième année collège",
+    "Troisième année collège",
+    "Tronc commun",
+    "Première année baccalauréat",
+    "Deuxième année baccalauréat",
+    "Études universitaires"
+  ],
+  "modal_close": "Fermer"
 }

@@ -460,6 +460,7 @@ ul.row-parag.right {
 .modal-title {
   font-weight: 700;
   color: var(--dark-blue);
+  margin: auto;
 }
 
 .modal-title.dark {
@@ -468,9 +469,55 @@ ul.row-parag.right {
 
 .modal-description-row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .modal-form {
   width: 90%;
+}
+
+option {
+  color: black;
+  background-color: var(--light-blue);
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+.modal-header .btn-close {
+  margin: 0;
+}
+
+.modal-input:not(label),
+.modal-input:focus {
+  background-color: #ddeeff7c;
+}
+
+.modal-input.dark:not(label),
+.modal-input.dark:focus {
+  color: var(--light-bg-color);
+}
+
+.modal-label {
+  width: 100%;
+}
+
+.modal-label.right {
+  text-align: right;
+}
+
+.form-floating > .form-control:focus ~ label.right,
+.form-floating > .form-control:not(:placeholder-shown) ~ label.right,
+.form-floating > .form-select:focus ~ label.right,
+.form-floating > .form-select:not(:placeholder-shown) ~ label.right {
+  transform: scale(0.85) translateY(-0.5rem) translateX(9rem);
+}
+
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-select:not(:placeholder-shown) ~ label::after,
+.form-floating > .form-select:focus ~ label::after {
+  background-color: transparent;
 }
