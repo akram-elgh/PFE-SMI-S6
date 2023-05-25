@@ -10,21 +10,21 @@ export function getTime() {
 
 export function getLevel(lvl) {
   const levels = [
-    "---Selectioner un niveau",
-    "Prescolaire",
-    "Premier anne primaire",
-    "Deuxieme anne primaire",
-    "Troisieme anne primaire",
-    "Quatrieme anne primaire",
-    "Cinquiem anne primaire",
-    "Sixiem anne primaire",
-    "Premier anne college",
-    "Deuxieme anne college",
-    "Troisieme anne college",
+    "---Sélectionner un niveau---",
+    "Préscolaire",
+    "Première année primaire",
+    "Deuxième année primaire",
+    "Troisième année primaire",
+    "Quatrième année primaire",
+    "Cinquième année primaire",
+    "Sixième année primaire",
+    "Première année collège",
+    "Deuxième année collège",
+    "Troisième année collège",
     "Tronc commun",
-    "Premier anner bac",
-    "Deuxieme anne bac",
-    "Etudes universitaires",
+    "Première année baccalauréat",
+    "Deuxième année baccalauréat",
+    "Études universitaires",
   ];
   return lvl ? levels[lvl] : levels;
 }
@@ -121,4 +121,9 @@ export function calculateClassesRevenuePerMonth(classes) {
       classe.student_count * classe.price - calculateTeacherSalary(classe);
   });
   return revenue;
+}
+
+export function getEnrollmetnType(type) {
+  const types = ["", "Inscription", "Réinscription"];
+  return type || type === 0 ? types[type] : types;
 }

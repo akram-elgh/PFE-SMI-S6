@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { getLevel } from "../../functions/functions";
+import { getLevel, getEnrollmetnType } from "../../functions/functions";
 import Button from "../../sub-components/Button";
 import Modal from "../../sub-components/Modal";
 
@@ -8,6 +8,7 @@ export default function Requests(props) {
   const url = "http://localhost:3001/request?id=";
   const [requests, setRequests] = useState([]);
   const [name, setName] = useState("");
+  const [classes, setClasses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [student, setStudent] = useState({});
   const {
@@ -18,13 +19,17 @@ export default function Requests(props) {
     phoneNum,
     parentNum,
     level,
-    class_name,
+    type,
+    class_id,
   } = student;
 
   useEffect(() => {
     axios
       .get("http://localhost:3001/request?name=")
       .then((response) => setRequests(response.data));
+    axios
+      .get("http://localhost:3001/class")
+      .then((response) => setClasses(response.data));
   }, []);
 
   function handleChange(event) {
@@ -44,7 +49,7 @@ export default function Requests(props) {
     setStudent((prevValues) => {
       return {
         ...prevValues,
-        [name]: value,
+        [name]: name === "bDate" ? value.slice(0, 10) : value,
       };
     });
   }
@@ -116,9 +121,12 @@ export default function Requests(props) {
             <td>Nom</td>
             <td>Prenom</td>
             <td>Tele</td>
+            <td>Tele du parent</td>
+            <td>Date de naissance</td>
             <td>Niveau</td>
             <td>Classe</td>
-            <td>Date du requet</td>
+            <td>Type du demande</td>
+            <td>Date du demande</td>
           </tr>
         </thead>
         <tbody>
@@ -141,8 +149,11 @@ export default function Requests(props) {
                 <td>{request.lname}</td>
                 <td>{request.fname}</td>
                 <td>{request.phoneNum}</td>
+                <td>{request.parentNum}</td>
+                <td>{request.bd}</td>
                 <td>{getLevel(request.level)}</td>
                 <td>{request.class_name}</td>
+                <td>{getEnrollmetnType(request.type)}</td>
                 <td>{request.date}</td>
               </tr>
             );
@@ -194,7 +205,7 @@ export default function Requests(props) {
                     type="date"
                     name="bDate"
                     placeholder="Taper ici"
-                    value={bDate || ""}
+                    value={bDate?.slice(0, 10)}
                     className="form-control"
                     onChange={handleFormChange}
                   ></input>
@@ -238,21 +249,31 @@ export default function Requests(props) {
                   </select>
                 </div>
                 <div className="mb-4">
-                  <input
+                  <select
                     type="text"
-                    name="class_name"
+                    name="class_id"
                     placeholder="Taper ici"
-                    value={class_name}
-                    className="form-control"
+                    value={class_id}
+                    className="form-select"
                     onChange={handleFormChange}
-                    disabled
-                  ></input>
+                  >
+                    <option key={0} value={0}>
+                      ---Selectioner une classe---
+                    </option>
+                    {classes.map((classe) => {
+                      return (
+                        <option value={classe.class_id} key={classe.class_id}>
+                          {classe.class_name}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
               </form>
             </div>
           </div>
           <Button
-            style={{ "margin-right": "10px" }}
+            style={{ marginRight: "10px" }}
             text="Suprimer la demande"
             color="danger"
             onClick={() => setShowModal(true)}

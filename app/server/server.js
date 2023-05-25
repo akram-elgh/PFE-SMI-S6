@@ -6,7 +6,7 @@ const date = require("./functions/function");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: ["http://localhost:3000", "http://localhost:3002"] }));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -288,10 +288,29 @@ app
       query = `WHERE R.fname LIKE "${name}%" OR R.lname LIKE "${name}%"`;
     if (id) query = `WHERE R.request_id = ${id}`;
     connection.query(
-      `SELECT R.request_id, R.fname, R.lname,R.level, R.phoneNum, R.parentNum,R.class_id, DATE_FORMAT(R.request_date, "%d/%m/%Y") AS date, C.class_name FROM Request AS R JOIN Class AS C ON R.class_id = C.class_id ${query} ORDER BY R.request_date DESC`,
+      `SELECT R.request_id, R.fname, R.lname,R.level, R.phoneNum, R.parentNum, R.type, DATE_FORMAT(R.request_date, "%d/%m/%Y") AS date,DATE_FORMAT(R.bDate, "%d/%m/%Y") AS bd, DATE_FORMAT(R.bDate, "%Y-%m-%d") AS bDate, R.class_name FROM Request AS R ${query} ORDER BY R.request_date DESC`,
       (err, result) => {
         console.log(err);
         res.send(err ? [] : result);
+      }
+    );
+  })
+  .post((req, res) => {
+    const {
+      fname,
+      lname,
+      bDate,
+      level,
+      class_name,
+      phoneNum = "",
+      parentNum = "",
+      type,
+    } = req.body;
+    connection.query(
+      `INSERT INTO Request (fname, lname, bDate, level, class_name, phoneNum, parentNum, type, request_date) VALUES ("${fname}", "${lname}","${bDate}", ${level}, "${class_name}", "${phoneNum}", "${parentNum}", ${type}, "${date.getDate()}")`,
+      (err) => {
+        console.log(err);
+        res.send(err ? 201 : 200);
       }
     );
   })

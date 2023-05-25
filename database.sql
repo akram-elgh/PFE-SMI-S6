@@ -48,11 +48,12 @@ CREATE TABLE Request(
   request_id INT NOT NULL AUTO_INCREMENT,
   fname VARCHAR(255) NOT NULL,
   lname VARCHAR(255) NOT NULL,
+  bDate DATE NOT NULL,
   phoneNumber VARCHAR(255) DEFAULT "",
   parentNumber VARCHAR(255) DEFAULT "",
   level INT NOT NULL,
+  type INT NOT NULL,
+  class_name VARCHAR(255) NOT NULL,
   request_date DATE NOT NULL,
-  class_id INT NOT NULL,
   PRIMARY KEY (request_id),
-  FOREIGN KEY (class_id) REFERENCES classes (class_id)
 )
