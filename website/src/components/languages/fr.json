@@ -36,8 +36,10 @@
   "modal_li4": "Numéro de téléphone",
   "modal_li5": "Numéro de téléphone du parent",
   "modal_li6": "Niveau scolaire",
-  "modal_li7": "Je souhaite m'inscrire au cours de :",
-  "modal_li8": "--- Selectioner un cour ---",
+  "modal_li7": "Type du demande",
+  "modal_li8": "Je souhaite m'inscrire au cours de :",
+  "modal_li9": "--- Selectioner un cour ---",
+  "types": ["---Selectioner un type---", "Inscription", "Réinscription"],
   "courses": [
     "Français",
     "Anglais",
@@ -63,5 +65,8 @@
     "Deuxième année baccalauréat",
     "Études universitaires"
   ],
-  "modal_close": "Fermer"
+  "modal_close": "Fermer",
+  "modal_success": "La demande ete envoyer avec succes",
+  "modal_danger": "Veuillez remplir tous les champs necessaires avant de envoyer la demande",
+  "modal_error": "Erreur dans l'envoi du demande, essayer du nouveau"
 }

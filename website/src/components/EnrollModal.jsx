@@ -4,7 +4,22 @@ import axios from "axios";
 
 export default function EnrollModal(props) {
   const isDarkMode = !!document.querySelector(".dark");
-  const [student, setStudent] = useState({});
+  const [student, setStudent] = useState({
+    fname: "",
+    lname: "",
+    bDate: "",
+    phoneNum: "",
+    parentNum: "",
+    level: 0,
+    type: 0,
+    class_name: 0,
+  });
+  const [correctInput, setCorrectInput] = useState({
+    show: false,
+    correct: false,
+    erro: false,
+  });
+  const { show, correct, error } = correctInput;
   const {
     modal_title,
     modal_li1,
@@ -15,12 +30,17 @@ export default function EnrollModal(props) {
     modal_li6,
     modal_li7,
     modal_li8,
+    modal_li9,
+    types,
     courses,
     levels,
     enroll_btn,
     modal_close,
+    modal_success,
+    modal_danger,
+    modal_error,
   } = props.lang;
-  const { fname, lname, bDate, phoneNum, parentNum, level, class_name } =
+  const { fname, lname, bDate, phoneNum, parentNum, level, type, class_name } =
     student;
 
   function handleChange(event) {
@@ -36,10 +56,15 @@ export default function EnrollModal(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    axios.post("http://localhost:3001/request", student).then((response) => {
-      console.log(response.status);
-    });
-    // setStudent({});
+    if (Number(level) === 0 || Number(type) === 0 || Number(class_name) === 0)
+      setCorrectInput({ show: true, correct: false });
+    else {
+      axios.post("http://localhost:3001/request", student).then((response) => {
+        if (response.status === 200)
+          setCorrectInput({ show: true, correct: true });
+        else setCorrectInput({ show: true, correct: false });
+      });
+    }
   }
 
   return (
@@ -62,13 +87,18 @@ export default function EnrollModal(props) {
             ></button>
           </div>
           <div className="modal-body">
+            {show && (
+              <p className="light" style={{ color: correct ? "green" : "red" }}>
+                {correct ? modal_success : error ? modal_error : modal_danger}
+              </p>
+            )}
             <div className="modal-description-row">
               <div className="col-6">
                 <form className="modal-form" onSubmit={handleSubmit}>
                   <div className="form-floating mb-3">
                     <input
                       type="text"
-                      className="form-control light left modal-input"
+                      className={`form-control light left modal-input`}
                       id="floatingInput"
                       placeholder="Nom"
                       name="lname"
@@ -183,6 +213,27 @@ export default function EnrollModal(props) {
                     <select
                       className="form-select modal-input left light"
                       id="floatingInput"
+                      name="type"
+                      value={type}
+                      onChange={handleChange}
+                      required
+                    >
+                      {types.map((type, index) => {
+                        return (
+                          <option value={index} key={index}>
+                            {type}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label className="modal-label left" htmlFor="floatingInput">
+                      {modal_li7}
+                    </label>
+                  </div>
+                  <div className="form-floating mb-3">
+                    <select
+                      className="form-select modal-input left light"
+                      id="floatingInput"
                       name="class_name"
                       value={class_name}
                       onChange={handleChange}
@@ -198,7 +249,7 @@ export default function EnrollModal(props) {
                       })}
                     </select>
                     <label className="modal-label left" htmlFor="floatingInput">
-                      {modal_li7}
+                      {modal_li9}
                     </label>
                   </div>
                   <div className="mb-3 left">
