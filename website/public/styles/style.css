@@ -521,3 +521,76 @@ option {
 .form-floating > .form-select:focus ~ label::after {
   background-color: transparent;
 }
+
+/* contact sections style */
+
+.contact {
+  background-image: url("../images/contact.svg");
+}
+
+.contact-card {
+  height: 60vh;
+  transition: 100ms ease;
+}
+
+.contact-card:hover {
+  scale: 1.1;
+}
+
+.contact-card > h1 {
+  color: var(--dark-blue);
+  font-weight: 700;
+}
+
+.contact-card.dark > h1 {
+  color: var(--light-blue);
+}
+
+.contact-numbers,
+.contact-socials {
+  height: 80%;
+  font-size: 2.5rem;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.contact-social {
+  font-weight: 5rem;
+  background-color: #ddeeff;
+  padding: 20px;
+  border-radius: 50%;
+  width: 30%;
+  color: #ff8730;
+}
+
+@media (max-width: 700px) {
+  img {
+    display: none;
+  }
+  .landing-page-description {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links-ul {
+    display: none;
+  }
+
+  .row-parag {
+    width: 100%;
+  }
+  .row-description {
+    width: 100%;
+  }
+  .row-description-image {
+    display: none;
+  }
+  .row {
+    display: block;
+  }
+  .section-description {
+    width: 100%;
+  }
+}

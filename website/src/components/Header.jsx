@@ -65,7 +65,7 @@ export default function Header(props) {
             <a href="#our-courses">{our_courses}</a>
           </li>
           <li className="nav-links-li">
-            <a href="#contatc">{contact_us}</a>
+            <a href="#contact">{contact_us}</a>
           </li>
           <li onClick={handleLangClick} className="language-switcher">
             {lang}

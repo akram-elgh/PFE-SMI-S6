@@ -60,9 +60,19 @@ export default function EnrollModal(props) {
       setCorrectInput({ show: true, correct: false });
     else {
       axios.post("http://localhost:3001/request", student).then((response) => {
-        if (response.status === 200)
+        if (response.status === 200) {
           setCorrectInput({ show: true, correct: true });
-        else setCorrectInput({ show: true, correct: false });
+          setStudent({
+            fname: "",
+            lname: "",
+            bDate: "",
+            phoneNum: "",
+            parentNum: "",
+            level: 0,
+            type: 0,
+            class_name: 0,
+          });
+        } else setCorrectInput({ show: true, correct: false });
       });
     }
   }
@@ -87,15 +97,22 @@ export default function EnrollModal(props) {
             ></button>
           </div>
           <div className="modal-body">
-            {show && (
-              <p className="light" style={{ color: correct ? "green" : "red" }}>
-                {correct ? modal_success : error ? modal_error : modal_danger}
-              </p>
-            )}
             <div className="modal-description-row">
               <div className="col-6">
+                {show && (
+                  <p
+                    className="light left"
+                    style={{ color: correct ? "green" : "red", width: "90%" }}
+                  >
+                    {correct
+                      ? modal_success
+                      : error
+                      ? modal_error
+                      : modal_danger}
+                  </p>
+                )}
                 <form className="modal-form" onSubmit={handleSubmit}>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="text"
                       className={`form-control light left modal-input`}
@@ -113,7 +130,7 @@ export default function EnrollModal(props) {
                       {modal_li1}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control light left modal-input"
@@ -131,7 +148,7 @@ export default function EnrollModal(props) {
                       {modal_li2}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="date"
                       className="form-control light left modal-input"
@@ -149,7 +166,7 @@ export default function EnrollModal(props) {
                       {modal_li3}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control light left modal-input"
@@ -167,7 +184,7 @@ export default function EnrollModal(props) {
                       {modal_li4}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <input
                       type="text"
                       className="form-control light left modal-input"
@@ -184,7 +201,7 @@ export default function EnrollModal(props) {
                       {modal_li5}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <select
                       type="text"
                       className="form-select light left modal-input"
@@ -209,7 +226,7 @@ export default function EnrollModal(props) {
                       {modal_li6}
                     </label>
                   </div>
-                  <div className="form-floating mb-3">
+                  <div className="form-floating mb-4">
                     <select
                       className="form-select modal-input left light"
                       id="floatingInput"
@@ -239,7 +256,7 @@ export default function EnrollModal(props) {
                       onChange={handleChange}
                       required
                     >
-                      <option value={0}>{modal_li8}</option>
+                      <option value={0}>{modal_li9}</option>
                       {courses.map((course, index) => {
                         return (
                           <option value={course} key={index}>
@@ -249,10 +266,10 @@ export default function EnrollModal(props) {
                       })}
                     </select>
                     <label className="modal-label left" htmlFor="floatingInput">
-                      {modal_li9}
+                      {modal_li8}
                     </label>
                   </div>
-                  <div className="mb-3 left">
+                  <div className="left">
                     <button className="btn btn-enroll" type="submit">
                       {enroll_btn}
                     </button>

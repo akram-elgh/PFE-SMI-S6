@@ -4,6 +4,7 @@ import WhyUS from "./WhyUS.jsx";
 import Header from "./Header.jsx";
 import OurCourses from "./OurCourses.jsx";
 import Enroll from "./Enroll.jsx";
+import Contact from "./Contact.jsx";
 import { useState } from "react";
 import ar from "./languages/ar.json";
 import fr from "./languages/fr.json";
@@ -19,6 +20,7 @@ export default function App() {
       <WhyUS lang={lang}></WhyUS>
       <OurCourses lang={lang}></OurCourses>
       <Enroll lang={lang}></Enroll>
+      <Contact lang={lang}></Contact>
     </div>
   );
 }

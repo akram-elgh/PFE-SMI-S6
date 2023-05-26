@@ -68,5 +68,10 @@
   "modal_close": "Fermer",
   "modal_success": "La demande ete envoyer avec succes",
   "modal_danger": "Veuillez remplir tous les champs necessaires avant de envoyer la demande",
-  "modal_error": "Erreur dans l'envoi du demande, essayer du nouveau"
+  "modal_error": "Erreur dans l'envoi du demande, essayer du nouveau",
+  "contact_title": "Vous pouvez nous trouvez",
+  "contact_title1": "Visitez nous",
+  "contact_title2": "Apellez nous ",
+  "contact_title3": "Sur les reseaux sociaux et email",
+  "contact_address": "Rue Mohamed V, N’45 - 2éme étage N’8 à coté du Lycée KADI IBN LAARABI Kaysariyat LHAMAMA - Tetouan"
 }
