@@ -5,9 +5,9 @@ export default function FinanceLogin(props) {
   const [password, setPassword] = useState("");
   return (
     <div className="finance-login">
-      {/* <div className="finance-login-title">
-        <h1>Entrer le mot du pass pour acceder a l'espace finance</h1>
-      </div> */}
+      <div className="finance-login-title">
+        <h1>Seul le directeur peut entrer a cet espace</h1>
+      </div>
       <div className="finance-login-icon"></div>
       <div className="finance-login-form">
         <form
