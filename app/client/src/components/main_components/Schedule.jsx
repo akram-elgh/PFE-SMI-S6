@@ -36,12 +36,12 @@ export default function Schedule(props) {
       .then((response) => {
         if (response.status === 200) {
           props.showSuccessModal(
-            "La classe ete ajouter dans l'emploi avec succes"
+            "La classe a été ajoutée à l'emploi du temps avec succès."
           );
           axios
             .get(url + chosenDay)
             .then((response) => setClasses(response.data));
-        } else props.showFailModal("Erreru lors du l'ajout du classe");
+        } else props.showFailModal("Erreur lors de l'ajout de la classe.");
       });
   }
 
@@ -55,7 +55,7 @@ export default function Schedule(props) {
             axios
               .get(url + chosenDay)
               .then((response) => setClasses(response.data));
-          else props.showFailModal("Erreur lors du suppression du classe");
+          else props.showFailModal("Erreur lors de la suppression de la classe.");
         });
     } else {
       axios.put(url, { hour: chosenRow, id: chosenClass }).then((response) => {
@@ -64,7 +64,7 @@ export default function Schedule(props) {
             .get(url + chosenDay)
             .then((response) => setClasses(response.data));
         } else {
-          props.showFailModal("Erreru lors du modifcation du classe");
+          props.showFailModal("Erreur lors de la modification de la classe");
         }
       });
     }

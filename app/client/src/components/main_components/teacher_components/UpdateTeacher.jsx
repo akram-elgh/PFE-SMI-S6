@@ -48,8 +48,8 @@ export default function UpdateTeacher(props) {
     } else {
       axios.put(url, teacherToModify).then((response) => {
         if (response.status === 200)
-          props.showSuccessModal("Le prof ete modifier avec succes");
-        else props.showFailModal("Erreur lors du modifcation du prof");
+          props.showSuccessModal("Le prof a été modifié avec succès.");
+        else props.showFailModal("Erreur lors de la modification du prof.");
         axios.get(url).then((response) => setTeachers(response.data));
         setTeacherToModify({});
       });
@@ -60,7 +60,7 @@ export default function UpdateTeacher(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner un prof</h3>
+          <h3>Sélectionner un prof</h3>
         </div>
         <div className="update-space-search-table">
           <table className="table table-striped table-primary table-hover">
@@ -68,7 +68,7 @@ export default function UpdateTeacher(props) {
               <tr>
                 <th></th>
                 <th>Nom</th>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <th>Classes</th>
               </tr>
             </thead>
@@ -111,9 +111,9 @@ export default function UpdateTeacher(props) {
         <div className="space-form">
           <div className="space-labels">
             <ul>
-              <li className="space-lable-li">Prenom:</li>
+              <li className="space-lable-li">Prénom:</li>
               <li className="space-lable-li">Nom:</li>
-              <li className="space-lable-li">Numero du telephone:</li>
+              <li className="space-lable-li">Numéro du téléphone:</li>
             </ul>
           </div>
           <div className="space-inputs">

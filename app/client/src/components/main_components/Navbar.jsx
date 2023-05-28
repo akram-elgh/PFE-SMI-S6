@@ -36,7 +36,7 @@ export default function Navbar(props) {
         <li
           className={`nav-item ${activeTab === "notification" ? "active" : ""}`}
           onClick={() => {
-            props.onClick("Notifications des demandes en lignes");
+            props.onClick("Notifications des demandes en ligne");
             handleTabClick("notification");
           }}
         >
@@ -45,7 +45,7 @@ export default function Navbar(props) {
         <li
           className={`nav-item ${activeTab === "payment" ? "active" : ""}`}
           onClick={() => {
-            props.onClick("Espace Payment");
+            props.onClick("Espace Paiement");
             handleTabClick("payment");
           }}
         >

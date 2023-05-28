@@ -19,7 +19,7 @@ export default function SearchStudent() {
           type="text"
           name="name"
           className="form-control"
-          placeholder="Taper le nom de l'etudiant"
+          placeholder="Taper le nom de l'étudiant"
           value={name}
           onChange={handleChange}
         />
@@ -29,12 +29,12 @@ export default function SearchStudent() {
           <thead>
             <tr>
               <th>Nom</th>
-              <th>Prenom</th>
-              <th>Date du naissance</th>
-              <th>Tele</th>
-              <th>Tele du parent</th>
+              <th>Prénom</th>
+              <th>Date de naissance</th>
+              <th>Télé</th>
+              <th>Télé du parent</th>
               <th>Niveau</th>
-              <th>Class</th>
+              <th>Classe</th>
               <th>Date d'inscription</th>
             </tr>
           </thead>

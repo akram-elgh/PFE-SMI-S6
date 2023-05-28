@@ -24,7 +24,7 @@ export default function Home() {
         <div className="home-space-blacklist">
           <div className="mb-4">
             <h1>Blacklist</h1>
-            <p>La liste des etudiants qui n'ont pas encore paye ce mois</p>
+            <p>La liste des étudiants qui n'ont pas encore payé ce mois-ci.</p>
           </div>
           <HomeBlackList></HomeBlackList>
         </div>

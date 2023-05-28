@@ -16,11 +16,11 @@ export default function HomeRequests() {
         <thead>
           <tr>
             <td>Nom</td>
-            <td>Prenom</td>
-            <td>Tele</td>
+            <td>Prénom</td>
+            <td>Télé</td>
             <td>Niveau</td>
             <td>Classe</td>
-            <td>Date du requet</td>
+            <td>Date du requête</td>
           </tr>
         </thead>
         <tbody>

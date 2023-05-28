@@ -12,7 +12,7 @@ export default function FinanceNavBar(props) {
           props.onClick("info");
         }}
       >
-        <h3>Information general</h3>
+        <h3>Informations générales</h3>
       </div>
       <div
         className={`space-navbar-item ${
@@ -23,7 +23,7 @@ export default function FinanceNavBar(props) {
           props.onClick("modify");
         }}
       >
-        <h3>Modififer les contrats</h3>
+        <h3>Modifier les contrats</h3>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ export default function FinanceLogin(props) {
   return (
     <div className="finance-login">
       <div className="finance-login-title">
-        <h1>Seul le directeur peut entrer a cet espace</h1>
+        <h1>Seul le directeur peut entrer à cet espace.</h1>
       </div>
       <div className="finance-login-icon"></div>
       <div className="finance-login-form">
@@ -20,7 +20,7 @@ export default function FinanceLogin(props) {
           <input
             type="password"
             value={password}
-            placeholder="Entrer le mot du pass"
+            placeholder="Entrer le mot de passe."
             className="form-control mb-3"
             onChange={(event) => setPassword(event.target.value)}
           />

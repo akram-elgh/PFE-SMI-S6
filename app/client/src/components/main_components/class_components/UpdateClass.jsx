@@ -45,12 +45,12 @@ export default function UpdateClass(props) {
   function handleSubmit(event) {
     event.preventDefault();
     if (Number(duration) === 0) {
-      props.showFailModal("Veuillez entrer la duree du cours");
+      props.showFailModal("Veuillez entrer la durée du cours.");
     } else {
       axios.put(url, classeToModify).then((response) => {
         if (response.status === 200)
-          props.showSuccessModal("La classe a ete modifier avec succes");
-        else props.showFailModal("Erreur Lors du modification du classe");
+          props.showSuccessModal("La classe a été modifiée avec succès.");
+        else props.showFailModal("Erreur lors de la modification du classe.");
         setClasseToModify({});
         axios.get(url).then((response) => setClasses(response.data));
       });
@@ -61,7 +61,7 @@ export default function UpdateClass(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner une classe</h3>
+          <h3>Sélectionner une classe</h3>
         </div>
         <div className="update-space-search-table">
           <table className="table table-striped table-primary table-hover">
@@ -106,7 +106,7 @@ export default function UpdateClass(props) {
             <div className="space-labels">
               <ul>
                 <li className="space-lable-li">Nom du classe:</li>
-                <li className="space-lable-li">Duree:</li>
+                <li className="space-lable-li">Durée:</li>
                 <li className="space-lable-li">Salle:</li>
                 <li className="space-lable-li">Prix:</li>
                 <li className="space-lable-li">Prof:</li>
@@ -134,7 +134,7 @@ export default function UpdateClass(props) {
                   onChange={handleChange}
                   aria-label="Default select example"
                 >
-                  <option value="0">----Duree----</option>
+                  <option value="0">----Durée----</option>
                   <option value="90">1h30</option>
                   <option value="120">2h</option>
                 </select>

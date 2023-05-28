@@ -28,7 +28,7 @@ export default function AddTeacher(props) {
     });
     if (name === "typeOfPayment") {
       let typetitle = "";
-      if (Number(value) === 1) typetitle = "Salaire par eleve:";
+      if (Number(value) === 1) typetitle = "Salaire par élève:";
       else if (Number(value) === 2) typetitle = "Salaire par heure:";
       else typetitle = "Pourcentage du salaire:";
       setType({
@@ -42,7 +42,7 @@ export default function AddTeacher(props) {
     event.preventDefault();
     axios.post(teacher_url, teacher).then((response) => {
       if (response.status === 200) {
-        props.showSuccessModal("Le prof a ete ajouter avec succes.");
+        props.showSuccessModal("Le professeur a été ajouté avec succès.");
         setTeacher({
           fname: "",
           lname: "",
@@ -54,7 +54,7 @@ export default function AddTeacher(props) {
           isTypeSelected: false,
           typeTitle: "",
         });
-      } else props.showFailModal("Un erreur lors de l'ajout du prof.");
+      } else props.showFailModal("Une erreur s'est produite lors de l'ajout du prof.");
     });
   }
 
@@ -63,9 +63,9 @@ export default function AddTeacher(props) {
       <div className="space-form">
         <div className="space-labels">
           <ul>
-            <li className="space-lable-li">Prenom:</li>
+            <li className="space-lable-li">Prénom:</li>
             <li className="space-lable-li">Nom:</li>
-            <li className="space-lable-li">Numero du telephone:</li>
+            <li className="space-lable-li">Numéro de téléphone:</li>
             <li className="space-lable-li">Type du contrat:</li>
             {isTypeSelected && <li className="space-lable-li">{typeTitle}</li>}
           </ul>

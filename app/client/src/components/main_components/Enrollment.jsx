@@ -66,10 +66,10 @@ export default function Enrollment(props) {
         <div className="space-labels">
           <ul>
             <li className="space-lable-li">Nom:</li>
-            <li className="space-lable-li">Prenom:</li>
+            <li className="space-lable-li">Prénom:</li>
             <li className="space-lable-li">Date de naissance:</li>
-            <li className="space-lable-li">Numero du telephone:</li>
-            <li className="space-lable-li">Numero du telephone du parent:</li>
+            <li className="space-lable-li">Numéro de téléphone:</li>
+            <li className="space-lable-li">Numéro de téléphone du parent:</li>
             <li className="space-lable-li">Niveau: </li>
             <li className="space-lable-li">Classe: </li>
           </ul>
@@ -154,7 +154,7 @@ export default function Enrollment(props) {
                 onChange={handleChange}
               >
                 <option value="0" key={0}>
-                  ---Selectioner une classe---
+                  ---Sélectionner une classe---
                 </option>
                 {classes.map((classe) => {
                   return (

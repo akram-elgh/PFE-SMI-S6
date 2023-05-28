@@ -23,10 +23,10 @@ export default function HomeBlackList() {
         <thead>
           <tr>
             <td>Nom</td>
-            <td>Prenom</td>
+            <td>Prénom</td>
             <td>Classe</td>
-            <td>Dernier mois du paiement</td>
-            <td>Dernier date du paiement</td>
+            <td>Dernier mois de paiement</td>
+            <td>Dernière date de paiement</td>
           </tr>
         </thead>
         <tbody>

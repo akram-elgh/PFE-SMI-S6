@@ -32,13 +32,13 @@ export default function AddClass(props) {
   function handleSubmit(event) {
     event.preventDefault();
     if (Number(duration) === 0) {
-      props.showFailModal("Veuillez entrer la duree du cours");
+      props.showFailModal("Veuillez entrer la durée du cours.");
     } else if (Number(teacher_id) === 0)
       props.showFailModal("Veuillez choisir un prof");
     else {
       axios.post(url, classe).then((response) => {
         if (response.status === 200) {
-          props.showSuccessModal("La classe a ete ajouter avec succes");
+          props.showSuccessModal("La classe a été ajoutée avec succès.");
           setClass({
             class_name: "",
             duration: 0,
@@ -46,7 +46,7 @@ export default function AddClass(props) {
             price: 0,
             teacher_id: 0,
           });
-        } else props.showFailModal("Erreur Lors de l'ajout du classe");
+        } else props.showFailModal("Erreur lors de l'ajout de la classe.");
       });
     }
   }
@@ -55,8 +55,8 @@ export default function AddClass(props) {
       <div className="space-form">
         <div className="space-labels">
           <ul>
-            <li className="space-lable-li">Nom du classe:</li>
-            <li className="space-lable-li">Duree:</li>
+            <li className="space-lable-li">Nom de la classe:</li>
+            <li className="space-lable-li">Durée:</li>
             <li className="space-lable-li">Salle:</li>
             <li className="space-lable-li">Prix:</li>
             <li className="space-lable-li">Prof:</li>
@@ -84,7 +84,7 @@ export default function AddClass(props) {
               onChange={handleChange}
               aria-label="Default select example"
             >
-              <option value="0">----Duree----</option>
+              <option value="0">----Durée----</option>
               <option value="90">1h30</option>
               <option value="120">2h</option>
             </select>

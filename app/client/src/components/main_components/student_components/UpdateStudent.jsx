@@ -73,8 +73,8 @@ export default function UpdateStudent(props) {
     else {
       axios.put(studentUrl, student).then((response) => {
         if (response.status === 200)
-          props.showSuccessModal("L'etudiant ete modifier avec succes");
-        else props.showFailModal("Erreur lors du modifcation de l'etudiant");
+          props.showSuccessModal("L'étudiant a été modifié avec succès.");
+        else props.showFailModal("Erreur lors de la modification de l'étudiant.");
       });
       setStudent({});
       setName("");
@@ -90,7 +90,7 @@ export default function UpdateStudent(props) {
             type="text"
             name="name"
             className="form-control"
-            placeholder="Taper le nom de l'etudiant"
+            placeholder="Taper le nom de l'étudiant"
             value={name}
             onChange={handleSearchChange}
           />
@@ -101,8 +101,8 @@ export default function UpdateStudent(props) {
               <tr>
                 <th></th>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>Class</th>
+                <th>Prénom</th>
+                <th>Classe</th>
               </tr>
             </thead>
             <tbody>
@@ -138,11 +138,11 @@ export default function UpdateStudent(props) {
             <div className="space-labels">
               <ul>
                 <li className="space-lable-li">Nom:</li>
-                <li className="space-lable-li">Prenom:</li>
+                <li className="space-lable-li">Prénom:</li>
                 <li className="space-lable-li">Date de naissance:</li>
-                <li className="space-lable-li">Numero du telephone:</li>
+                <li className="space-lable-li">Numéro de téléphone:</li>
                 <li className="space-lable-li">
-                  Numero du telephone du parent:
+                  Numéro de téléphone du parent:
                 </li>
                 <li className="space-lable-li">Niveau: </li>
                 <li className="space-lable-li">Classe: </li>

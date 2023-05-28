@@ -41,9 +41,9 @@ export default function DeleteClass(props) {
       setShowModal(false);
       axios.delete(url + class_id).then((response) => {
         if (response.status === 200) {
-          props.showSuccessModal("La classe ete supprimer avec succes");
+          props.showSuccessModal("La classe a été supprimée avec succès.");
         } else {
-          props.showFailModal("Erreur lors de suppresion du classe");
+          props.showFailModal("Erreur lors de la suppression de la classe.");
         }
         axios.get(url).then((response) => setClasses(response.data));
         setClasseToDelete({});
@@ -57,7 +57,7 @@ export default function DeleteClass(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner une classe</h3>
+          <h3>Sélectionner une classe.</h3>
         </div>
         <div className="update-space-search-table">
           <form onSubmit={handleSubmit}>
@@ -109,8 +109,9 @@ export default function DeleteClass(props) {
               title="Attention !!"
               body={
                 <p style={{ textAlign: "left" }}>
-                  Tous les etudiant et le prof inscrits dans ce classe vont etre
-                  supprimer <br /> Voulez-vous vraiment supprimer cette classe
+                  Tous les étudiants et les prof inscrits dans cette classe
+                  vont être supprimés. <br /> Voulez-vous vraiment supprimer
+                  cette classe?
                 </p>
               }
               color="red"

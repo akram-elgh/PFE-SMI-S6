@@ -43,9 +43,9 @@ export default function DeleteTeacher(props) {
       setShowModal(false);
       axios.delete(url + teacher_id).then((response) => {
         if (response.status === 200) {
-          props.showSuccessModal("Le prof ete supprimer avec succes");
+          props.showSuccessModal("Le prof a été supprimé avec succès.");
         } else {
-          props.showFailModal("Erreur lors de suppresion du prof");
+          props.showFailModal("Erreur lors de la suppression du prof");
         }
         axios.get(url).then((response) => setTeachers(response.data));
         setTeacherToDelete({});
@@ -59,7 +59,7 @@ export default function DeleteTeacher(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner un prof</h3>
+          <h3>Sélectionner un prof</h3>
         </div>
         <div className="update-space-search-table">
           <form onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ export default function DeleteTeacher(props) {
                 <tr>
                   <th></th>
                   <th>Nom</th>
-                  <th>Prenom</th>
+                  <th>Prénom</th>
                   <th>Classes</th>
                 </tr>
               </thead>
@@ -119,7 +119,7 @@ export default function DeleteTeacher(props) {
           {showModal && (
             <Modal
               title="Attention !!"
-              body="Voulez vous vraiment supprimer ce prof"
+              body="Voulez-vous vraiment supprimer ce prof."
               color="red"
               delete="true"
               show={showModal}

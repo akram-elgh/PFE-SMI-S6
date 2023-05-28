@@ -16,10 +16,10 @@ export default function SearchClass() {
             <tr>
               <th>Nom</th>
               <th>Salle</th>
-              <th>Duree</th>
+              <th>Durée</th>
               <th>Prix</th>
               <th>Prof</th>
-              <th>Nombre d'etudiants</th>
+              <th>Nombre d'étudiants</th>
             </tr>
           </thead>
           <tbody>

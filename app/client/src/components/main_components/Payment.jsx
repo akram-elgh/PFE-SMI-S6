@@ -54,12 +54,12 @@ export default function Payment(props) {
   function handleSubmit(event) {
     event.preventDefault();
     if (student_id === 0) {
-      props.showFailModal("Il fault selectioner un etudiant");
+      props.showFailModal("Il faut sélectioner un étudiant");
     } else {
       axios.post(url, payingStudent).then((response) => {
         if (response.status === 200) {
-          props.showSuccessModal("Le paiment a ete effectuer avec succes");
-        } else props.showFailModal("Erreur lors de l'effectue du paiement");
+          props.showSuccessModal("Le paiement a été effectué avec succès.");
+        } else props.showFailModal("Erreur lors de l'effectuation du paiement.");
       });
       setPayingStudent({
         student_id: 0,
@@ -76,7 +76,7 @@ export default function Payment(props) {
           type="text"
           name="name"
           className="form-control"
-          placeholder="Taper le nom de l'etudiant"
+          placeholder="Taper le nom de l'étudiant"
           value={name}
           onChange={handleChange}
         />

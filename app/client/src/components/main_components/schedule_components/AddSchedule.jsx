@@ -22,7 +22,7 @@ export default function AddSchedule(props) {
             onChange={(event) => setId(Number(event.target.value))}
           >
             <option value={0} key={0}>
-              ---Selectioner une classe---
+              ---Sélectionner une classe---
             </option>
             {classes.map((classe, index) => {
               return (

@@ -78,14 +78,14 @@ export default function Requests(props) {
     event.preventDefault();
     axios.post("http://localhost:3001/student", student).then((response) => {
       if (response.status === 200) {
-        props.showSuccessModal("L'etudiant ete bien ajouter");
+        props.showSuccessModal("L'étudiant a été bien ajouté.");
         axios.delete(url + request_id).then((response) => {
           if (response.status === 200) {
             axios.get(url).then((response) => setRequests(response.data));
             setStudent({});
           }
         });
-      } else props.showFailModal("Erreur lors de l'ajout d'etudiant");
+      } else props.showFailModal("Erreur lors de l'ajout de l'étudiant.");
     });
   }
 
@@ -94,10 +94,10 @@ export default function Requests(props) {
     if (answer) {
       axios.delete(url + request_id).then((response) => {
         if (response.status === 200) {
-          props.showSuccessModal("La demande ete supprimer avec succes");
+          props.showSuccessModal("La demande a été supprimée avec succès.");
           axios.get(url).then((response) => setRequests(response.data));
           setStudent({});
-        } else props.showFailModal("Erreur lors du suppression du demande");
+        } else props.showFailModal("Erreur lors de la suppression de la demande.");
       });
     }
   }
@@ -109,7 +109,7 @@ export default function Requests(props) {
           type="text"
           name="name"
           className="form-control"
-          placeholder="Taper le nom de l'etudiant"
+          placeholder="Taper le nom de l'étudiant"
           value={name}
           onChange={handleChange}
         />
@@ -119,14 +119,14 @@ export default function Requests(props) {
           <tr>
             <td></td>
             <td>Nom</td>
-            <td>Prenom</td>
-            <td>Tele</td>
-            <td>Tele du parent</td>
+            <td>Prénom</td>
+            <td>Télé</td>
+            <td>Télé du parent</td>
             <td>Date de naissance</td>
             <td>Niveau</td>
             <td>Classe</td>
-            <td>Type du demande</td>
-            <td>Date du demande</td>
+            <td>Type de demande</td>
+            <td>Date de la demande</td>
           </tr>
         </thead>
         <tbody>
@@ -166,11 +166,11 @@ export default function Requests(props) {
             <div className="space-labels">
               <ul>
                 <li className="space-lable-li">Nom:</li>
-                <li className="space-lable-li">Prenom:</li>
+                <li className="space-lable-li">Prénom:</li>
                 <li className="space-lable-li">Date de naissance:</li>
-                <li className="space-lable-li">Numero du telephone:</li>
+                <li className="space-lable-li">Numéro de téléphone:</li>
                 <li className="space-lable-li">
-                  Numero du telephone du parent:
+                  Numéro de téléphone du parent:
                 </li>
                 <li className="space-lable-li">Niveau: </li>
                 <li className="space-lable-li">Classe: </li>
@@ -274,7 +274,7 @@ export default function Requests(props) {
           </div>
           <Button
             style={{ marginRight: "10px" }}
-            text="Suprimer la demande"
+            text="Supprimer la demande"
             color="danger"
             onClick={() => setShowModal(true)}
           ></Button>
@@ -291,7 +291,7 @@ export default function Requests(props) {
           show={showModal}
           classe="danger"
           title="Attention"
-          body="Voulez vous vraiment supprimer la demande"
+          body="Voulez-vous vraiment supprimer la demande"
           delete="true"
           color="red"
         ></Modal>

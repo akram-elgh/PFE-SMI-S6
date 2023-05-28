@@ -69,13 +69,13 @@ export default function Body(props) {
         style={{ width: mouseOver ? "85%" : "" }}
       >
         {activeTab === "Acceuil" && <Home></Home>}
-        {activeTab === "Notifications des demandes en lignes" && (
+        {activeTab === "Notifications des demandes en ligne" && (
           <Requests
             showSuccessModal={handleShowSuccessModal}
             showFailModal={handleShowFailModal}
           ></Requests>
         )}
-        {activeTab === "Espace Payment" && (
+        {activeTab === "Espace payment" && (
           <Payment
             showSuccessModal={handleShowSuccessModal}
             showFailModal={handleShowFailModal}

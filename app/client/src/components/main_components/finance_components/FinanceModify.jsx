@@ -50,8 +50,8 @@ export default function UpdateTeacher(props) {
     } else {
       axios.put(url, teacherToModify).then((response) => {
         if (response.status === 200)
-          props.showSuccessModal("Le contrat ete modifier avec succes");
-        else props.showFailModal("Erreur lors du modifcation du contrat");
+          props.showSuccessModal("Le contrat a été modifié avec succès.");
+        else props.showFailModal("Erreur lors de la modification du contrat.");
         setTeacherToModify({});
         axios.get(url).then((response) => setTeachers(response.data));
       });
@@ -62,7 +62,7 @@ export default function UpdateTeacher(props) {
     <div className="update-space">
       <div className="update-space-search">
         <div className="update-space-search-input">
-          <h3>Selectionner un prof</h3>
+          <h3>Sélectionner un prof</h3>
         </div>
         <div className="update-space-search-table">
           <form onSubmit={handleSubmit}>
@@ -71,8 +71,8 @@ export default function UpdateTeacher(props) {
                 <tr>
                   <th></th>
                   <th>Nom</th>
-                  <th>Prenom</th>
-                  <th>Type du contrat</th>
+                  <th>Prénom</th>
+                  <th>Type de contrat</th>
                   <th>Salaire</th>
                   <th>Classes</th>
                 </tr>

@@ -21,13 +21,13 @@ export default function FinanceInfo(props) {
           <tr>
             <td>Nom</td>
             <td>Prix</td>
-            <td>Nombre d'etudiants</td>
+            <td>Nombre d'étudiants</td>
             <td>Revenue total</td>
             <td>Prof</td>
-            <td>Type du contrat</td>
+            <td>Type de contrat</td>
             <td>Salaire</td>
-            <td>Salaire totale</td>
-            <td>Revenue du classe</td>
+            <td>Salaire total</td>
+            <td>Revenue de la classe</td>
           </tr>
         </thead>
         <tbody>

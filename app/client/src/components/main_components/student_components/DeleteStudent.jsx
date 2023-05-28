@@ -48,9 +48,9 @@ export default function DeleteStudent(props) {
         .delete("http://localhost:3001/student?id=" + student_id)
         .then((response) => {
           if (response.status === 200) {
-            props.showSuccessModal("L'etudiant ete supprimer avec succes");
+            props.showSuccessModal("L'étudiant a été supprimé avec succès.");
           } else {
-            props.showFailModal("Erreur lors de suppresion d'etudiant");
+            props.showFailModal("Erreur lors de la suppression d'étudiant.");
           }
           setStudentToDelete({});
           setStudents([]);
@@ -68,7 +68,7 @@ export default function DeleteStudent(props) {
           type="text"
           name="name"
           className="form-control"
-          placeholder="Taper le nom de l'etudiant"
+          placeholder="Taper le nom de l'étudiant"
           value={name}
           onChange={handleChange}
         />
@@ -80,12 +80,12 @@ export default function DeleteStudent(props) {
               <tr>
                 <th></th>
                 <th>Nom</th>
-                <th>Prenom</th>
-                <th>Date du naissance</th>
-                <th>Tele</th>
-                <th>Tele du parent</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Télé</th>
+                <th>Télé du parent</th>
                 <th>Niveau</th>
-                <th>Class</th>
+                <th>Classe</th>
                 <th>Date d'inscription</th>
               </tr>
             </thead>
@@ -131,7 +131,7 @@ export default function DeleteStudent(props) {
         {showModal && (
           <Modal
             title="Attention !!"
-            body="Voulez vous vraiment supprimer cet etudiant"
+            body="Voulez-vous vraiment supprimer cet étudiant"
             color="red"
             delete="true"
             show={showModal}
