@@ -45,11 +45,11 @@ export default function Navbar(props) {
         <li
           className={`nav-item ${activeTab === "payment" ? "active" : ""}`}
           onClick={() => {
-            props.onClick("Espace payment");
+            props.onClick("Espace Paiement");
             handleTabClick("payment");
           }}
         >
-          <PaymentIcon fontSize="large" /> Espace Paiment
+          <PaymentIcon fontSize="large" /> Espace Paiement
         </li>
         <li
           className={`nav-item ${activeTab === "enrollment" ? "active" : ""}`}

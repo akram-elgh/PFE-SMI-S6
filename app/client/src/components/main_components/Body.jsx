@@ -75,7 +75,7 @@ export default function Body(props) {
             showFailModal={handleShowFailModal}
           ></Requests>
         )}
-        {activeTab === "Espace payment" && (
+        {activeTab === "Espace Paiement" && (
           <Payment
             showSuccessModal={handleShowSuccessModal}
             showFailModal={handleShowFailModal}
