@@ -1,3 +1,5 @@
+CREATE DATABASE PFE;
+
 CREATE TABLE Teacher(
   teacher_id INT NOT NULL AUTO_INCREMENT,
   fname VARCHAR(255) NOT NULL,
@@ -7,6 +9,7 @@ CREATE TABLE Teacher(
   salary INT DEFAULT 0,
   PRIMARY KEY (teacher_id),
 )
+
 CREATE TABLE Class(
   class_id INT NOT NULL AUTO_INCREMENT,
   class_name VARCHAR(255) NOT NULL,
@@ -33,7 +36,6 @@ CREATE TABLE Student(
   PRIMARY KEY (student_id),
   FOREIGN KEY (class_id) REFERENCES Class(class_id)
 )
-
 
 CREATE TABLE Schedule(
   id INT NOT NULL AUTO_INCREMENT,
