@@ -6,7 +6,7 @@ export default function FinanceLogin(props) {
   return (
     <div className="finance-login">
       <div className="finance-login-title">
-        <h1>Seul le directeur peut entrer à cet espace.</h1>
+        <h1>Seul les directeurs peuvent entrer à cet espace</h1>
       </div>
       <div className="finance-login-icon"></div>
       <div className="finance-login-form">
